@@ -22,7 +22,6 @@ export const GrayBlock = ({
       {isMainTitle ? <MainTitle text={title} /> : <SubTitle text={title} />}
       <GrayBlockStyle>
         <Description fontSize={18} text={description} />
-        <Description fontSize={18} text={description} />
         {isImg && (
           <>
             <ImgS className='asideButton' src={S} />

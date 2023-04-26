@@ -14,27 +14,27 @@ export const MiniBlock = () => {
       <Wrapper>
         <GrayBlockMini>
           <Description
-            text="Просторная карта, на которой можно весело провести время"
+            text="Большой мир с красочными локациями"
             fontSize820={24}
           />
           <Img src={Map} />
         </GrayBlockMini>
         <GrayBlockMini>
           <Description
-            text="Надежные друзья, которые помогут в решении задач"
+            text="Уникальная история с необычными персонажами"
             fontSize820={24}
           />
           <Img src={Cat} />
         </GrayBlockMini>
         <GrayBlockMini>
           <Description
-            text="Интересные задачи, которые предстоит решить"
+            text="Интересные задания, развивающие различные навыки"
             fontSize820={24}
           />
           <Img src={Science} />
         </GrayBlockMini>
         <GrayBlockMini>
-          <Description text="Бонусы и градострой" fontSize820={24} />
+          <Description text="Градострой режим и экономика" fontSize820={24} />
           <Img src={House} />
         </GrayBlockMini>
       </Wrapper>

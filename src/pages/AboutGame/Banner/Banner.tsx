@@ -15,9 +15,7 @@ export const Banner = () => {
       <BannerDescriptionBlock>
         <BannerTitle>Юнга Мур и большая стройка котов-пиратов</BannerTitle>
         <BannerDescription>
-          Наше дело не так однозначно, как может показаться: семантический
-          разбор внешних противодействий является качественно новой ступенью
-          соответствующих условий активизации!
+        Используй свои знания и навыки и помоги котам построить городок для туристов.
         </BannerDescription>
         <Button width="1020px" text="Скачать для Windows" />
       </BannerDescriptionBlock>
