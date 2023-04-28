@@ -18,7 +18,7 @@ export const Form = ({
       <BlockLeft>
         <Img src={BlockLeftImg} alt="" />
         <Img720 src={BlockLeftImg720} alt="" />
-        <Text>{text}</Text>
+        <Text id="contactTitle">{text}</Text>
       </BlockLeft>
       <FormStyle>
         <Input type="text" placeholder="Имя" />
@@ -119,6 +119,7 @@ const FormBlock = styled.div({
 
   "@media(max-width: 991px)": {
     flexDirection: "column",
+    height: "auto"
   },
 
   "@media(max-width: 600px)": {

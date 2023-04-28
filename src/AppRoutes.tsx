@@ -3,6 +3,7 @@ import { Main } from "./pages/Main/Main";
 import { AboutUs } from "./pages/AboutUs/AboutUs";
 import { AboutGame } from "./pages/AboutGame/AboutGame";
 import { Game } from "./pages/Game/Game";
+import { EcologyGame } from "./pages/AboutGame copy/EcologyGame";
 
 export const AppRoutes = () => {
   return (
@@ -11,6 +12,7 @@ export const AppRoutes = () => {
       <Route path="/about-us" element={<AboutUs />} />
       <Route path="about-game" element={<AboutGame />} />
       <Route path="/game" element={<Game />} />
+      <Route path="/ecology-game" element={<EcologyGame />} />
     </Routes>
   );
 };

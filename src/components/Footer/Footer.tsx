@@ -7,11 +7,11 @@ import { ReactComponent as Vb } from "../../assets/vb.svg";
 import { ReactComponent as Vk } from "../../assets/vk.svg";
 import { ReactComponent as Yt } from "../../assets/yt.svg";
 import { ReactComponent as Yn } from "../../assets/yn.svg";
-import clouds from "../../assets/clouds.svg";
 import { Button } from "../Button/Button";
 
 import E from "../../assets/E.svg";
 import W from "../../assets/W.svg";
+import { NavLink } from "react-router-dom";
 
 export const Footer = () => {
   return (
@@ -24,39 +24,39 @@ export const Footer = () => {
             <Nav>
               <Text>Узнай больше</Text>
               <Ul>
-                <Li>О нас</Li>
-                <Li>Наши игры</Li>
+                <Li><NavLink to="/about-us">О нас</NavLink></Li>
+                <Li><NavLink to="/game">Наши игры</NavLink></Li>
               </Ul>
             </Nav>
 
             <Social>
               <Text>Мы в соцсетях</Text>
               <Icons>
-                <Tg />
-                <Tg />
-                <Tg />
+                <div><NavLink to="https://domznaniy.school/"><Tg /></NavLink></div>
+                <div><NavLink to="https://domznaniy.school/"><Tg /></NavLink></div>
+                <div><NavLink to="https://domznaniy.school/"><Tg /></NavLink></div>
               </Icons>
             </Social>
           </Block>
           <Contact className="size">
             <Text>Контакты школы Дома знаний</Text>
-            <LogoImg />
+            <NavLink to="https://domznaniy.school/"><LogoImg /></NavLink>
             <Tel href="tel: 8 800 600 60 77">8 800 600 60 77</Tel>
             <Icons>
-              <Tg />
-              <Vb />
-              <Vk />
-              <Yt />
-              <Yn />
+            <div><NavLink to="https://domznaniy.school/"><Tg /></NavLink></div>
+            <div><NavLink to="https://domznaniy.school/"><Vb /></NavLink></div>
+            <div><NavLink to="https://domznaniy.school/"><Vk /></NavLink></div>
+            <div><NavLink to="https://domznaniy.school/"><Yt /></NavLink></div>
+            <div><NavLink to="https://domznaniy.school/"><Yn /></NavLink></div>
             </Icons>
           </Contact>
         </Wrapper>
         <Wrapper className="align-center">
           <Button width="212px" text="Связаться с нами" />
           <TextWrapper>
-            <div>© DZGames 2023</div>
-            <div>Политика конфиденциальности</div>
-            <div>Условия использования</div>
+            <div><NavLink to="https://domznaniy.school/">© DZGames 2023</NavLink></div>
+            <div><NavLink to="https://domznaniy.school/">Политика конфиденциальности</NavLink></div>
+            <div><NavLink to="https://domznaniy.school/">Условия использования</NavLink></div>
           </TextWrapper>
         </Wrapper>
       <ImgW className="asideButton" src={W} />
@@ -118,6 +118,7 @@ const Ul = styled.ul({
 
 const Li = styled.li({
   listStyleType: "none",
+  cursor: "pointer",
 });
 
 const Social = styled.div({
@@ -136,6 +137,7 @@ const Wrapper = styled.div({
   maxWidth: "1128px",
   width: "100%",
   margin: "0 auto",
+  zIndex: "100",
 
   "@media(max-width: 650px)": {
     flexDirection: "column",
@@ -165,6 +167,9 @@ const TextWrapper = styled.div({
 const Icons = styled.div({
   display: "flex",
   gap: "8px",
+  "div":{
+    cursor: "pointer"
+  }
 });
 const Tel = styled.a({
   fontSize: "18px",

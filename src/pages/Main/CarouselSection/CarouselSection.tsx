@@ -5,10 +5,18 @@ import sliderOpacity from '../../../assets/slider-opacity.png';
 import { Carousel } from 'react-responsive-carousel';
 import { Button } from '../../../components/Button/Button';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const INTERVAL = 6000;
 
 export const CarouselSection = () => {
+
+  const navigate = useNavigate();
+
+  const navigateToAboutGame = () => {
+    navigate('/about-game');
+  }
+
   useEffect(() => {
     const dots = document.querySelector('.carousel .control-dots');
     const backBlock = document.querySelector('.backBlock .backRight');
@@ -32,6 +40,7 @@ export const CarouselSection = () => {
         autoPlay
         infiniteLoop
         emulateTouch
+        verticalSwipe="natural"
         renderIndicator={(
           clickHandler: (e: React.MouseEvent | React.KeyboardEvent) => void,
           isSelected: boolean
@@ -54,7 +63,7 @@ export const CarouselSection = () => {
                 ступенью соответствующих условий активизации!
               </p>
             </Wrapper>
-            <Button width='100%' text='Скачать для Windows' />
+            <Button handleClick={navigateToAboutGame} width='100%' text='Скачать для Windows' />
           </Inner>
         </SliderItem>
         <SliderItem className='mySliderItem'>
@@ -70,7 +79,7 @@ export const CarouselSection = () => {
                 шрифтов, используя Lorem Ipsum для распечатки образцов{' '}
               </p>
             </Wrapper>
-            <Button width='100%' text='Скачать для Windows' />
+            <Button handleClick={navigateToAboutGame} width='100%' text='Скачать для Windows' />
           </Inner>
         </SliderItem>
         <SliderItem className='mySliderItem'>
@@ -84,7 +93,7 @@ export const CarouselSection = () => {
                 или слова, которые даже отдалённо не напоминают латынь.
               </p>
             </Wrapper>
-            <Button width='100%' text='Скачать для Windows' />
+            <Button handleClick={navigateToAboutGame} width='100%' text='Скачать для Windows' />
           </Inner>
         </SliderItem>
       </Carousel>

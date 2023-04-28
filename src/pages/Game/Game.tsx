@@ -49,7 +49,7 @@ export const Game = () => {
           </Cards>
         </Games>
 
-        <div className="relative ">
+        <div className="relative" id="contact">
           <Title><SubTitle text="Задавай вопросы и делись идеями" /></Title>
           <Form text="У тебя есть идеи или вопросы? Напиши нам!" />
           <ImgA className="asideButton" src={A} />

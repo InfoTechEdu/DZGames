@@ -27,7 +27,7 @@ export const Main = () => {
           <ImgL src={LeftArrow} />
           <ImgA className="asideButton" src={A} />
         </Info>
-        <div>
+        <div id="contact">
           <Title><SubTitle text="Задавай вопросы и делись идеями" /></Title>
           <Form text="У тебя есть идеи или вопросы? Напиши нам!" />
         </div>

@@ -13,7 +13,7 @@ export const GrayBlock = ({
   isImg,
 }: {
   title: string;
-  description: string;
+  description: JSX.Element;
   isMainTitle?: boolean;
   isImg?: boolean;
 }) => {
@@ -21,7 +21,7 @@ export const GrayBlock = ({
     <div>
       {isMainTitle ? <MainTitle text={title} /> : <SubTitle text={title} />}
       <GrayBlockStyle>
-        <Description fontSize={18} text={description} />
+        {description}
         {isImg && (
           <>
             <ImgS className='asideButton' src={S} />

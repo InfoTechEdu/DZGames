@@ -1,15 +1,14 @@
 import styled from "styled-components";
 
-export const Button = ({
-  width,
-  text,
-  withMargin,
-}: {
+type Props = {
   width: string;
   text: string;
   withMargin?: boolean;
-}) => (
-  <StyledButton withMargin={withMargin} width={width}>
+  handleClick?: () => void;
+};
+
+export const Button = ({ width, text, withMargin, handleClick }: Props) => (
+  <StyledButton onClick={handleClick} withMargin={withMargin} width={width}>
     {text}
   </StyledButton>
 );
@@ -48,15 +47,15 @@ const StyledButton = styled.button<{ width: string; withMargin?: boolean }>`
   }
 
   &:active {
-    background: #FF7001;
+    background: #ff7001;
     transition: none;
   }
 
   &:disabled {
-    background: #EFEFEF;
+    background: #efefef;
     animation: none;
     transition: none;
-    color: #BBBBBB;
+    color: #bbbbbb;
     box-shadow: none;
   }
 `;

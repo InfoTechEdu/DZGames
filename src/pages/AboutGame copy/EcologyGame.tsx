@@ -12,7 +12,7 @@ import { SubTitle } from "../../components/SubTitle/SubTitle";
 import D from "../../assets/D.svg";
 import { Description } from "../../components/Description/Description";
 
-export const AboutGame = () => {
+export const EcologyGame = () => {
   return (
     <AboutGameStyle>
       <Container>

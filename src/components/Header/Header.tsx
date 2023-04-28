@@ -1,10 +1,37 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { Button } from "../Button/Button";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export const Header = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleScroll = () => {
+    const contactBlock = document.getElementById("contact");
+
+    if (contactBlock) {
+      contactBlock?.scrollIntoView({ behavior: "smooth" });
+      if (isOpenMenu) {
+        setIsOpenMenu(false)
+      }
+      return;
+    } else {
+      navigate('/');
+
+
+      setTimeout(() => {
+        const contactBlock = document.getElementById("contact");
+        contactBlock?.scrollIntoView({ behavior: "smooth" });
+        if (isOpenMenu) {
+          setIsOpenMenu(false)
+        }
+      }, 300)
+    }
+
+  };
+
   return (
     <HeaderStyle>
       <Container>
@@ -22,7 +49,7 @@ export const Header = () => {
             </Li>
           </Nav>
         </Wrapper>
-        <ButtonWrapper>
+        <ButtonWrapper onClick={handleScroll}>
           <Button width="100%" text="Связаться с нами" />
         </ButtonWrapper>
         <div
@@ -57,7 +84,11 @@ export const Header = () => {
             </Li>
           </ul>
         </nav>
-        <Button width="212px" text="Связаться с нами" />
+        <Button
+          handleClick={handleScroll}
+          width="212px"
+          text="Связаться с нами"
+        />
       </div>
     </HeaderStyle>
   );
