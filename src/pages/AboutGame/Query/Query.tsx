@@ -5,39 +5,44 @@ import CatQuery from "../../../assets/catQuery.png";
 import Captain760 from "../../../assets/captain760.png";
 import Captain320 from "../../../assets/captain320.png";
 import CatQuery760 from "../../../assets/catQuery760.png";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { SubTitle } from "../../../components/SubTitle/SubTitle";
 import { Description } from "../../../components/Description/Description";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../../../components/Button/Button";
 
 export const Query = () => {
-  const [liked, setLiked] = useState("");
-  
+  const [feedback, setFeedback] = useState("");
+
   const navigate = useNavigate();
 
-
   const scrollToForm = () => {
-    navigate('/');
-
+    navigate("/");
 
     setTimeout(() => {
-      const contactBlock = document.getElementById("contact");
+      const contactBlock = document.getElementById("contact-main");
       contactBlock?.scrollIntoView({ behavior: "smooth" });
-    }, 200)
-  }
+    }, 200);
+  };
+
+  const handleSendFeedback = useCallback(async (feedbackType: string) => {
+    setFeedback(feedbackType);
+
+    await fetch(
+      `https://functions.yandexcloud.net/d4ej48ta5vbhapraj3j9?game=Unga and Mur&feedback=${feedbackType}&date=${new Date()}`
+    );
+  }, []);
 
   return (
     <QueryStyle>
       <Interview>
-        {liked === "yes" && (
+        {feedback === "like" && (
           <SubTitle
             text="Спасибо, мы очень рады!
             И скоро порадуем вас новыми играми."
           />
         )}
 
-        {liked === "no" && (
+        {feedback === "dislike" && (
           <NoWrapper>
             <SubTitle text="Очень жаль :-(" />
             <Description text="Расскажите, что не так. Мы постараемся учесть ваши замечания, когда будем придумывать новые игры." />
@@ -45,12 +50,16 @@ export const Query = () => {
           </NoWrapper>
         )}
 
-        {liked === "" && (
+        {feedback === "" && (
           <>
             <InterviewTitle>Понравилась ли тебе игра?</InterviewTitle>
             <InterviewBtns>
-              <InterviewBtn onClick={() => setLiked("yes")}>Да</InterviewBtn>
-              <InterviewBtn onClick={() => setLiked("no")}>Нет</InterviewBtn>
+              <InterviewBtn onClick={() => handleSendFeedback("like")}>
+                Да
+              </InterviewBtn>
+              <InterviewBtn onClick={() => handleSendFeedback("dislike")}>
+                Нет
+              </InterviewBtn>
             </InterviewBtns>
           </>
         )}
@@ -92,27 +101,27 @@ const Interview = styled.div({
 
   "@media(max-width: 685px)": {
     marginTop: "24px",
-    padding: 10
+    padding: 10,
   },
 
-  "h2": {
+  h2: {
     margin: 0,
-    textAlign: "center"
+    textAlign: "center",
   },
 
-  "div": {
-    textAlign: "center"
+  div: {
+    textAlign: "center",
   },
 });
 
 const NoWrapper = styled.div({
-  "h2": {
+  h2: {
     marginBottom: 10,
-    fontSize: 34
+    fontSize: 34,
   },
-  "div": {
-    fontSize: 24
-  }
+  div: {
+    fontSize: 24,
+  },
 });
 
 const InterviewTitle = styled.div({
@@ -178,7 +187,7 @@ const CommentButton = styled.button`
   border: 1px solid;
   border-radius: 20px;
   margin-top: 15px;
-`
+`;
 
 const ImgCatQuery = styled.img({
   "@media(max-width: 1041px)": {

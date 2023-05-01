@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-import { Form } from "../../components/Form/Form";
 import { Banner } from "./Banner/Banner";
 import { Info } from "./Info/Info";
 import { Query } from "./Query/Query";
@@ -11,6 +10,7 @@ import { SubTitle } from "../../components/SubTitle/SubTitle";
 
 import D from "../../assets/D.svg";
 import { Description } from "../../components/Description/Description";
+import { SubscriptionForm } from "./SubscriptionForm/SubscriptionForm";
 
 export const AboutGame = () => {
   return (
@@ -39,15 +39,11 @@ export const AboutGame = () => {
         />
         <Query />
 
-        <div className="relative" id="contact">
+        <div className="relative">
           <Title>
             <SubTitle text="Подписывайся на новости о наших игрых" />
           </Title>
-          <Form
-            withMessage={false}
-            submitText="Подписаться"
-            text="Хочешь получать актуальные новости о наших играх? Тогда смело подписывайся на рассылку!"
-          />
+          <SubscriptionForm />
           <ImgD className="asideButton" src={D} />
         </div>
       </Container>

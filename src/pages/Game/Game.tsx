@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import A from "../../assets/A.svg";
 import GameImg from "../../assets/game.png";
-import { Form } from "../../components/Form/Form";
 import { useNavigate } from "react-router-dom";
 import { MainTitle } from "../../components/MainTitle/MainTitle";
 import { SubTitle } from "../../components/SubTitle/SubTitle";
+import { SendMessageForm } from "../Main/SendMessageForm/SendMessageForm";
 
 export const Game = () => {
   const navigate = useNavigate();
@@ -49,9 +49,9 @@ export const Game = () => {
           </Cards>
         </Games>
 
-        <div className="relative" id="contact">
+        <div className="relative">
           <Title><SubTitle text="Задавай вопросы и делись идеями" /></Title>
-          <Form text="У тебя есть идеи или вопросы? Напиши нам!" />
+          <SendMessageForm />
           <ImgA className="asideButton" src={A} />
         </div>
       </Container>

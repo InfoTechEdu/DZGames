@@ -5,6 +5,7 @@ import { Form } from "../../components/Form/Form";
 import { SubTitle } from "../../components/SubTitle/SubTitle";
 import { GrayBlock } from "../../components/GrayBlock/GrayBlock";
 import { Description } from "../../components/Description/Description";
+import { SendMessageForm } from "../Main/SendMessageForm/SendMessageForm";
 
 export const AboutUs = () => {
   return (
@@ -80,9 +81,9 @@ export const AboutUs = () => {
             </GrayBlockMini>
           </Wrapper>
         </div>
-        <RelativeBlock className="relative" id="contact">
+        <RelativeBlock className="relative">
           <SubTitle text="Стань частью нашей команды" />
-          <Form text="Если у тебя есть желание присоединиться к нам, то смело заполняй форму!" />
+          <SendMessageForm />
           <ImgA className="asideButton" src={A} />
         </RelativeBlock>
       </Container>

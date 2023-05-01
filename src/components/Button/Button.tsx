@@ -5,10 +5,25 @@ type Props = {
   text: string;
   withMargin?: boolean;
   handleClick?: () => void;
+  type?: "submit" | "button" | "reset";
+  disabled?: boolean;
 };
 
-export const Button = ({ width, text, withMargin, handleClick }: Props) => (
-  <StyledButton onClick={handleClick} withMargin={withMargin} width={width}>
+export const Button = ({
+  width,
+  text,
+  withMargin,
+  handleClick,
+  type,
+  disabled = false,
+}: Props) => (
+  <StyledButton
+    type={type}
+    onClick={handleClick}
+    withMargin={withMargin}
+    width={width}
+    disabled={disabled}
+  >
     {text}
   </StyledButton>
 );

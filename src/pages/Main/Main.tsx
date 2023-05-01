@@ -3,13 +3,13 @@ import styled from "styled-components";
 import GroupLessons from "../../assets/groupLessons.svg";
 import LeftArrow from "../../assets/left_arrow.svg";
 import RightArrow from "../../assets/right_arrow.svg";
-import { Form } from "../../components/Form/Form";
 import { CarouselSection } from "./CarouselSection/CarouselSection";
 import { MainTitle } from "../../components/MainTitle/MainTitle";
 
 import S from "../../assets/S.svg";
 import A from "../../assets/A.svg";
 import { SubTitle } from "../../components/SubTitle/SubTitle";
+import { SendMessageForm } from "./SendMessageForm/SendMessageForm";
 
 export const Main = () => {
   return (
@@ -27,9 +27,9 @@ export const Main = () => {
           <ImgL src={LeftArrow} />
           <ImgA className="asideButton" src={A} />
         </Info>
-        <div id="contact">
+        <div id="contact-main">
           <Title><SubTitle text="Задавай вопросы и делись идеями" /></Title>
-          <Form text="У тебя есть идеи или вопросы? Напиши нам!" />
+          <SendMessageForm />
         </div>
       </Container>
     </MainStyle>

@@ -9,7 +9,7 @@ export const Header = () => {
   const navigate = useNavigate();
 
   const handleScroll = () => {
-    const contactBlock = document.getElementById("contact");
+    const contactBlock = document.getElementById("contact-main");
 
     if (contactBlock) {
       contactBlock?.scrollIntoView({ behavior: "smooth" });
@@ -22,7 +22,7 @@ export const Header = () => {
 
 
       setTimeout(() => {
-        const contactBlock = document.getElementById("contact");
+        const contactBlock = document.getElementById("contact-main");
         contactBlock?.scrollIntoView({ behavior: "smooth" });
         if (isOpenMenu) {
           setIsOpenMenu(false)

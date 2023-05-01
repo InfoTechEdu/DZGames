@@ -9,7 +9,6 @@ import { useState } from "react";
 import { SubTitle } from "../../../components/SubTitle/SubTitle";
 import { Description } from "../../../components/Description/Description";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../../../components/Button/Button";
 
 export const Query = () => {
   const [liked, setLiked] = useState("");
@@ -22,7 +21,7 @@ export const Query = () => {
 
 
     setTimeout(() => {
-      const contactBlock = document.getElementById("contact");
+      const contactBlock = document.getElementById("contact-main");
       contactBlock?.scrollIntoView({ behavior: "smooth" });
     }, 200)
   }

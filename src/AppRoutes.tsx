@@ -3,7 +3,7 @@ import { Main } from "./pages/Main/Main";
 import { AboutUs } from "./pages/AboutUs/AboutUs";
 import { AboutGame } from "./pages/AboutGame/AboutGame";
 import { Game } from "./pages/Game/Game";
-import { EcologyGame } from "./pages/AboutGame copy/EcologyGame";
+import { EcologyGame } from "./pages/EcologyGame/EcologyGame";
 
 export const AppRoutes = () => {
   return (

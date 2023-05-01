@@ -40,7 +40,6 @@ export const CarouselSection = () => {
         autoPlay
         infiniteLoop
         emulateTouch
-        verticalSwipe="natural"
         renderIndicator={(
           clickHandler: (e: React.MouseEvent | React.KeyboardEvent) => void,
           isSelected: boolean
@@ -140,6 +139,8 @@ const BackgroundBlock = styled.div`
     position: relative;
     padding: 96px 48px 48px 48px;
     display: flex;
+
+    z-index: 100;
   }
 
   @media only screen and (max-width: 1100px) {
@@ -256,6 +257,9 @@ const Inner = styled.div`
   flex-direction: column;
 
   overflow: hidden;
+
+  position: relative;
+  z-index: 100;
 
   background-image: url('${sliderOpacity}');
   background-repeat: no-repeat;

@@ -39,7 +39,7 @@ export const EcologyGame = () => {
         />
         <Query />
 
-        <div className="relative" id="contact">
+        <div className="relative">
           <Title>
             <SubTitle text="Подписывайся на новости о наших игрых" />
           </Title>
