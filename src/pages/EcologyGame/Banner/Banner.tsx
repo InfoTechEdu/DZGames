@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-import GameBanner from "../../../assets/gameBanner.png";
-import GameBanner720 from "../../../assets/gameBanner720.png";
-import GameBanner320 from "../../../assets/gameBanner320.png";
+import GameBanner from "../../../assets/gameBannerEcology.png";
+import GameBanner720 from "../../../assets/gameBannerEcology720.png";
+import GameBanner320 from "../../../assets/gameBannerEcology320.png";
 import RightArrow from "../../../assets/right_arrow.svg";
-import { Button } from "../../../components/Button/Button";
+import { Button } from "../../../components/Button/Button"; 
 
 export const Banner = () => {
   return (
@@ -13,13 +13,11 @@ export const Banner = () => {
       <ImgBanner720 src={GameBanner720} />
       <ImgBanner320 src={GameBanner320} />
       <BannerDescriptionBlock>
-        <BannerTitle>Юнга Мур и большая стройка котов-пиратов</BannerTitle>
+        <BannerTitle>Экология</BannerTitle>
         <BannerDescription>
-          Наше дело не так однозначно, как может показаться: семантический
-          разбор внешних противодействий является качественно новой ступенью
-          соответствующих условий активизации!
+        Соблюдение баланса между экологией и производством всегда было непростой задачей
         </BannerDescription>
-        <Button width="1020px" text="Скачать для Windows" />
+        <Button width="1020px" text="Играть в браузере" />
       </BannerDescriptionBlock>
       <ImgRight src={RightArrow} />
     </BannerStyle>

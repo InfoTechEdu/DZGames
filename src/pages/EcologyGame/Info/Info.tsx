@@ -7,17 +7,15 @@ import { Description } from "../../../components/Description/Description";
 export const Info = () => {
   return (
     <div>
-      <SubTitle text="Методическая информация" />
+      <SubTitle text="Игра в стадии раннего доступа" />
       <Description
       fontSize820={24}
         text="
-        Wake: Tales from the Aqualab нацелен на научные практики NGSS, связанные
-        с экспериментами, моделированием и аргументацией. Инструменты, которые
-        учащиеся будут использовать для изучения экосистем и решения задач в
-        игре, включают:"
+        Игра находится в стадии активной разработки и доступна для первооткрывателей. Ты можешь сделать свой вклад в развитие данного проекта!
+Вступай в наше сообщество, делись идеями и предложениями с нашей командой разработчиков. Давай вместе создадим игру и повысим осведомленность людей об окружающей среде."
       />
 
-      <Implements>
+      {/* <Implements>
         <ImplementBlock>
           <ImplementsTitle>Инструменты аргументации:</ImplementsTitle>
           <WhiteBlock>
@@ -95,7 +93,7 @@ export const Info = () => {
         </ImplementBlock>
         <ImgS className="asideButton" src={S} />
         <ImgLeft src={LeftArrow} />
-      </Implements>
+      </Implements> */}
     </div>
   );
 };

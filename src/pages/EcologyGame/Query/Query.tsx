@@ -5,13 +5,13 @@ import CatQuery from "../../../assets/catQuery.png";
 import Captain760 from "../../../assets/captain760.png";
 import Captain320 from "../../../assets/captain320.png";
 import CatQuery760 from "../../../assets/catQuery760.png";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { SubTitle } from "../../../components/SubTitle/SubTitle";
 import { Description } from "../../../components/Description/Description";
 import { useNavigate } from "react-router-dom";
 
 export const Query = () => {
-  const [liked, setLiked] = useState("");
+  const [feedback, setFeedback] = useState("");
   
   const navigate = useNavigate();
 
@@ -26,30 +26,38 @@ export const Query = () => {
     }, 200)
   }
 
+  const handleSendFeedback = useCallback(async (feedbackType: string) => {
+    setFeedback(feedbackType);
+
+    await fetch(
+      `https://functions.yandexcloud.net/d4ej48ta5vbhapraj3j9?game=ecology&feedback=${feedbackType}&date=${new Date()}`
+    );
+  }, []);
+
   return (
     <QueryStyle>
       <Interview>
-        {liked === "yes" && (
+        {feedback === "like" && (
           <SubTitle
             text="Спасибо, мы очень рады!
             И скоро порадуем вас новыми играми."
           />
         )}
 
-        {liked === "no" && (
+        {feedback === "dislike" && (
           <NoWrapper>
             <SubTitle text="Очень жаль :-(" />
-            <Description text="Расскажите, что не так. Мы постараемся учесть ваши замечания, когда будем придумывать новые игры." />
+            <Description text="Спасибо обратную связь. Мы будем рады услышать от вас, что вам не понравилось. Напишите нам!" />
             <CommentButton onClick={scrollToForm}>Оставить отзыв</CommentButton>
           </NoWrapper>
         )}
 
-        {liked === "" && (
+        {feedback === "" && (
           <>
             <InterviewTitle>Понравилась ли тебе игра?</InterviewTitle>
             <InterviewBtns>
-              <InterviewBtn onClick={() => setLiked("yes")}>Да</InterviewBtn>
-              <InterviewBtn onClick={() => setLiked("no")}>Нет</InterviewBtn>
+              <InterviewBtn onClick={() => handleSendFeedback("like")}>Да</InterviewBtn>
+              <InterviewBtn onClick={() => handleSendFeedback("dislike")}>Нет</InterviewBtn>
             </InterviewBtns>
           </>
         )}
