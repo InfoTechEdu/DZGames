@@ -16,6 +16,33 @@ export const Info = () => {
 
       <Implements>
         <ImplementBlock>
+          <ImplementsTitle>
+            Направления развития и оценки функциональной грамотности:
+          </ImplementsTitle>
+          <WhiteBlock>
+            <ImplementUl>
+              <ImplementLi>
+                Математическая грамотность
+              </ImplementLi>
+              <ImplementLi>
+                Читательская грамотность
+              </ImplementLi>
+              <ImplementLi>
+                Естественнонаучная грамотность
+              </ImplementLi>
+              <ImplementLi>
+                Финансовая грамотность
+              </ImplementLi>
+            </ImplementUl>
+          </WhiteBlock>
+
+          <br></br>
+          <Description
+              fontSize={24}
+              text="Для получения больших деталей относительно списка задач для игроков и оцениваемых навыков обратитесь к команде разработчиков"
+            />
+        </ImplementBlock>
+        {/* <ImplementBlock>
           <ImplementsTitle>Инструменты аргументации:</ImplementsTitle>
           <WhiteBlock>
             <ImplementUl>
@@ -39,8 +66,8 @@ export const Info = () => {
               </ImplementLi>
             </ImplementUl>
           </WhiteBlock>
-        </ImplementBlock>
-        <ImplementBlock>
+        </ImplementBlock> */}
+        {/* <ImplementBlock>
           <ImplementsTitle>Инструменты аргументации:</ImplementsTitle>
           <WhiteBlock>
             <ImplementUl>
@@ -64,32 +91,7 @@ export const Info = () => {
               </ImplementLi>
             </ImplementUl>
           </WhiteBlock>
-        </ImplementBlock>
-        <ImplementBlock>
-          <ImplementsTitle>Инструменты аргументации:</ImplementsTitle>
-          <WhiteBlock>
-            <ImplementUl>
-              <ImplementLi>
-                Утверждение, доказательства, структура рассуждений. Подкрепляйте
-                аргументы данными, собранными в результате наблюдений,
-                экспериментов и моделирования.
-              </ImplementLi>
-              <ImplementLi>
-                Резервуар наблюдения для сбора информации о взаимодействии
-                организмов.
-              </ImplementLi>
-              <ImplementLi>
-                Утверждение, доказательства, структура рассуждений. Подкрепляйте
-                аргументы данными, собранными в результате наблюдений,
-                экспериментов и моделирования.
-              </ImplementLi>
-              <ImplementLi>
-                Резервуар наблюдения для сбора информации о взаимодействии
-                организмов.
-              </ImplementLi>
-            </ImplementUl>
-          </WhiteBlock>
-        </ImplementBlock>
+        </ImplementBlock> */}
         <ImgS className="asideButton" src={S} />
         <ImgLeft src={LeftArrow} />
       </Implements>
