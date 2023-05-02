@@ -45,7 +45,7 @@ export const Query = () => {
         {feedback === "dislike" && (
           <NoWrapper>
             <SubTitle text="Очень жаль :-(" />
-            <Description text="Расскажите, что не так. Мы постараемся учесть ваши замечания, когда будем придумывать новые игры." />
+            <Description text="Спасибо обратную связь. Мы будем рады услышать от вас, что вам не понравилось. Напишите нам!" />
             <CommentButton onClick={scrollToForm}>Оставить отзыв</CommentButton>
           </NoWrapper>
         )}
