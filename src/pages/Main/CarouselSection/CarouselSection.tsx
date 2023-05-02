@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 import bgImage from '../../../assets/slider-bg.png';
 import bgImageMedium from '../../../assets/slider-bg-medium.png';
+import bgImageEcology from '../../../assets/slider-bg-ecology.png';
+import bgImageMediumEcology from '../../../assets/slider-bg-medium-ecology.png';
 import sliderOpacity from '../../../assets/slider-opacity.png';
 import { Carousel } from 'react-responsive-carousel';
 import { Button } from '../../../components/Button/Button';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+
 
 const INTERVAL = 6000;
 
@@ -13,8 +17,14 @@ export const CarouselSection = () => {
 
   const navigate = useNavigate();
 
-  const navigateToAboutGame = () => {
+  const navigateToMurGame = () => {
+    console.log("Navigating");
     navigate('/about-game');
+  }
+
+  const navigateToEcologyGame = () => {
+    console.log("Navigating");
+    navigate('/ecology-game');
   }
 
   useEffect(() => {
@@ -57,31 +67,25 @@ export const CarouselSection = () => {
             <Wrapper>
               <h2>Юнга Мур и большая стройка котов-пиратов</h2>
               <p>
-                Наше дело не так однозначно, как может показаться: семантический
-                разбор внешних противодействий является качественно новой
-                ступенью соответствующих условий активизации!
+              Используй свои знания и навыки и помоги котам построить городок для туристов.
               </p>
             </Wrapper>
-            <Button handleClick={navigateToAboutGame} width='100%' text='Скачать для Windows' />
+            <Button handleClick={navigateToMurGame} width='100%' text='Скачать для Windows' />
           </Inner>
         </SliderItem>
         <SliderItem className='mySliderItem'>
           <Left />
           <Inner>
             <Wrapper>
-              <h2>Юнга Мур и большая стройка котов-пиратов</h2>
+              <h2>Экология</h2>
               <p>
-                Lorem Ipsum - это текст-"рыба", часто используемый в печати и
-                вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для
-                текстов на латинице с начала XVI века. В то время некий
-                безымянный печатник создал большую коллекцию размеров и форм
-                шрифтов, используя Lorem Ipsum для распечатки образцов{' '}
+              Соблюдение баланса между экологией и производством всегда было непростой задачей{' '}
               </p>
             </Wrapper>
-            <Button handleClick={navigateToAboutGame} width='100%' text='Скачать для Windows' />
+            <Button handleClick={navigateToEcologyGame} width='100%' text='Играть в браузере' />
           </Inner>
         </SliderItem>
-        <SliderItem className='mySliderItem'>
+        {/* <SliderItem className='mySliderItem'>
           <Left />
           <Inner>
             <Wrapper>
@@ -94,7 +98,7 @@ export const CarouselSection = () => {
             </Wrapper>
             <Button handleClick={navigateToAboutGame} width='100%' text='Скачать для Windows' />
           </Inner>
-        </SliderItem>
+        </SliderItem> */}
       </Carousel>
     </Container>
   );
@@ -213,6 +217,39 @@ const Left = styled.div`
     background-image: url('${bgImage}');
   }
 `;
+
+const LeftEcology = styled.div`
+  display: flex;
+  flex: 1;
+  height: 100%;
+  overflow: hidden;
+
+  border-radius: 20px 0 0 20px;
+
+  background-image: url('${bgImageEcology}');
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: cover;
+
+  @media only screen and (max-width: 1100px) {
+    width: 50%;
+  }
+
+  @media only screen and (max-width: 820px) {
+    background-image: url('${bgImageMediumEcology}');
+  }
+
+  @media only screen and (max-width: 690px) {
+    width: 100%;
+    height: 266px;
+    flex: auto;
+
+    border-radius: 20px 20px 0 0;
+
+    background-image: url('${bgImage}');
+  }
+`;
+
 
 const CustomIndicator = styled.button<{
   isSelected: boolean;

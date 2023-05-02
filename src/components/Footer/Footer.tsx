@@ -33,8 +33,7 @@ export const Footer = () => {
               <Text>Мы в соцсетях</Text>
               <Icons>
                 <div><NavLink to="https://domznaniy.school/"><Tg /></NavLink></div>
-                <div><NavLink to="https://domznaniy.school/"><Tg /></NavLink></div>
-                <div><NavLink to="https://domznaniy.school/"><Tg /></NavLink></div>
+                <div><NavLink to="https://domznaniy.school/"><Vk /></NavLink></div>
               </Icons>
             </Social>
           </Block>
@@ -43,16 +42,16 @@ export const Footer = () => {
             <NavLink to="https://domznaniy.school/"><LogoImg /></NavLink>
             <Tel href="tel: 8 800 600 60 77">8 800 600 60 77</Tel>
             <Icons>
-            <div><NavLink to="https://domznaniy.school/"><Tg /></NavLink></div>
-            <div><NavLink to="https://domznaniy.school/"><Vb /></NavLink></div>
-            <div><NavLink to="https://domznaniy.school/"><Vk /></NavLink></div>
-            <div><NavLink to="https://domznaniy.school/"><Yt /></NavLink></div>
-            <div><NavLink to="https://domznaniy.school/"><Yn /></NavLink></div>
+            <div><NavLink to="https://t.me/d_znaniy"><Tg /></NavLink></div>
+            <div><NavLink to="https://wa.me/79667438117"><Vb /></NavLink></div>
+            <div><NavLink to="https://vk.com/dom.znaniy"><Vk /></NavLink></div>
+            <div><NavLink to="https://www.youtube.com/channel/UCO3VZZ4at8ofzeZskwSSN8w/featured"><Yt /></NavLink></div>
+            <div><NavLink to="https://zen.yandex.ru/id/5e21e4c19c944600b23d8274"><Yn /></NavLink></div>
             </Icons>
           </Contact>
         </Wrapper>
         <Wrapper className="align-center">
-          <Button width="212px" text="Связаться с нами" />
+          {/* <Button width="212px" text="Связаться с нами" /> */}
           <TextWrapper>
             <div><NavLink to="https://domznaniy.school/">© DZGames 2023</NavLink></div>
             <div><NavLink to="https://domznaniy.school/">Политика конфиденциальности</NavLink></div>

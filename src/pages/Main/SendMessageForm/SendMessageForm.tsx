@@ -22,7 +22,7 @@ export const SendMessageForm = () => {
       setIsLoading(true);
 
       const response = await fetch(
-        `https://functions.yandexcloud.net/d4e8a0km5h5ugh1t9729?message=${message}&date=${new Date()}`
+        `https://functions.yandexcloud.net/d4e8a0km5h5ugh1t9729?message=${message}&email=${email}&name=${name}&date=${new Date()}`
       );
 
       if (response.ok) {
