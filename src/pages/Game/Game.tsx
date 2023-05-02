@@ -1,16 +1,21 @@
 import styled from "styled-components";
 import A from "../../assets/A.svg";
 import GameImg from "../../assets/game.png";
+import EcologyGameImg from "../../assets/ecology-game.png";
 import { useNavigate } from "react-router-dom";
 import { MainTitle } from "../../components/MainTitle/MainTitle";
 import { SubTitle } from "../../components/SubTitle/SubTitle";
-import { SendMessageForm } from "../Main/SendMessageForm/SendMessageForm";
+import { SendMessageForm } from "../Main/SendMessageForm/SendMessageForm"; 
 
 export const Game = () => {
   const navigate = useNavigate();
 
   const handleNavigation = () => {
     navigate("/about-game");
+  };
+
+  const handleEcologyNavigation = () => {
+    navigate("/ecology-game");
   };
 
   return (
@@ -24,11 +29,20 @@ export const Game = () => {
               <CardText>
                 <CardTitle>Юнга Мур и большая стройка котов-пиратов</CardTitle>
                 <CardDescription>
-                  Описание игры Описание игры Описание игры Описание игры
+                Используй свои знания и навыки и помоги котам построить городок для туристов
                 </CardDescription>
               </CardText>
             </Card>
-            <Card onClick={handleNavigation}>
+            <Card onClick={handleEcologyNavigation}>
+              <Img src={EcologyGameImg} />
+              <CardText>
+                <CardTitle>Экология</CardTitle>
+                <CardDescription>
+                Соблюдение баланса между экологией и производством всегда было непростой задачей
+                </CardDescription>
+              </CardText>
+            </Card>
+            {/* <Card onClick={handleNavigation}>
               <Img src={GameImg} />
               <CardText>
                 <CardTitle>Юнга Мур и большая стройка котов-пиратов</CardTitle>
@@ -36,16 +50,7 @@ export const Game = () => {
                   Описание игры Описание игры Описание игры Описание игры
                 </CardDescription>
               </CardText>
-            </Card>
-            <Card onClick={handleNavigation}>
-              <Img src={GameImg} />
-              <CardText>
-                <CardTitle>Юнга Мур и большая стройка котов-пиратов</CardTitle>
-                <CardDescription>
-                  Описание игры Описание игры Описание игры Описание игры
-                </CardDescription>
-              </CardText>
-            </Card>
+            </Card> */}
           </Cards>
         </Games>
 
