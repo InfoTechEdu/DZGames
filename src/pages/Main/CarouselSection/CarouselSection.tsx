@@ -1,35 +1,51 @@
-import styled from 'styled-components';
-import bgImage from '../../../assets/slider-bg.png';
-import bgImageMedium from '../../../assets/slider-bg-medium.png';
-import bgImageEcology from '../../../assets/slider-bg-ecology.png';
-import bgImageMediumEcology from '../../../assets/slider-bg-medium-ecology.png';
-import sliderOpacity from '../../../assets/slider-opacity.png';
-import { Carousel } from 'react-responsive-carousel';
-import { Button } from '../../../components/Button/Button';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-
+import styled from "styled-components";
+import bgImage from "../../../assets/slider-bg.png";
+import bgImageMedium from "../../../assets/slider-bg-medium.png";
+import bgImageEcology from "../../../assets/slider-bg-ecology.png";
+import bgImageMediumEcology from "../../../assets/slider-bg-medium-ecology.png";
+import sliderOpacity from "../../../assets/slider-opacity.png";
+import { Carousel } from "react-responsive-carousel";
+import { Button } from "../../../components/Button/Button";
+import { useEffect, useMemo, useState, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
 
 const INTERVAL = 6000;
 
 export const CarouselSection = () => {
-
   const navigate = useNavigate();
 
-  const navigateToMurGame = () => {
-    console.log("Navigating");
-    navigate('/about-game');
-  }
+  const [slideIndex, setSlideIndex] = useState(0);
 
-  const navigateToEcologyGame = () => {
+  const navigateToMurGame = useCallback(() => {
     console.log("Navigating");
-    navigate('/ecology-game');
-  }
+    navigate("/about-game");
+  }, [navigate]);
+
+  const navigateToEcologyGame = useCallback(() => {
+    console.log("Navigating");
+    navigate("/ecology-game");
+  }, [navigate]);
+
+  const buttons = useMemo(
+    () => [
+      <Button
+        handleClick={navigateToMurGame}
+        width="100%"
+        text="Скачать для Windows"
+      />,
+      <Button
+        handleClick={navigateToEcologyGame}
+        width="100%"
+        text="Играть в браузере"
+      />,
+    ],
+    [navigateToMurGame, navigateToEcologyGame]
+  );
 
   useEffect(() => {
-    const dots = document.querySelector('.carousel .control-dots');
-    const backBlock = document.querySelector('.backBlock .backRight');
+    const dots = document.querySelector(".carousel .control-dots");
+    const backBlock = document.querySelector(".backBlock .backRight");
 
     if (dots && backBlock) {
       backBlock.append(dots);
@@ -38,51 +54,61 @@ export const CarouselSection = () => {
 
   return (
     <Container>
-      <BackgroundBlock className='backBlock'>
-        <div className='backLeft'></div>
-        <div className='backRight'></div>
+      <BackgroundBlock className="backBlock">
+        <div className="backLeft" />
+        <div className="backRight">
+          {buttons[slideIndex]}
+        </div>
       </BackgroundBlock>
       <Carousel
         showThumbs={false}
         showStatus={false}
         showArrows={false}
         interval={INTERVAL}
-        autoPlay
         infiniteLoop
         emulateTouch
+        autoPlay
+        onChange={(index) => setSlideIndex(index)}
         renderIndicator={(
           clickHandler: (e: React.MouseEvent | React.KeyboardEvent) => void,
-          isSelected: boolean
+          isSelected: boolean,
+          index: number
         ) => {
           return (
-            <CustomIndicator isSelected={isSelected} onClick={clickHandler}>
+            <CustomIndicator
+              isSelected={isSelected}
+              onClick={(e) => {
+                setSlideIndex(index);
+                clickHandler(e);
+              }}
+            >
               <div />
             </CustomIndicator>
           );
         }}
       >
-        <SliderItem className='mySliderItem'>
+        <SliderItem className="mySliderItem">
           <Left />
           <Inner>
             <Wrapper>
               <h2>Юнга Мур и большая стройка котов-пиратов</h2>
               <p>
-              Используй свои знания и навыки и помоги котам построить городок для туристов.
+                Используй свои знания и навыки и помоги котам построить городок
+                для туристов.
               </p>
             </Wrapper>
-            <Button handleClick={navigateToMurGame} width='100%' text='Скачать для Windows' />
           </Inner>
         </SliderItem>
-        <SliderItem className='mySliderItem'>
+        <SliderItem className="mySliderItem">
           <Left />
           <Inner>
             <Wrapper>
               <h2>Экология</h2>
               <p>
-              Соблюдение баланса между экологией и производством всегда было непростой задачей{' '}
+                Соблюдение баланса между экологией и производством всегда было
+                непростой задачей{" "}
               </p>
             </Wrapper>
-            <Button handleClick={navigateToEcologyGame} width='100%' text='Играть в браузере' />
           </Inner>
         </SliderItem>
         {/* <SliderItem className='mySliderItem'>
@@ -143,6 +169,8 @@ const BackgroundBlock = styled.div`
     position: relative;
     padding: 96px 48px 48px 48px;
     display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 
     z-index: 100;
   }
@@ -179,6 +207,7 @@ const BackgroundBlock = styled.div`
 
 const SliderItem = styled.div`
   display: flex;
+  min-height: 426px;
   height: 100%;
 
   @media only screen and (max-width: 690px) {
@@ -194,7 +223,7 @@ const Left = styled.div`
 
   border-radius: 20px 0 0 20px;
 
-  background-image: url('${bgImage}');
+  background-image: url("${bgImage}");
   background-repeat: no-repeat;
   background-position: right;
   background-size: cover;
@@ -204,7 +233,7 @@ const Left = styled.div`
   }
 
   @media only screen and (max-width: 820px) {
-    background-image: url('${bgImageMedium}');
+    background-image: url("${bgImageMedium}");
   }
 
   @media only screen and (max-width: 690px) {
@@ -214,7 +243,7 @@ const Left = styled.div`
 
     border-radius: 20px 20px 0 0;
 
-    background-image: url('${bgImage}');
+    background-image: url("${bgImage}");
   }
 `;
 
@@ -226,7 +255,7 @@ const LeftEcology = styled.div`
 
   border-radius: 20px 0 0 20px;
 
-  background-image: url('${bgImageEcology}');
+  background-image: url("${bgImageEcology}");
   background-repeat: no-repeat;
   background-position: right;
   background-size: cover;
@@ -236,7 +265,7 @@ const LeftEcology = styled.div`
   }
 
   @media only screen and (max-width: 820px) {
-    background-image: url('${bgImageMediumEcology}');
+    background-image: url("${bgImageMediumEcology}");
   }
 
   @media only screen and (max-width: 690px) {
@@ -246,10 +275,9 @@ const LeftEcology = styled.div`
 
     border-radius: 20px 20px 0 0;
 
-    background-image: url('${bgImage}');
+    background-image: url("${bgImage}");
   }
 `;
-
 
 const CustomIndicator = styled.button<{
   isSelected: boolean;
@@ -262,6 +290,8 @@ const CustomIndicator = styled.button<{
   border: 0;
   padding: 0;
   overflow: hidden;
+
+  z-index: 200;
 
   & div {
     background-color: #ff7001;
@@ -295,10 +325,11 @@ const Inner = styled.div`
 
   overflow: hidden;
 
-  position: relative;
-  z-index: 100;
+  z-index: 200;
 
-  background-image: url('${sliderOpacity}');
+  position: relative;
+
+  background-image: url("${sliderOpacity}");
   background-repeat: no-repeat;
   background-size: cover;
 
