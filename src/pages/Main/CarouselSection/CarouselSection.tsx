@@ -8,7 +8,6 @@ import { Carousel } from "react-responsive-carousel";
 import { Button } from "../../../components/Button/Button";
 import { useEffect, useMemo, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRef } from "react";
 
 const INTERVAL = 6000;
 

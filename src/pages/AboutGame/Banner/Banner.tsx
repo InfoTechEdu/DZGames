@@ -7,6 +7,12 @@ import RightArrow from "../../../assets/right_arrow.svg";
 import { Button } from "../../../components/Button/Button";
 
 export const Banner = () => {
+  const handleDownloading = () => {
+    window.open(
+      "https://file-examples.com/storage/fe0d875dfd645260e96b346/2017/11/file_example_MP3_700KB.mp3"
+    );
+  };
+
   return (
     <BannerStyle>
       <ImgBanner src={GameBanner} />
@@ -15,9 +21,14 @@ export const Banner = () => {
       <BannerDescriptionBlock>
         <BannerTitle>Юнга Мур и большая стройка котов-пиратов</BannerTitle>
         <BannerDescription>
-        Используй свои знания и навыки и помоги котам построить городок для туристов.
+          Используй свои знания и навыки и помоги котам построить городок для
+          туристов.
         </BannerDescription>
-        <Button width="1020px" text="Скачать для Windows" />
+        <Button
+          handleClick={handleDownloading}
+          width="1020px"
+          text="Скачать для Windows"
+        />
       </BannerDescriptionBlock>
       <ImgRight src={RightArrow} />
     </BannerStyle>
