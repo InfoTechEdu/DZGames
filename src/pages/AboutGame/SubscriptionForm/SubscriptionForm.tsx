@@ -39,8 +39,7 @@ export const SubscriptionForm = () => {
         <Img src={BlockLeftImg} alt="" />
         <Img720 src={BlockLeftImg720} alt="" />
         <Text id="contactTitle">
-          Хочешь получать актуальные новости о наших играх? Тогда смело
-          подписывайся на рассылку!
+        Подпишись на рассылку, чтобы не пропустить актуальные обновления и новости!
         </Text>
       </BlockLeft>
       <FormStyle>

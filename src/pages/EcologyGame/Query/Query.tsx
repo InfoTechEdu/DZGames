@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import Captain from "../../../assets/captain.png";
-import CatQuery from "../../../assets/catQuery.png";
+import FeedbackLeftImg from "../../../assets/feedback-ecology-left.png";
+import FeedbackRightImg from "../../../assets/feedback-ecology-right.png";
 import Captain760 from "../../../assets/captain760.png";
 import Captain320 from "../../../assets/captain320.png";
 import CatQuery760 from "../../../assets/catQuery760.png";
@@ -38,16 +38,21 @@ export const Query = () => {
     <QueryStyle>
       <Interview>
         {feedback === "like" && (
+          <>
           <SubTitle
-            text="Спасибо, мы очень рады!
-            И скоро порадуем вас новыми играми."
+            text="Спасибо, мы очень рады!"
+
           />
+          <SubTitle
+            text="Жди новые игры от нашей команды!"
+          />
+        </>
         )}
 
         {feedback === "dislike" && (
           <NoWrapper>
             <SubTitle text="Очень жаль :-(" />
-            <Description text="Спасибо обратную связь. Мы будем рады услышать от вас, что вам не понравилось. Напишите нам!" />
+            <Description text="Спасибо обратную связь. Мы будем рады услышать, что тебе не понравилось. Напиши нам!" />
             <CommentButton onClick={scrollToForm}>Оставить отзыв</CommentButton>
           </NoWrapper>
         )}
@@ -63,8 +68,8 @@ export const Query = () => {
         )}
       </Interview>
       <Image>
-        <ImgCaptain src={Captain} />
-        <ImgCatQuery src={CatQuery} />
+        <ImgCaptain src={FeedbackLeftImg} />
+        <ImgCatQuery src={FeedbackRightImg} />
         <ImgCaptain760 src={Captain760} />
         <ImgCatQuery760 src={CatQuery760} />
         <ImgCaptain320 src={Captain320} />

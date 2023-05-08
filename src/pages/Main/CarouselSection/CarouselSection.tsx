@@ -4,6 +4,7 @@ import bgImageMedium from "../../../assets/slider-bg-medium.png";
 import bgImageEcology from "../../../assets/slider-bg-ecology.png";
 import bgImageMediumEcology from "../../../assets/slider-bg-medium-ecology.png";
 import sliderOpacity from "../../../assets/slider-opacity.png";
+import sliderOpacityEcology from "../../../assets/slider-opacity-ecology.png";
 import { Carousel } from "react-responsive-carousel";
 import { Button } from "../../../components/Button/Button";
 import { useEffect, useMemo, useState, useCallback } from "react";
@@ -99,8 +100,8 @@ export const CarouselSection = () => {
           </Inner>
         </SliderItem>
         <SliderItem className="mySliderItem">
-          <Left />
-          <Inner>
+          <LeftEcology />
+          <InnerEcology>
             <Wrapper>
               <h2>Экология</h2>
               <p>
@@ -108,7 +109,7 @@ export const CarouselSection = () => {
                 непростой задачей{" "}
               </p>
             </Wrapper>
-          </Inner>
+          </InnerEcology>
         </SliderItem>
         {/* <SliderItem className='mySliderItem'>
           <Left />
@@ -274,7 +275,7 @@ const LeftEcology = styled.div`
 
     border-radius: 20px 20px 0 0;
 
-    background-image: url("${bgImage}");
+    background-image: url("${bgImageEcology}");
   }
 `;
 
@@ -329,6 +330,44 @@ const Inner = styled.div`
   position: relative;
 
   background-image: url("${sliderOpacity}");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  @media only screen and (max-width: 1100px) {
+    width: 50%;
+  }
+
+  @media only screen and (max-width: 820px) {
+    padding: 86px 24px 38px 24px;
+  }
+
+  @media only screen and (max-width: 690px) {
+    width: 100%;
+    height: 378px;
+
+    padding: 52px 24px 24px 24px;
+
+    border-radius: 0 0 20px 20px;
+  }
+`;
+
+const InnerEcology = styled.div`
+  height: 100%;
+  width: 520px;
+  padding: 96px 48px 48px 48px;
+  border-radius: 0 20px 20px 0;
+
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  z-index: 200;
+
+  position: relative;
+
+  background-image: url("${sliderOpacityEcology}");
   background-repeat: no-repeat;
   background-size: cover;
 

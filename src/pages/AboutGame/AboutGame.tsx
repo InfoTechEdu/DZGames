@@ -46,7 +46,7 @@ export const AboutGame = () => {
 
         <div className="relative">
           <Title>
-            <SubTitle text="Подписывайся на новости о наших игрых" />
+            <SubTitle text="Подписывайся на новости о наших играх" />
           </Title>
           <SubscriptionForm />
           <ImgD className="asideButton" src={D} />

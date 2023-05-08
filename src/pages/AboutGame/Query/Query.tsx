@@ -36,16 +36,22 @@ export const Query = () => {
     <QueryStyle>
       <Interview>
         {feedback === "like" && (
-          <SubTitle
-            text="Спасибо, мы очень рады!
-            И скоро порадуем вас новыми играми."
-          />
+          <>
+            <SubTitle
+              text="Спасибо, мы очень рады!"
+
+            />
+            <SubTitle
+              text="Жди новые игры от нашей команды!"
+            />
+          </>
+
         )}
 
         {feedback === "dislike" && (
           <NoWrapper>
             <SubTitle text="Очень жаль :-(" />
-            <Description text="Спасибо обратную связь. Мы будем рады услышать от вас, что вам не понравилось. Напишите нам!" />
+            <Description text="Спасибо обратную связь. Мы будем рады услышать, что тебе не понравилось. Напиши нам!" />
             <CommentButton onClick={scrollToForm}>Оставить отзыв</CommentButton>
           </NoWrapper>
         )}

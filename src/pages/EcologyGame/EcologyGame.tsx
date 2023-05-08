@@ -11,6 +11,7 @@ import { SubTitle } from "../../components/SubTitle/SubTitle";
 
 import D from "../../assets/D.svg";
 import { Description } from "../../components/Description/Description";
+import { SubscriptionForm } from "../AboutGame/SubscriptionForm/SubscriptionForm";
 
 export const EcologyGame = () => {
   return (
@@ -42,13 +43,14 @@ export const EcologyGame = () => {
 
         <div className="relative">
           <Title>
-            <SubTitle text="Подписывайся на новости о наших игрых" />
+            <SubTitle text="Подписывайся на новости о наших играх" />
           </Title>
-          <Form
+          <SubscriptionForm></SubscriptionForm>
+          {/* <Form
             withMessage={false}
             submitText="Подписаться"
-            text="Хочешь получать актуальные новости о наших играх? Тогда смело подписывайся на рассылку!"
-          />
+            text="Подпишись на рассылку, чтобы не пропустить актуальные новости!"
+          /> */}
           <ImgD className="asideButton" src={D} />
         </div>
       </Container>
