@@ -5,6 +5,14 @@ import GameBanner720 from "../../../assets/gameBannerEcology720.png";
 import GameBanner320 from "../../../assets/gameBannerEcology320.png";
 import RightArrow from "../../../assets/right_arrow.svg";
 import { Button } from "../../../components/Button/Button"; 
+import { useNavigate } from "react-router-dom";
+
+const openEcologyGame = () => {
+  // const navigate = useNavigate();
+  // navigate("/ecology-game-index");
+  const URL = "https://games.domznaniy.school/games/ecology/index.html";
+  window.open(URL, '_blank')?.focus();
+};
 
 export const Banner = () => {
   return (
@@ -17,7 +25,7 @@ export const Banner = () => {
         <BannerDescription>
         Соблюдение баланса между экологией и производством всегда было непростой задачей
         </BannerDescription>
-        <Button width="1020px" text="Играть в браузере" />
+        <Button width="1020px" text="Играть в браузере" handleClick={openEcologyGame} />
       </BannerDescriptionBlock>
       <ImgRight src={RightArrow} />
     </BannerStyle>

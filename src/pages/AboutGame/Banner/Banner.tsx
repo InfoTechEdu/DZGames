@@ -9,8 +9,9 @@ import { Button } from "../../../components/Button/Button";
 export const Banner = () => {
   const handleDownloading = () => {
     window.open(
-      "https://file-examples.com/storage/fe0d875dfd645260e96b346/2017/11/file_example_MP3_700KB.mp3"
-    );
+      //"https://file-examples.com/storage/fe0d875dfd645260e96b346/2017/11/file_example_MP3_700KB.mp3"
+      "https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1Ou6k75bsuQ0l9RAOiZ_SnoAN2byM_hsH"
+      );
   };
 
   return (
