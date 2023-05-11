@@ -148,6 +148,7 @@ const Textarea = styled.textarea({
   fontSize: "18px",
   fontWeight: "600",
   paddingLeft: "30px",
+  paddingRight: "30px",
   paddingTop: "16px",
   resize: "none",
   width: "100%",
