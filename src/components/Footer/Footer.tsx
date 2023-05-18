@@ -32,8 +32,8 @@ export const Footer = () => {
             <Social>
               <Text>Мы в соцсетях</Text>
               <Icons>
-                <div><NavLink to="https://domznaniy.school/"><Tg /></NavLink></div>
-                <div><NavLink to="https://domznaniy.school/"><Vk /></NavLink></div>
+                <div><NavLink to="https://t.me/domznaniygames"><Tg /></NavLink></div>
+                <div><NavLink to="https://vk.com/domznaniygames"><Vk /></NavLink></div>
               </Icons>
             </Social>
           </Block>
