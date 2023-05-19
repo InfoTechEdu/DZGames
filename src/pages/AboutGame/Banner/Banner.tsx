@@ -7,7 +7,16 @@ import RightArrow from "../../../assets/right_arrow.svg";
 import { Button } from "../../../components/Button/Button";
 
 export const Banner = () => {
-  const handleDownloading = () => {
+  const handleDownloading = async () => {
+    const response = await fetch(
+      `https://functions.yandexcloud.net/d4ec1o5pg8he0c6aej8g?game=yunga-mur&uid=undefined`
+    ); //#edit. Add UID paramaeter to request
+    if(response.ok){
+      console.log("Tracking event 'game-download' was sent");
+    }else{
+      console.error("Failed to send tracking event 'game-download'. Error - " + response.body);
+    }
+
     window.open(
       //"https://file-examples.com/storage/fe0d875dfd645260e96b346/2017/11/file_example_MP3_700KB.mp3"
       "https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1Ou6k75bsuQ0l9RAOiZ_SnoAN2byM_hsH"

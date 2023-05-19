@@ -7,10 +7,18 @@ import RightArrow from "../../../assets/right_arrow.svg";
 import { Button } from "../../../components/Button/Button"; 
 import { useNavigate } from "react-router-dom";
 
-const openEcologyGame = () => {
+const openEcologyGame = async () => {
   // const navigate = useNavigate();
   // navigate("/ecology-game-index");
   const URL = "https://games.domznaniy.school/games/ecology/index.html";
+  const response = await fetch(
+    `https://functions.yandexcloud.net/d4ec1o5pg8he0c6aej8g?game=ecology&uid=undefined`
+  ); //#edit. Add UID paramaeter to request
+  if(response.ok){
+    console.log("Tracking event 'game-download' was sent");
+  }else{
+    console.error("Failed to send tracking event 'game-download'. Error - " + response.body);
+  }
   window.open(URL, '_blank')?.focus();
 };
 
