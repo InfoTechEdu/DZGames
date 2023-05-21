@@ -7,6 +7,9 @@ import RightArrow from "../../../assets/right_arrow.svg";
 import { Button } from "../../../components/Button/Button";
 
 export const Banner = () => {
+
+  /* Backup */
+  /*
   const handleDownloading = async () => {
     const response = await fetch(
       `https://functions.yandexcloud.net/d4ec1o5pg8he0c6aej8g?game=yunga-mur&uid=undefined`
@@ -22,6 +25,46 @@ export const Banner = () => {
       "https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1Ou6k75bsuQ0l9RAOiZ_SnoAN2byM_hsH"
       );
   };
+  */
+
+  // function handleDownload() {
+  //   const fileUrl = '../../../../public/builds/Yunga_Mur_Installer.exe'; //process.env.PUBLIC_URL + '/hotel_recolor_icon.png'; // URL of the file to download
+  //   const fileName = 'Yunga_Mur_Installer.exe'; // Name of the file to download
+  //   console.log("FileURL = " + fileUrl);
+
+  //   fetch(fileUrl, {
+  //     headers: {
+  //       'Content-Type': 'application/vnd.microsoft.portable-executable'
+  //     }
+  //   })
+  //     .then(response => response.blob())
+  //     .then(blob => {
+  //       const url = window.URL.createObjectURL(new Blob([blob]));
+  //       const link = document.createElement('a');
+  //       link.href = url;
+  //       link.setAttribute('download', fileName);
+  //       document.body.appendChild(link);
+  //       link.click();
+  //       if(link.parentNode) link.parentNode.removeChild(link);
+  //     });
+  // }
+
+  // function handleDownload() {
+  //   const downloadUrl = 'https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1Ou6k75bsuQ0l9RAOiZ_SnoAN2byM_hsH';
+  //     fetch(downloadUrl)
+  //     .then(response => response.blob())
+  //     .then(blob => {
+  //       const url = URL.createObjectURL(blob);
+  //       const a = document.createElement('a');
+  //       a.href = url;
+  //       a.download = 'file.exe';
+  //       a.click();
+  //     });
+  //   }
+
+  const handleDownload = () => {
+    window.location.href = `../../../../public/builds/Yunga_Mur_Installer.zip`; //zip, так как прямое скачивание и запуск exe вызывает предупреждение windows. Но с zip форматом (как сообщает chatgpt) это не всегда вызывает предупреждение 
+  };
 
   return (
     <BannerStyle>
@@ -35,7 +78,7 @@ export const Banner = () => {
           туристов.
         </BannerDescription>
         <Button
-          handleClick={handleDownloading}
+          handleClick={handleDownload}
           width="1020px"
           text="Скачать для Windows"
         />

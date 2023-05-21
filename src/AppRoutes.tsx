@@ -4,6 +4,7 @@ import { AboutUs } from "./pages/AboutUs/AboutUs";
 import { AboutGame } from "./pages/AboutGame/AboutGame";
 import { Game } from "./pages/Game/Game";
 import { EcologyGame } from "./pages/EcologyGame/EcologyGame";
+// import { Index } from "./pages/EcologyGame/Game/Index";
 
 export const AppRoutes = () => {
   return (
@@ -13,6 +14,7 @@ export const AppRoutes = () => {
       <Route path="about-game" element={<AboutGame />} />
       <Route path="/game" element={<Game />} />
       <Route path="/ecology-game" element={<EcologyGame />} />
+      {/* <Route path="/ecology-game-index" element={<Index />} /> */}
     </Routes>
   );
 };
