@@ -19,8 +19,21 @@ export const SubscriptionForm = () => {
       e.preventDefault();
 
       setIsLoading(true);
+
+      //#analytics
+      let uid = localStorage.getItem("uid");
+      if (!uid) {
+        localStorage.setItem("uid", generateUserId());
+        uid = localStorage.getItem("uid");
+      }
+      function generateUserId() {
+        var possibleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        var userId = "";
+        for (var j = 0; j < 20; j++) userId += possibleChars.charAt(Math.floor(Math.random() * possibleChars.length));
+        return userId;
+      }
       const response = await fetch(
-        `https://functions.yandexcloud.net/d4ec3d0f7t8ga1u736q2?email=${email}&date=${new Date()}`
+        `https://functions.yandexcloud.net/d4ec3d0f7t8ga1u736q2?uid=${uid}&email=${email}&date=${new Date()}`
       );
 
       if (response.ok) {
@@ -39,7 +52,7 @@ export const SubscriptionForm = () => {
         <Img src={BlockLeftImg} alt="" />
         <Img720 src={BlockLeftImg720} alt="" />
         <Text id="contactTitle">
-        Подпишись на рассылку, чтобы не пропустить актуальные обновления и новости!
+          Подпишись на рассылку, чтобы не пропустить актуальные обновления и новости!
         </Text>
       </BlockLeft>
       <FormStyle>

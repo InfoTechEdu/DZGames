@@ -18,10 +18,27 @@ const openEcologyGame = async () => {
   const URL = `../../../../public/builds/ecology/index.html`; 
 
   window.open(URL, '_blank')?.focus();
-  const response = await fetch(
-    `https://functions.yandexcloud.net/d4ec1o5pg8he0c6aej8g?game=ecology&uid=undefined`
-  ); //#edit. Add UID paramaeter to request
+  // not correct. need editing
+  // const deviceInfo = navigator.userAgent;
+  // console.log(deviceInfo);
 
+  //#analytics
+  let uid = localStorage.getItem("uid");
+  if(!uid){
+    localStorage.setItem("uid", generateUserId());
+    uid = localStorage.getItem("uid");
+  }
+  function generateUserId() {
+    var possibleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var userId = "";
+    for (var j = 0; j < 20; j++) userId += possibleChars.charAt(Math.floor(Math.random() * possibleChars.length));
+    return userId;
+  }
+  const response = await fetch(
+    `https://functions.yandexcloud.net/d4ec1o5pg8he0c6aej8g?game=ecology&uid=${uid}`
+  );
+
+  
   
   // if(response.ok){
   //   console.log("Tracking event 'game-download' was sent");

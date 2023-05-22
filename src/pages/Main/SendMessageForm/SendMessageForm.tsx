@@ -21,8 +21,20 @@ export const SendMessageForm = () => {
 
       setIsLoading(true);
 
+      //#analytics
+      let uid = localStorage.getItem("uid");
+      if (!uid) {
+        localStorage.setItem("uid", generateUserId());
+        uid = localStorage.getItem("uid");
+      }
+      function generateUserId() {
+        var possibleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        var userId = "";
+        for (var j = 0; j < 20; j++) userId += possibleChars.charAt(Math.floor(Math.random() * possibleChars.length));
+        return userId;
+      }
       const response = await fetch(
-        `https://functions.yandexcloud.net/d4e8a0km5h5ugh1t9729?message=${message}&email=${email}&name=${name}&date=${new Date()}`
+        `https://functions.yandexcloud.net/d4e8a0km5h5ugh1t9729?uid=${uid}&message=${message}&email=${email}&name=${name}&date=${new Date()}`
       );
 
       if (response.ok) {

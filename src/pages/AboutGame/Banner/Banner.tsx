@@ -62,7 +62,29 @@ export const Banner = () => {
   //     });
   //   }
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
+    //#analytics
+    let uid = localStorage.getItem("uid");
+    if (!uid) {
+      localStorage.setItem("uid", generateUserId());
+      uid = localStorage.getItem("uid");
+    }
+    function generateUserId() {
+      var possibleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      var userId = "";
+      for (var j = 0; j < 20; j++) userId += possibleChars.charAt(Math.floor(Math.random() * possibleChars.length));
+      return userId;
+    }
+    const response = await fetch(
+      `https://functions.yandexcloud.net/d4ec1o5pg8he0c6aej8g?game=yunga-mur&uid=${uid}`
+    ); //#edit. Add UID paramaeter to request
+    if (response.ok) {
+      console.log("Tracking event 'game-download' was sent");
+    } else {
+      console.error("Failed to send tracking event 'game-download'. Error - " + response.body);
+    }
+
+
     window.location.href = `../../../../public/builds/Yunga_Mur_Installer.zip`; //zip, так как прямое скачивание и запуск exe вызывает предупреждение windows. Но с zip форматом (как сообщает chatgpt) это не всегда вызывает предупреждение 
   };
 

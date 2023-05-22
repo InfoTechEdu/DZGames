@@ -27,9 +27,22 @@ export const Query = () => {
   const handleSendFeedback = useCallback(async (feedbackType: string) => {
     setFeedback(feedbackType);
 
-    await fetch(
-      `https://functions.yandexcloud.net/d4ej48ta5vbhapraj3j9?game=Unga and Mur&feedback=${feedbackType}&date=${new Date()}`
-    );
+    //#analytics
+  let uid = localStorage.getItem("uid");
+  if(!uid){
+    localStorage.setItem("uid", generateUserId());
+    uid = localStorage.getItem("uid");
+  }
+  function generateUserId() {
+    var possibleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var userId = "";
+    for (var j = 0; j < 20; j++) userId += possibleChars.charAt(Math.floor(Math.random() * possibleChars.length));
+    return userId;
+  }
+
+  await fetch(
+    `https://functions.yandexcloud.net/d4ej48ta5vbhapraj3j9?uid=${uid}&game=Unga and Mur&feedback=${feedbackType}&date=${new Date()}`
+  );
   }, []);
 
   return (
