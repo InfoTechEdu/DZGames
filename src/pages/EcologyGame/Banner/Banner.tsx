@@ -14,7 +14,8 @@ const openEcologyGame = async () => {
   // navigate("/ecology-game-index");
 
   // const URL = "https://games.domznaniy.school/games/ecology/index.html";
-  const URL = "https://dzgamesdebug.web.app/games/ecology/index.html";
+  // const URL = "https://dzgamesdebug.web.app/games/ecology/index.html";
+  const URL = `../../../../public/builds/ecology/index.html`; 
 
   window.open(URL, '_blank')?.focus();
   const response = await fetch(
