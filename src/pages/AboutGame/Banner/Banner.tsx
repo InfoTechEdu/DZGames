@@ -5,6 +5,7 @@ import GameBanner720 from "../../../assets/gameBanner720.png";
 import GameBanner320 from "../../../assets/gameBanner320.png";
 import RightArrow from "../../../assets/right_arrow.svg";
 import { Button } from "../../../components/Button/Button";
+import { useState } from "react";
 
 export const Banner = () => {
 
@@ -62,7 +63,12 @@ export const Banner = () => {
   //     });
   //   }
 
+  const [buttonText, setButtonText] = useState("Нажми меня");
+
   const handleDownload = async () => {
+
+    setButtonText("Идет скачивание...");
+    
     //#analytics
     let uid = localStorage.getItem("uid");
     if (!uid) {
@@ -84,8 +90,8 @@ export const Banner = () => {
       console.error("Failed to send tracking event 'game-download'. Error - " + response.body);
     }
 
-
-    window.location.href = `../../../../public/builds/Yunga_Mur_Installer.zip`; //zip, так как прямое скачивание и запуск exe вызывает предупреждение windows. Но с zip форматом (как сообщает chatgpt) это не всегда вызывает предупреждение 
+    window.location.href = `/builds/Yunga_Mur_Installer.zip`;
+    // window.location.href = `../../../../public/builds/Yunga_Mur_Installer.zip`; //zip, так как прямое скачивание и запуск exe вызывает предупреждение windows. Но с zip форматом (как сообщает chatgpt) это не всегда вызывает предупреждение 
   };
 
   return (
