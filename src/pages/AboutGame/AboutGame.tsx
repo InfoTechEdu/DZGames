@@ -13,6 +13,7 @@ import { Description } from "../../components/Description/Description";
 import { SubscriptionForm } from "./SubscriptionForm/SubscriptionForm";
 
 export const AboutGame = () => {
+  
   return (
     <AboutGameStyle>
       <Container>

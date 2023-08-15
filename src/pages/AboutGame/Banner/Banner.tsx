@@ -8,7 +8,7 @@ import { Button } from "../../../components/Button/Button";
 import { useState } from "react";
 
 export const Banner = () => {
-
+  
   /* Backup */
   /*
   const handleDownloading = async () => {
@@ -81,14 +81,20 @@ export const Banner = () => {
       for (var j = 0; j < 20; j++) userId += possibleChars.charAt(Math.floor(Math.random() * possibleChars.length));
       return userId;
     }
-    const response = await fetch(
-      `https://functions.yandexcloud.net/d4ec1o5pg8he0c6aej8g?game=yunga-mur&uid=${uid}`
-    ); //#edit. Add UID paramaeter to request
-    if (response.ok) {
-      console.log("Tracking event 'game-download' was sent");
-    } else {
-      console.error("Failed to send tracking event 'game-download'. Error - " + response.body);
-    }
+
+    //temp test. working
+    // fetch(`https://us-central1-dzgamesdebug.cloudfunctions.net/DownloadTop10Leaderboard?game=battleofminds`
+    // ).then(r => r.json())
+    // .then(jsonData => console.log("JsonData: " + JSON.stringify(jsonData)));
+
+    // const response = await fetch(
+    //   `https://functions.yandexcloud.net/d4ec1o5pg8he0c6aej8g?game=yunga-mur&uid=${uid}`
+    // ); //#edit. Add UID paramaeter to request
+    // if (response.ok) {
+    //   console.log("Tracking event 'game-download' was sent. Your uid:  " + uid);
+    // } else {
+    //   console.error("Failed to send tracking event 'game-download'. Error - " + response.body);
+    // }
 
     window.location.href = `/builds/Yunga_Mur_Installer.zip`;
     // window.location.href = `../../../../public/builds/Yunga_Mur_Installer.zip`; //zip, так как прямое скачивание и запуск exe вызывает предупреждение windows. Но с zip форматом (как сообщает chatgpt) это не всегда вызывает предупреждение 

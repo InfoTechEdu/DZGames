@@ -44,6 +44,9 @@ export const Query = () => {
     await fetch(
       `https://functions.yandexcloud.net/d4ej48ta5vbhapraj3j9?uid=${uid}&game=ecology&feedback=${feedbackType}&date=${new Date()}`
     );
+    
+
+    
   }, []);
 
   return (
