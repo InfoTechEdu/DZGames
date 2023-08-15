@@ -8,61 +8,6 @@ import { Button } from "../../../components/Button/Button";
 import { useState } from "react";
 
 export const Banner = () => {
-  
-  /* Backup */
-  /*
-  const handleDownloading = async () => {
-    const response = await fetch(
-      `https://functions.yandexcloud.net/d4ec1o5pg8he0c6aej8g?game=yunga-mur&uid=undefined`
-    ); //#edit. Add UID paramaeter to request
-    if(response.ok){
-      console.log("Tracking event 'game-download' was sent");
-    }else{
-      console.error("Failed to send tracking event 'game-download'. Error - " + response.body);
-    }
-
-    window.open(
-      //"https://file-examples.com/storage/fe0d875dfd645260e96b346/2017/11/file_example_MP3_700KB.mp3"
-      "https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1Ou6k75bsuQ0l9RAOiZ_SnoAN2byM_hsH"
-      );
-  };
-  */
-
-  // function handleDownload() {
-  //   const fileUrl = '../../../../public/builds/Yunga_Mur_Installer.exe'; //process.env.PUBLIC_URL + '/hotel_recolor_icon.png'; // URL of the file to download
-  //   const fileName = 'Yunga_Mur_Installer.exe'; // Name of the file to download
-  //   console.log("FileURL = " + fileUrl);
-
-  //   fetch(fileUrl, {
-  //     headers: {
-  //       'Content-Type': 'application/vnd.microsoft.portable-executable'
-  //     }
-  //   })
-  //     .then(response => response.blob())
-  //     .then(blob => {
-  //       const url = window.URL.createObjectURL(new Blob([blob]));
-  //       const link = document.createElement('a');
-  //       link.href = url;
-  //       link.setAttribute('download', fileName);
-  //       document.body.appendChild(link);
-  //       link.click();
-  //       if(link.parentNode) link.parentNode.removeChild(link);
-  //     });
-  // }
-
-  // function handleDownload() {
-  //   const downloadUrl = 'https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1Ou6k75bsuQ0l9RAOiZ_SnoAN2byM_hsH';
-  //     fetch(downloadUrl)
-  //     .then(response => response.blob())
-  //     .then(blob => {
-  //       const url = URL.createObjectURL(blob);
-  //       const a = document.createElement('a');
-  //       a.href = url;
-  //       a.download = 'file.exe';
-  //       a.click();
-  //     });
-  //   }
-
   const [buttonText, setButtonText] = useState("Нажми меня");
 
   const handleDownload = async () => {
@@ -82,19 +27,14 @@ export const Banner = () => {
       return userId;
     }
 
-    //temp test. working
-    // fetch(`https://us-central1-dzgamesdebug.cloudfunctions.net/DownloadTop10Leaderboard?game=battleofminds`
-    // ).then(r => r.json())
-    // .then(jsonData => console.log("JsonData: " + JSON.stringify(jsonData)));
-
-    // const response = await fetch(
-    //   `https://functions.yandexcloud.net/d4ec1o5pg8he0c6aej8g?game=yunga-mur&uid=${uid}`
-    // ); //#edit. Add UID paramaeter to request
-    // if (response.ok) {
-    //   console.log("Tracking event 'game-download' was sent. Your uid:  " + uid);
-    // } else {
-    //   console.error("Failed to send tracking event 'game-download'. Error - " + response.body);
-    // }
+    const response = await fetch(
+      `https://functions.yandexcloud.net/d4ec1o5pg8he0c6aej8g?game=yunga-mur&uid=${uid}`
+    ); //#edit. Add UID paramaeter to request
+    if (response.ok) {
+      console.log("Tracking event 'game-download' was sent. Your uid:  " + uid);
+    } else {
+      console.error("Failed to send tracking event 'game-download'. Error - " + response.body);
+    }
 
     window.location.href = `/builds/Yunga_Mur_Installer.zip`;
     // window.location.href = `../../../../public/builds/Yunga_Mur_Installer.zip`; //zip, так как прямое скачивание и запуск exe вызывает предупреждение windows. Но с zip форматом (как сообщает chatgpt) это не всегда вызывает предупреждение 
@@ -201,3 +141,58 @@ const BannerDescription = styled.div({
   maxWidth: "1020px",
   textAlign: "center",
 });
+
+
+///* Backup Banner () => { ...*/
+  /*
+  const handleDownloading = async () => {
+    const response = await fetch(
+      `https://functions.yandexcloud.net/d4ec1o5pg8he0c6aej8g?game=yunga-mur&uid=undefined`
+    ); //#edit. Add UID paramaeter to request
+    if(response.ok){
+      console.log("Tracking event 'game-download' was sent");
+    }else{
+      console.error("Failed to send tracking event 'game-download'. Error - " + response.body);
+    }
+
+    window.open(
+      //"https://file-examples.com/storage/fe0d875dfd645260e96b346/2017/11/file_example_MP3_700KB.mp3"
+      "https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1Ou6k75bsuQ0l9RAOiZ_SnoAN2byM_hsH"
+      );
+  };
+  */
+
+  // function handleDownload() {
+  //   const fileUrl = '../../../../public/builds/Yunga_Mur_Installer.exe'; //process.env.PUBLIC_URL + '/hotel_recolor_icon.png'; // URL of the file to download
+  //   const fileName = 'Yunga_Mur_Installer.exe'; // Name of the file to download
+  //   console.log("FileURL = " + fileUrl);
+
+  //   fetch(fileUrl, {
+  //     headers: {
+  //       'Content-Type': 'application/vnd.microsoft.portable-executable'
+  //     }
+  //   })
+  //     .then(response => response.blob())
+  //     .then(blob => {
+  //       const url = window.URL.createObjectURL(new Blob([blob]));
+  //       const link = document.createElement('a');
+  //       link.href = url;
+  //       link.setAttribute('download', fileName);
+  //       document.body.appendChild(link);
+  //       link.click();
+  //       if(link.parentNode) link.parentNode.removeChild(link);
+  //     });
+  // }
+
+  // function handleDownload() {
+  //   const downloadUrl = 'https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1Ou6k75bsuQ0l9RAOiZ_SnoAN2byM_hsH';
+  //     fetch(downloadUrl)
+  //     .then(response => response.blob())
+  //     .then(blob => {
+  //       const url = URL.createObjectURL(blob);
+  //       const a = document.createElement('a');
+  //       a.href = url;
+  //       a.download = 'file.exe';
+  //       a.click();
+  //     });
+  //   }

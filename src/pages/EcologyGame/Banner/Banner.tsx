@@ -10,12 +10,6 @@ import { useNavigate } from "react-router-dom";
 
 
 const openEcologyGame = async () => {
-  // const navigate = useNavigate();
-  // navigate("/ecology-game-index");
-
-  // const URL = "https://games.domznaniy.school/games/ecology/index.html";
-  // const URL = "https://dzgamesdebug.web.app/games/ecology/index.html";
-  // const URL = `../../../../public/builds/ecology/index.html`; 
   const URL = `/builds/ecology/index.html`
   window.open(URL, '_blank')?.focus();
   // not correct. need editing
@@ -37,8 +31,6 @@ const openEcologyGame = async () => {
   const response = await fetch(
     `https://functions.yandexcloud.net/d4ec1o5pg8he0c6aej8g?game=ecology&uid=${uid}`
   );
-
-  
   
   // if(response.ok){
   //   console.log("Tracking event 'game-download' was sent");
