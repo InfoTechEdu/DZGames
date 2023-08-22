@@ -17,7 +17,7 @@ export const MessageModal = ({
         <img src={closeIcon} alt="close" className="close" onClick={onClose} />
         <img src={checkMark} alt="Checkmark" />
         <Text>{text}</Text>
-        <Button handleClick={onClose} text="Хорошо" width="100%" />
+        <Button onClick={onClose} text="Хорошо" width="100%" />
       </Modal>
     </>
   );

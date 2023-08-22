@@ -52,7 +52,7 @@ export const Banner = () => {
         <BannerDescription>
         Соблюдение баланса между экологией и производством всегда было непростой задачей
         </BannerDescription>
-        <Button width="1020px" text="Играть в браузере" handleClick={openEcologyGame} />
+        <Button width="1020px" text="Играть в браузере" onClick={openEcologyGame} />
       </BannerDescriptionBlock>
       <ImgRight src={RightArrow} />
     </BannerStyle>

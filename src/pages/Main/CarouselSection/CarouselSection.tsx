@@ -30,12 +30,12 @@ export const CarouselSection = () => {
   const buttons = useMemo(
     () => [
       <Button
-        handleClick={navigateToMurGame}
+        onClick={navigateToMurGame}
         width="100%"
         text="Скачать для Windows"
       />,
       <Button
-        handleClick={navigateToEcologyGame}
+        onClick={navigateToEcologyGame}
         width="100%"
         text="Играть в браузере"
       />,
@@ -122,7 +122,7 @@ export const CarouselSection = () => {
                 или слова, которые даже отдалённо не напоминают латынь.
               </p>
             </Wrapper>
-            <Button handleClick={navigateToAboutGame} width='100%' text='Скачать для Windows' />
+            <Button onClick={navigateToAboutGame} width='100%' text='Скачать для Windows' />
           </Inner>
         </SliderItem> */}
       </Carousel>

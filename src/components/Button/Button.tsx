@@ -1,30 +1,26 @@
+import React from 'react'
 import styled from "styled-components";
 
-type Props = {
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   width: string;
   text: string;
   withMargin?: boolean;
-  handleClick?: () => void;
-  type?: "submit" | "button" | "reset";
-  disabled?: boolean;
 };
 
 export const Button = ({
   width,
   text,
   withMargin,
-  handleClick,
-  type,
   disabled = false,
+  ...rest
 }: Props) => (
   <StyledButton
-    type={type}
-    onClick={handleClick}
     withMargin={withMargin}
     width={width}
-    disabled={disabled}
+    {...rest}
   >
     {text}
+    <button disabled></button>
   </StyledButton>
 );
 
@@ -34,7 +30,7 @@ const StyledButton = styled.button<{ width: string; withMargin?: boolean }>`
   border-radius: 20px;
   border: none;
   max-width: ${({ width }) => width};
-  width: 100%;
+  width: ${({ width }) => width};
   min-height: 50px;
   color: #ffffff;
   display: flex;

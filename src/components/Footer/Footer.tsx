@@ -7,7 +7,6 @@ import { ReactComponent as Vb } from "../../assets/vb.svg";
 import { ReactComponent as Vk } from "../../assets/vk.svg";
 import { ReactComponent as Yt } from "../../assets/yt.svg";
 import { ReactComponent as Yn } from "../../assets/yn.svg";
-import { Button } from "../Button/Button";
 
 import E from "../../assets/E.svg";
 import W from "../../assets/W.svg";
@@ -25,7 +24,7 @@ export const Footer = () => {
               <Text>Узнай больше</Text>
               <Ul>
                 <Li><NavLink to="/about-us">О нас</NavLink></Li>
-                <Li><NavLink to="/game">Наши игры</NavLink></Li>
+                <Li><NavLink to="/games">Наши игры</NavLink></Li>
               </Ul>
             </Nav>
 

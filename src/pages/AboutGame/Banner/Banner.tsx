@@ -52,7 +52,7 @@ export const Banner = () => {
           туристов.
         </BannerDescription>
         <Button
-          handleClick={handleDownload}
+          onClick={handleDownload}
           width="1020px"
           text="Скачать для Windows"
         />
