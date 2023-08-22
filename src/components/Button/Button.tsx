@@ -1,30 +1,27 @@
-import React from 'react'
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  width: string;
-  text: string;
+  width?: string;
   withMargin?: boolean;
-};
+}
 
 export const Button = ({
-  width,
-  text,
+  width = 'auto',
+  children,
   withMargin,
-  disabled = false,
   ...rest
 }: Props) => (
-  <StyledButton
-    withMargin={withMargin}
-    width={width}
-    {...rest}
-  >
-    {text}
-    <button disabled></button>
+  <StyledButton withMargin={withMargin} width={width} {...rest}>
+    {children}
   </StyledButton>
 );
 
-const StyledButton = styled.button<{ width: string; withMargin?: boolean }>`
+const StyledButton = styled.button<{
+  width: string;
+  withMargin?: boolean;
+  disabled?: boolean;
+}>`
   background: linear-gradient(-270deg, #ff6f00, #ffa000 25%, #ff6f00);
   box-shadow: 0px 5px 20px rgba(255, 159, 1, 0.36);
   border-radius: 20px;
@@ -37,7 +34,7 @@ const StyledButton = styled.button<{ width: string; withMargin?: boolean }>`
   align-items: center;
   font-size: 18px;
   justify-content: center;
-  margin-top: ${({ withMargin }) => (withMargin ? "20px" : 0)};
+  margin-top: ${({ withMargin }) => (withMargin ? '20px' : 0)};
   transition: background 2s;
   background-size: 400%;
 

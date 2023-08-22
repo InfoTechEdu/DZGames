@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { MainTitle } from "../../components/MainTitle/MainTitle";
 import { SubTitle } from "../../components/SubTitle/SubTitle";
 import { SendMessageForm } from "../Main/SendMessageForm/SendMessageForm"; 
+import { Filter } from "../../components/Filter/Filter";
 
 export const Game = () => {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ export const Game = () => {
     <GameStyle>
       <Container>
         <Games>
+          <Filter />
           <MainTitle text="Наши игры" />
           <Cards>
             <Card onClick={handleNavigation}>
