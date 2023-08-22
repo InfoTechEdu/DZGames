@@ -22,9 +22,7 @@ export const Main = () => {
           <ImgR src={RightArrow} />
           <ImgS className="asideButton" src={S} />
         </div>
-        </Container>
         <CarouselMain />
-        <Container>
         <Info>
           <TextInfo>Мы делаем игры на функциональную грамотность</TextInfo>
           <BackgrundBlock src={GroupLessons} />
