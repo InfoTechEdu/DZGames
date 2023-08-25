@@ -17,7 +17,7 @@ export const Header = () => {
     if (contactBlock) {
       contactBlock?.scrollIntoView({ behavior: 'smooth' });
       if (isOpenMenu) {
-        hideMenu()
+        hideMenu();
       }
       return;
     } else {
@@ -27,11 +27,11 @@ export const Header = () => {
         const contactBlock = document.getElementById('contact-main');
         contactBlock?.scrollIntoView({ behavior: 'smooth' });
         if (isOpenMenu) {
-          hideMenu()
+          hideMenu();
         }
       }, 300);
     }
-  }, [isOpenMenu, navigate])
+  }, [isOpenMenu, navigate]);
 
   return (
     <HeaderStyle>
@@ -43,11 +43,9 @@ export const Header = () => {
           <Line></Line>
           <Nav>
             <Li>
-              <Button
-                width='163px'
-                text='Все игры'
-                onClick={() => navigate('/games')}
-              />
+              <Button width='163px' onClick={() => navigate('/games')}>
+                Все игры
+              </Button>
             </Li>
             <Li>
               <NavLink to='/about-us'>О нас</NavLink>
@@ -58,7 +56,7 @@ export const Header = () => {
           </Nav>
         </Wrapper>
         <ButtonWrapper onClick={handleScroll}>
-          <Button width='100%' text='Связаться с нами' />
+          <Button width='100%'>Связаться с нами</Button>
         </ButtonWrapper>
         <div
           className={`menu-btn ${isOpenMenu ? 'active' : ''}`}

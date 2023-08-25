@@ -3,6 +3,7 @@ import { Button } from '../Button/Button';
 import { ReactComponent as Joystick } from '../../assets/filters/joystick.svg';
 import { ReactComponent as Grammar } from '../../assets/filters/grammar.svg';
 import { ReactComponent as Simulator } from '../../assets/filters/simulator.svg';
+import { ReactComponent as Quiz } from '../../assets/filters/quiz.svg';
 
 export const Filter = () => {
 
@@ -21,7 +22,7 @@ export const Filter = () => {
         <span>Тренажеры</span>
       </Button>
       <Button>
-        <Grammar className='size' />
+        <Quiz className='size' />
         <span>Викторины</span>
       </Button>
     </Container>

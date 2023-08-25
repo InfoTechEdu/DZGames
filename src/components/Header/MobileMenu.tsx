@@ -24,12 +24,13 @@ export const MobileMenu = React.memo(
               >
                 <Button
                   width='163px'
-                  text='Все игры'
                   onClick={() => {
                     hideMenu();
                     navigate('/games');
                   }}
-                />
+                >
+                  Все игры
+                </Button>
               </NavLink>
             </Li>
             <Li>
@@ -43,11 +44,9 @@ export const MobileMenu = React.memo(
             </Li>
           </ul>
         </nav>
-        <Button
-          onClick={handleScroll}
-          width='212px'
-          text='Связаться с нами'
-        />
+        <Button onClick={handleScroll} width='212px'>
+          Связаться с нами
+        </Button>
       </div>
     );
   }

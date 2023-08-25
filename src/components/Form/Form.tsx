@@ -44,7 +44,7 @@ export const Form = ({
         <Input type="text" placeholder="Имя" />
         <Input type="email" placeholder="Почта" />
         {withMessage && <Textarea placeholder="Сообщение " />}
-        <Button type="submit" width="100%" text={submitText ?? "Отправить"} />
+        <Button type="submit" width="100%">{submitText ?? "Отправить"}</Button>
       </FormStyle>
       {status === "success" && (
         <MessageModal onClose={() => setStatus("")} text="Ваше сообщение отправлено" />

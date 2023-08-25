@@ -1,14 +1,14 @@
-import styled from "styled-components";
-import bgImage from "../../../assets/slider-bg.png";
-import bgImageMedium from "../../../assets/slider-bg-medium.png";
-import bgImageEcology from "../../../assets/slider-bg-ecology.png";
-import bgImageMediumEcology from "../../../assets/slider-bg-medium-ecology.png";
-import sliderOpacity from "../../../assets/slider-opacity.png";
-import sliderOpacityEcology from "../../../assets/slider-opacity-ecology.png";
-import { Carousel } from "react-responsive-carousel";
-import { Button } from "../../../components/Button/Button";
-import { useEffect, useMemo, useState, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import styled from 'styled-components';
+import bgImage from '../../../assets/slider-bg.png';
+import bgImageMedium from '../../../assets/slider-bg-medium.png';
+import bgImageEcology from '../../../assets/slider-bg-ecology.png';
+import bgImageMediumEcology from '../../../assets/slider-bg-medium-ecology.png';
+import sliderOpacity from '../../../assets/slider-opacity.png';
+import sliderOpacityEcology from '../../../assets/slider-opacity-ecology.png';
+import { Carousel } from 'react-responsive-carousel';
+import { Button } from '../../../components/Button/Button';
+import { useEffect, useMemo, useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const INTERVAL = 6000;
 
@@ -18,34 +18,30 @@ export const CarouselSection = () => {
   const [slideIndex, setSlideIndex] = useState(0);
 
   const navigateToMurGame = useCallback(() => {
-    console.log("Navigating");
-    navigate("/about-game");
+    console.log('Navigating');
+    navigate('/about-game');
   }, [navigate]);
 
   const navigateToEcologyGame = useCallback(() => {
-    console.log("Navigating");
-    navigate("/ecology-game");
+    console.log('Navigating');
+    navigate('/ecology-game');
   }, [navigate]);
 
   const buttons = useMemo(
     () => [
-      <Button
-        onClick={navigateToMurGame}
-        width="100%"
-        text="Скачать для Windows"
-      />,
-      <Button
-        onClick={navigateToEcologyGame}
-        width="100%"
-        text="Играть в браузере"
-      />,
+      <Button onClick={navigateToMurGame} width='100%'>
+        Скачать для Windows
+      </Button>,
+      <Button onClick={navigateToEcologyGame} width='100%'>
+        Играть в браузере
+      </Button>,
     ],
     [navigateToMurGame, navigateToEcologyGame]
   );
 
   useEffect(() => {
-    const dots = document.querySelector(".carousel .control-dots");
-    const backBlock = document.querySelector(".backBlock .backRight");
+    const dots = document.querySelector('.carousel .control-dots');
+    const backBlock = document.querySelector('.backBlock .backRight');
 
     if (dots && backBlock) {
       backBlock.append(dots);
@@ -54,11 +50,9 @@ export const CarouselSection = () => {
 
   return (
     <Container>
-      <BackgroundBlock className="backBlock">
-        <div className="backLeft" />
-        <div className="backRight">
-          {buttons[slideIndex]}
-        </div>
+      <BackgroundBlock className='backBlock'>
+        <div className='backLeft' />
+        <div className='backRight'>{buttons[slideIndex]}</div>
       </BackgroundBlock>
       <Carousel
         showThumbs={false}
@@ -87,7 +81,7 @@ export const CarouselSection = () => {
           );
         }}
       >
-        <SliderItem className="mySliderItem">
+        <SliderItem className='mySliderItem'>
           <Left />
           <Inner>
             <Wrapper>
@@ -99,14 +93,14 @@ export const CarouselSection = () => {
             </Wrapper>
           </Inner>
         </SliderItem>
-        <SliderItem className="mySliderItem">
+        <SliderItem className='mySliderItem'>
           <LeftEcology />
           <InnerEcology>
             <Wrapper>
               <h2>Экология</h2>
               <p>
                 Соблюдение баланса между экологией и производством всегда было
-                непростой задачей{" "}
+                непростой задачей{' '}
               </p>
             </Wrapper>
           </InnerEcology>
@@ -223,7 +217,7 @@ const Left = styled.div`
 
   border-radius: 20px 0 0 20px;
 
-  background-image: url("${bgImage}");
+  background-image: url('${bgImage}');
   background-repeat: no-repeat;
   background-position: right;
   background-size: cover;
@@ -233,7 +227,7 @@ const Left = styled.div`
   }
 
   @media only screen and (max-width: 820px) {
-    background-image: url("${bgImageMedium}");
+    background-image: url('${bgImageMedium}');
   }
 
   @media only screen and (max-width: 690px) {
@@ -243,7 +237,7 @@ const Left = styled.div`
 
     border-radius: 20px 20px 0 0;
 
-    background-image: url("${bgImage}");
+    background-image: url('${bgImage}');
   }
 `;
 
@@ -255,7 +249,7 @@ const LeftEcology = styled.div`
 
   border-radius: 20px 0 0 20px;
 
-  background-image: url("${bgImageEcology}");
+  background-image: url('${bgImageEcology}');
   background-repeat: no-repeat;
   background-position: right;
   background-size: cover;
@@ -265,7 +259,7 @@ const LeftEcology = styled.div`
   }
 
   @media only screen and (max-width: 820px) {
-    background-image: url("${bgImageMediumEcology}");
+    background-image: url('${bgImageMediumEcology}');
   }
 
   @media only screen and (max-width: 690px) {
@@ -275,7 +269,7 @@ const LeftEcology = styled.div`
 
     border-radius: 20px 20px 0 0;
 
-    background-image: url("${bgImageEcology}");
+    background-image: url('${bgImageEcology}');
   }
 `;
 
@@ -329,7 +323,7 @@ const Inner = styled.div`
 
   position: relative;
 
-  background-image: url("${sliderOpacity}");
+  background-image: url('${sliderOpacity}');
   background-repeat: no-repeat;
   background-size: cover;
 
@@ -367,7 +361,7 @@ const InnerEcology = styled.div`
 
   position: relative;
 
-  background-image: url("${sliderOpacityEcology}");
+  background-image: url('${sliderOpacityEcology}');
   background-repeat: no-repeat;
   background-size: cover;
 

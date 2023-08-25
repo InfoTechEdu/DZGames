@@ -1,44 +1,44 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import GameBanner from "../../../assets/gameBannerEcology.png";
-import GameBanner720 from "../../../assets/gameBannerEcology720.png";
-import GameBanner320 from "../../../assets/gameBannerEcology320.png";
-import RightArrow from "../../../assets/right_arrow.svg";
-import { Button } from "../../../components/Button/Button"; 
-import { useNavigate } from "react-router-dom";
-
-
+import GameBanner from '../../../assets/gameBannerEcology.png';
+import GameBanner720 from '../../../assets/gameBannerEcology720.png';
+import GameBanner320 from '../../../assets/gameBannerEcology320.png';
+import RightArrow from '../../../assets/right_arrow.svg';
+import { Button } from '../../../components/Button/Button';
+import { useNavigate } from 'react-router-dom';
 
 const openEcologyGame = async () => {
-  const URL = `/builds/ecology/index.html`
+  const URL = `/builds/ecology/index.html`;
   window.open(URL, '_blank')?.focus();
   // not correct. need editing
   // const deviceInfo = navigator.userAgent;
   // console.log(deviceInfo);
 
   //#analytics
-  let uid = localStorage.getItem("uid");
-  if(!uid){
-    localStorage.setItem("uid", generateUserId());
-    uid = localStorage.getItem("uid");
+  let uid = localStorage.getItem('uid');
+  if (!uid) {
+    localStorage.setItem('uid', generateUserId());
+    uid = localStorage.getItem('uid');
   }
   function generateUserId() {
-    var possibleChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    var userId = "";
-    for (var j = 0; j < 20; j++) userId += possibleChars.charAt(Math.floor(Math.random() * possibleChars.length));
+    var possibleChars =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var userId = '';
+    for (var j = 0; j < 20; j++)
+      userId += possibleChars.charAt(
+        Math.floor(Math.random() * possibleChars.length)
+      );
     return userId;
   }
   const response = await fetch(
     `https://functions.yandexcloud.net/d4ec1o5pg8he0c6aej8g?game=ecology&uid=${uid}`
   );
-  
+
   // if(response.ok){
   //   console.log("Tracking event 'game-download' was sent");
   // }else{
   //   console.error("Failed to send tracking event 'game-download'. Error - " + response.body);
   // }
-  
-  
 };
 
 export const Banner = () => {
@@ -50,9 +50,12 @@ export const Banner = () => {
       <BannerDescriptionBlock>
         <BannerTitle>Экология</BannerTitle>
         <BannerDescription>
-        Соблюдение баланса между экологией и производством всегда было непростой задачей
+          Соблюдение баланса между экологией и производством всегда было
+          непростой задачей
         </BannerDescription>
-        <Button width="1020px" text="Играть в браузере" onClick={openEcologyGame} />
+        <Button width='1020px' onClick={openEcologyGame}>
+          Играть в браузере
+        </Button>
       </BannerDescriptionBlock>
       <ImgRight src={RightArrow} />
     </BannerStyle>
@@ -60,81 +63,81 @@ export const Banner = () => {
 };
 
 const BannerStyle = styled.div({
-  position: "relative",
+  position: 'relative',
 });
 
 const ImgBanner = styled.img({
-  width: "100%",
+  width: '100%',
 
-  "@media(max-width: 920px)": {
-    display: "none",
+  '@media(max-width: 920px)': {
+    display: 'none',
   },
 });
 
 const ImgBanner720 = styled.img({
-  width: "100%",
-  display: "none",
-  borderRadius: "20px",
+  width: '100%',
+  display: 'none',
+  borderRadius: '20px',
 
-  "@media(max-width: 920px)": {
-    display: "block",
+  '@media(max-width: 920px)': {
+    display: 'block',
   },
 
-  "@media(max-width: 520px)": {
-    display: "none",
+  '@media(max-width: 520px)': {
+    display: 'none',
   },
 });
 
 const ImgBanner320 = styled.img({
-  width: "100%",
-  display: "none",
-  borderRadius: "20px",
+  width: '100%',
+  display: 'none',
+  borderRadius: '20px',
 
-  "@media(max-width: 520px)": {
-    display: "block",
+  '@media(max-width: 520px)': {
+    display: 'block',
   },
 });
 
 const ImgRight = styled.img({
-  position: "absolute",
-  left: "-172px",
-  bottom: "-295px",
+  position: 'absolute',
+  left: '-172px',
+  bottom: '-295px',
 
-  "@media(max-width: 1580px)": {
-    display: "none",
+  '@media(max-width: 1580px)': {
+    display: 'none',
   },
 });
 
 const BannerDescriptionBlock = styled.div({
-  background: "rgba(247, 247, 248, 0.66)",
-  backdropFilter: "blur(12px)",
-  borderRadius: "20px",
-  height: "268px",
-  position: "absolute",
-  width: "100%",
-  bottom: "0",
+  background: 'rgba(247, 247, 248, 0.66)',
+  backdropFilter: 'blur(12px)',
+  borderRadius: '20px',
+  height: '268px',
+  position: 'absolute',
+  width: '100%',
+  bottom: '0',
 
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
 
-  padding: "48px 24px",
+  padding: '48px 24px',
 
-  "@media(max-width: 520px)": {
-    height: "408px",
+  '@media(max-width: 520px)': {
+    height: '408px',
   },
 });
 
 const BannerTitle = styled.div({
-  fontSize: "30px",
-  fontWeight: "600",
-  marginBottom: "12px",
+  fontSize: '30px',
+  fontWeight: '600',
+  marginBottom: '12px',
 });
 
 const BannerDescription = styled.div({
-  fontSize: "18px",
-  marginBottom: "32px",
-  maxWidth: "1020px",
-  textAlign: "center",
+  fontSize: '18px',
+  marginBottom: '32px',
+  maxWidth: '1020px',
+  textAlign: 'center',
 });

@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import checkMark from "../../assets/checkmark.svg";
-import closeIcon from "../../assets/close.svg";
-import { Button } from "../Button/Button";
+import styled from 'styled-components';
+import checkMark from '../../assets/checkmark.svg';
+import closeIcon from '../../assets/close.svg';
+import { Button } from '../Button/Button';
 
 export const MessageModal = ({
   text,
@@ -14,10 +14,12 @@ export const MessageModal = ({
     <>
       <Overlay onClick={onClose} />
       <Modal>
-        <img src={closeIcon} alt="close" className="close" onClick={onClose} />
-        <img src={checkMark} alt="Checkmark" />
+        <img src={closeIcon} alt='close' className='close' onClick={onClose} />
+        <img src={checkMark} alt='Checkmark' />
         <Text>{text}</Text>
-        <Button onClick={onClose} text="Хорошо" width="100%" />
+        <Button onClick={onClose} width='100%'>
+          Хорошо
+        </Button>
       </Modal>
     </>
   );
