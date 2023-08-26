@@ -1,5 +1,6 @@
 import { CarouselProvider, Slider, Slide } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -15,12 +16,30 @@ interface IProps {
 export const CarouselMain = ({ data }: IProps) => {
   const navigate = useNavigate();
 
+  const [width, setWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleWindowSizeChange = () => {
+      setWidth(window.innerWidth);
+    }
+    window.addEventListener("resize", handleWindowSizeChange);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+    };
+  }, []);
+
+  const isMobile = width <= 600;
+  const isTablet = width >= 600 && width <= 1024;
+
+  const visibleSlides = isTablet ? 2 : (isMobile ? 1 : 3)
+
   return (
     <CarouselProvider
       naturalSlideWidth={100}
       naturalSlideHeight={100}
       totalSlides={data.length}
-      visibleSlides={3}
+      visibleSlides={visibleSlides}
       isIntrinsicHeight
     >
       <Slider style={  {paddingBottom: '24px'}}>
@@ -51,9 +70,11 @@ const Content = styled.div({
   display: 'flex',
   flexDirection: 'column',
   height: '466px',
+  overflow: 'hidden',
+  borderRadius: '20px',
+
   ':hover': {
     boxShadow: '16px 16px 0px #FFCD4C',
-    borderRadius: '20px',
     transition: '0.5s',
   },
 
@@ -66,6 +87,7 @@ const Content = styled.div({
 const Img = styled.img({
   width: '100%',
   height: '50%',
+  objectFit: 'cover',
 });
 
 const CardText = styled.div({
