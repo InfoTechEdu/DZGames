@@ -13,6 +13,8 @@ import { SendMessageForm } from './SendMessageForm/SendMessageForm';
 import { MainCarousel } from '../../components/MainCarousel/MainCarousel';
 
 import bgImageMedium from '../../assets/gameSliderItem.png';
+import { Button } from '../../components/Button/Button';
+import { useNavigate } from 'react-router-dom';
 
 const CAROUSEL_DATA = [
   { img: bgImageMedium },
@@ -20,9 +22,10 @@ const CAROUSEL_DATA = [
   { img: bgImageMedium },
   { img: bgImageMedium },
   { img: bgImageMedium },
-]
+];
 
 export const Main = () => {
+  const navigate = useNavigate();
   return (
     <MainStyle>
       <Container>
@@ -33,6 +36,14 @@ export const Main = () => {
           <ImgS className='asideButton' src={S} />
         </div>
         <MainCarousel data={CAROUSEL_DATA} />
+        <ButtonWrapper>
+          <Button
+            style={{ maxWidth: 332, width: '100%', margin: '0 auto' }}
+            onClick={() => navigate('/games')}
+          >
+            Посмотреть все игры
+          </Button>
+        </ButtonWrapper>
         <Info>
           <TextInfo>Мы делаем игры на функциональную грамотность</TextInfo>
           <BackgrundBlock src={GroupLessons} />
@@ -158,6 +169,10 @@ const Info = styled.div({
     height: '316px',
   },
 });
+
+const ButtonWrapper = styled.div`
+  text-align: center;
+`;
 
 const TextInfo = styled.div({
   width: '50%',

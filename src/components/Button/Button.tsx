@@ -4,15 +4,22 @@ import styled from 'styled-components';
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   width?: string;
   withMargin?: boolean;
+  withShadow?: boolean;
 }
 
 export const Button = ({
   width = 'auto',
   children,
   withMargin,
+  withShadow = true,
   ...rest
 }: Props) => (
-  <StyledButton withMargin={withMargin} width={width} {...rest}>
+  <StyledButton
+    withShadow={withShadow}
+    withMargin={withMargin}
+    width={width}
+    {...rest}
+  >
     {children}
   </StyledButton>
 );
@@ -21,9 +28,11 @@ const StyledButton = styled.button<{
   width: string;
   withMargin?: boolean;
   disabled?: boolean;
+  withShadow?: boolean;
 }>`
   background: linear-gradient(-270deg, #ff6f00, #ffa000 25%, #ff6f00);
-  /* box-shadow: 0px 5px 20px rgba(255, 159, 1, 0.36); */
+  box-shadow: ${({ withShadow }) =>
+    withShadow && '0px 5px 20px rgba(255, 159, 1, 0.36)'};
   border-radius: 20px;
   border: none;
   max-width: ${({ width }) => width};

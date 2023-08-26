@@ -44,6 +44,7 @@ export const Filter = ({ activeGameIndex, setActiveGameIndex }: Props) => {
     <Container className='filters'>
       {buttons.map(({ text, icon }, index) => (
         <Button
+          withShadow={false}
           onClick={() => setActiveGameIndex(index)}
           style={activeGameIndex !== index ? inactiveStyle : {}}
           className={`${activeGameIndex === index ? 'active' : ''}`}
