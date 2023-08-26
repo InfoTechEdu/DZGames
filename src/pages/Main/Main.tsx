@@ -17,11 +17,11 @@ import { Button } from '../../components/Button/Button';
 import { useNavigate } from 'react-router-dom';
 
 const CAROUSEL_DATA = [
-  { img: bgImageMedium },
-  { img: bgImageMedium },
-  { img: bgImageMedium },
-  { img: bgImageMedium },
-  { img: bgImageMedium },
+  { img: bgImageMedium, navigate: '/about-game' },
+  { img: bgImageMedium, navigate: '/about-game' },
+  { img: bgImageMedium, navigate: '/about-game' },
+  { img: bgImageMedium, navigate: '/about-game' },
+  { img: bgImageMedium, navigate: '/about-game' },
 ];
 
 export const Main = () => {
@@ -35,15 +35,25 @@ export const Main = () => {
           <ImgR src={RightArrow} />
           <ImgS className='asideButton' src={S} />
         </div>
-        <MainCarousel data={CAROUSEL_DATA} />
-        <ButtonWrapper>
-          <Button
-            style={{ maxWidth: 332, width: '100%', margin: '0 auto' }}
-            onClick={() => navigate('/games')}
-          >
-            Посмотреть все игры
-          </Button>
-        </ButtonWrapper>
+
+        <div>
+          <SubTitle text='Попробуй викторины' />
+          <MainCarousel data={CAROUSEL_DATA} />
+
+          <ButtonWrapper>
+            <Button
+              style={{
+                maxWidth: 332,
+                width: '100%',
+                margin: '44px auto 0 auto',
+              }}
+              onClick={() => navigate('/games')}
+            >
+              Посмотреть все игры
+            </Button>
+          </ButtonWrapper>
+        </div>
+
         <Info>
           <TextInfo>Мы делаем игры на функциональную грамотность</TextInfo>
           <BackgrundBlock src={GroupLessons} />

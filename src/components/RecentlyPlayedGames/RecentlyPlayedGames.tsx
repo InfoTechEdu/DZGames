@@ -1,6 +1,7 @@
 import { CarouselProvider, Slider, Slide } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface IProps {
@@ -13,23 +14,24 @@ interface IProps {
 }
 
 export const RecentlyPlayedGames = ({ data }: IProps) => {
-
   const [width, setWidth] = useState(window.innerWidth);
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     const handleWindowSizeChange = () => {
       setWidth(window.innerWidth);
-    }
-    window.addEventListener("resize", handleWindowSizeChange);
+    };
+    window.addEventListener('resize', handleWindowSizeChange);
 
     return () => {
-      window.removeEventListener("resize", handleWindowSizeChange);
+      window.removeEventListener('resize', handleWindowSizeChange);
     };
   }, []);
 
   const isMobile = width <= 600;
 
-  const visibleSlides = isMobile ? 4 : data.length
+  const visibleSlides = isMobile ? 4 : data.length;
 
   return (
     <CarouselProvider
@@ -39,11 +41,11 @@ export const RecentlyPlayedGames = ({ data }: IProps) => {
       visibleSlides={visibleSlides}
       isIntrinsicHeight
     >
-      <Slider style={{paddingBottom: '24px'}}>
+      <Slider style={{ paddingBottom: '24px' }}>
         {data.map((item, i) => {
           return (
             <Slide key={i} index={i} style={{ width: 110, paddingRight: 20 }}>
-              <Content>
+              <Content onClick={() => item.navigate && navigate(item.navigate)}>
                 <Img alt='' src={item.img} />
                 {(item.title || item.description) && (
                   <CardText>
@@ -72,7 +74,7 @@ const Img = styled.img`
 const CardText = styled.div`
   width: 100%;
   margin-top: 8px;
-`
+`;
 
 const CardTitle = styled.div`
   font-size: 18px;
@@ -83,4 +85,4 @@ const CardTitle = styled.div`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-`
+`;

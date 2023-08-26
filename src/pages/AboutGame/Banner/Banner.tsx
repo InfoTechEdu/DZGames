@@ -57,7 +57,7 @@ export const Banner = () => {
           Используй свои знания и навыки и помоги котам построить городок для
           туристов.
         </BannerDescription>
-        <Button onClick={handleDownload} width='1020px'>
+        <Button onClick={handleDownload} width='100%'>
           Скачать для Windows
         </Button>
       </BannerDescriptionBlock>

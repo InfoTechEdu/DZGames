@@ -42,7 +42,7 @@ export const MainCarousel = ({ data }: IProps) => {
       visibleSlides={visibleSlides}
       isIntrinsicHeight
     >
-      <Slider style={{ paddingBottom: '24px' }}>
+      <Slider>
         {data.map((item, i) => {
           return (
             <Slide key={i} index={i} style={{ paddingRight: 24 }}>
