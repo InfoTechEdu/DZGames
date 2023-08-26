@@ -23,7 +23,7 @@ const StyledButton = styled.button<{
   disabled?: boolean;
 }>`
   background: linear-gradient(-270deg, #ff6f00, #ffa000 25%, #ff6f00);
-  box-shadow: 0px 5px 20px rgba(255, 159, 1, 0.36);
+  /* box-shadow: 0px 5px 20px rgba(255, 159, 1, 0.36); */
   border-radius: 20px;
   border: none;
   max-width: ${({ width }) => width};
