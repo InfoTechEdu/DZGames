@@ -8,7 +8,7 @@ import { MainTitle } from '../../components/MainTitle/MainTitle';
 import { SubTitle } from '../../components/SubTitle/SubTitle';
 import { SendMessageForm } from '../Main/SendMessageForm/SendMessageForm';
 import { Filter } from '../../components/Filter/Filter';
-import { CarouselMain } from '../../components/Carousel/Carousel';
+import { GamesCarousel } from '../../components/GamesCarousel/GamesCarousel';
 
 import { ReactComponent as Grammar } from '../../assets/filters/grammar.svg';
 import { ReactComponent as Simulator } from '../../assets/filters/simulator.svg';
@@ -64,7 +64,7 @@ export const Game = () => {
           {activeGameIndex === 0 && (
             <ContainerCarousel>
               <MainTitle text='Рекомендуемые' />
-              <CarouselMain data={SLIDER_DATA_CARDS} />
+              <GamesCarousel data={SLIDER_DATA_CARDS} />
             </ContainerCarousel>
           )}
 
@@ -75,7 +75,7 @@ export const Game = () => {
                 <SubTitle text='Функциональная грамотность' />
               </CarouselHeader>
               
-              <CarouselMain data={SLIDER_DATA_CARDS} />
+              <GamesCarousel data={SLIDER_DATA_CARDS} />
             </ContainerCarousel>
           )}
 
@@ -85,7 +85,7 @@ export const Game = () => {
                 <Simulator className='size' />
                 <SubTitle text='Тренажеры' />
               </CarouselHeader>
-              <CarouselMain data={SLIDER_DATA_CARDS} />
+              <GamesCarousel data={SLIDER_DATA_CARDS} />
             </ContainerCarousel>
           )}
 
@@ -95,7 +95,7 @@ export const Game = () => {
                 <Quiz className='size' />
                 <SubTitle text='Викторины' />
               </CarouselHeader>
-              <CarouselMain data={SLIDER_DATA_CARDS} />
+              <GamesCarousel data={SLIDER_DATA_CARDS} />
             </ContainerCarousel>
           )}
         </Games>

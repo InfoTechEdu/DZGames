@@ -13,7 +13,7 @@ interface IProps {
   }[];
 }
 
-export const CarouselMain = ({ data }: IProps) => {
+export const GamesCarousel = ({ data }: IProps) => {
   const navigate = useNavigate();
 
   const [width, setWidth] = useState(window.innerWidth);

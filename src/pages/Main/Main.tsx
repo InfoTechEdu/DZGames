@@ -10,7 +10,7 @@ import S from '../../assets/S.svg';
 import A from '../../assets/A.svg';
 import { SubTitle } from '../../components/SubTitle/SubTitle';
 import { SendMessageForm } from './SendMessageForm/SendMessageForm';
-import { CarouselMain } from '../../components/Carousel/Carousel';
+import { MainCarousel } from '../../components/MainCarousel/MainCarousel';
 
 import bgImageMedium from '../../assets/gameSliderItem.png';
 
@@ -32,7 +32,7 @@ export const Main = () => {
           <ImgR src={RightArrow} />
           <ImgS className='asideButton' src={S} />
         </div>
-        <CarouselMain data={CAROUSEL_DATA} />
+        <MainCarousel data={CAROUSEL_DATA} />
         <Info>
           <TextInfo>Мы делаем игры на функциональную грамотность</TextInfo>
           <BackgrundBlock src={GroupLessons} />
