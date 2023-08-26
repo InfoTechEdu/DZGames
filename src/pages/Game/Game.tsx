@@ -7,6 +7,7 @@ import { SubTitle } from '../../components/SubTitle/SubTitle';
 import { SendMessageForm } from '../Main/SendMessageForm/SendMessageForm';
 import { Filter } from '../../components/Filter/Filter';
 import { CarouselMain } from '../../components/Carousel/Carousel';
+import { useState } from 'react';
 
 const SLIDER_DATA_CARDS = [
   {
@@ -44,31 +45,44 @@ const SLIDER_DATA_CARDS = [
 ];
 
 export const Game = () => {
+  const [activeGameIndex, setActiveGameIndex] = useState(0);
+
   return (
     <GameStyle>
       <Container>
         <Games>
-          <Filter />
+          <Filter
+            activeGameIndex={activeGameIndex}
+            setActiveGameIndex={setActiveGameIndex}
+          />
 
-          <ContainerCarousel>
-            <MainTitle text='Рекомендуемые' />
-            <CarouselMain data={SLIDER_DATA_CARDS} />
-          </ContainerCarousel>
+          {activeGameIndex === 0 && (
+            <ContainerCarousel>
+              <MainTitle text='Рекомендуемые' />
+              <CarouselMain data={SLIDER_DATA_CARDS} />
+            </ContainerCarousel>
+          )}
 
-          <ContainerCarousel>
-            <MainTitle text='Функциональная грамотность' />
-            <CarouselMain data={SLIDER_DATA_CARDS} />
-          </ContainerCarousel>
+          {(activeGameIndex === 0 || activeGameIndex === 1) && (
+            <ContainerCarousel>
+              <MainTitle text='Функциональная грамотность' />
+              <CarouselMain data={SLIDER_DATA_CARDS} />
+            </ContainerCarousel>
+          )}
 
-          <ContainerCarousel>
-            <MainTitle text='Тренажеры' />
-            <CarouselMain data={SLIDER_DATA_CARDS} />
-          </ContainerCarousel>
+          {(activeGameIndex === 0 || activeGameIndex === 2) && (
+            <ContainerCarousel>
+              <MainTitle text='Тренажеры' />
+              <CarouselMain data={SLIDER_DATA_CARDS} />
+            </ContainerCarousel>
+          )}
 
-          <ContainerCarousel>
-            <MainTitle text='Викторины' />
-            <CarouselMain data={SLIDER_DATA_CARDS} />
-          </ContainerCarousel>
+          {(activeGameIndex === 0 || activeGameIndex === 3) && (
+            <ContainerCarousel>
+              <MainTitle text='Викторины' />
+              <CarouselMain data={SLIDER_DATA_CARDS} />
+            </ContainerCarousel>
+          )}
         </Games>
 
         <div className='relative'>

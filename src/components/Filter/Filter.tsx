@@ -35,18 +35,21 @@ const buttons = [
   },
 ];
 
-export const Filter = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+type Props = {
+  setActiveGameIndex: (value: number) => void;
+  activeGameIndex: number;
+};
 
+export const Filter = ({ activeGameIndex, setActiveGameIndex }: Props) => {
   return (
     <Container className='filters'>
       {buttons.map(({ text, icon }, index) => (
         <Button
-          onClick={() => setActiveIndex(index)}
-          style={activeIndex !== index ? inactiveStyle : {}}
-          className={`${activeIndex === index ? 'active' : ''}`}
+          onClick={() => setActiveGameIndex(index)}
+          style={activeGameIndex !== index ? inactiveStyle : {}}
+          className={`${activeGameIndex === index ? 'active' : ''}`}
         >
-          <IconWrapper index={index} isActive={activeIndex === index}>
+          <IconWrapper index={index} isActive={activeGameIndex === index}>
             {icon}
           </IconWrapper>
           <span>{text}</span>
@@ -86,10 +89,10 @@ const IconWrapper = styled.div<{ isActive: boolean; index: number }>`
       }
 
       if (index === 0) {
-        return `stroke: #BBBBBB`
+        return `stroke: #BBBBBB`;
       }
 
-      return `fill: #BBBBBB`
+      return `fill: #BBBBBB`;
     }}
   }
 `;
