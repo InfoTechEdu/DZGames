@@ -2,8 +2,7 @@ import { useState } from 'react';
 
 import styled from 'styled-components';
 import A from '../../assets/A.svg';
-import GameImg from '../../assets/game.png';
-import EcologyGameImg from '../../assets/ecology-game.png';
+
 import { MainTitle } from '../../components/MainTitle/MainTitle';
 import { SubTitle } from '../../components/SubTitle/SubTitle';
 import { SendMessageForm } from '../Main/SendMessageForm/SendMessageForm';
@@ -13,53 +12,23 @@ import { GamesCarousel } from '../../components/GamesCarousel/GamesCarousel';
 import { ReactComponent as Grammar } from '../../assets/filters/grammar.svg';
 import { ReactComponent as Simulator } from '../../assets/filters/simulator.svg';
 import { ReactComponent as Quiz } from '../../assets/filters/quiz.svg';
+import { RecentlyPlayedGames } from '../../components/RecentlyPlayedGames/RecentlyPlayedGames';
+import { SLIDER_DATA_CARDS, SMALL_SLIDER_DATA } from '../../shared/slider';
 
-const SLIDER_DATA_CARDS = [
-  {
-    img: GameImg,
-    title: 'Юнга Мур и большая стройка котов-пиратов',
-    description:
-      'Используй свои знания и навыки и помоги котам построить городок для туристов',
-    navigate: '/about-game',
-  },
-  {
-    img: EcologyGameImg,
-    title: 'Экология',
-    description:
-      'Соблюдение баланса между экологией и производством всегда было непростой задачей',
-    navigate: '/ecology-game',
-  },
-  {
-    img: GameImg,
-    title: 'Юнга Мур и большая стройка котов-пиратов',
-    description:
-      'Используй свои знания и навыки и помоги котам построить городок для туристов',
-  },
-  {
-    img: EcologyGameImg,
-    title: 'Экология',
-    description:
-      'Соблюдение баланса между экологией и производством всегда было непростой задачей',
-  },
-  {
-    img: GameImg,
-    title: 'Юнга Мур и большая стройка котов-пиратов',
-    description:
-      'Используй свои знания и навыки и помоги котам построить городок для туристов',
-  },
-];
 
-export const Game = () => {
+export const Games = () => {
   const [activeGameIndex, setActiveGameIndex] = useState(0);
 
   return (
-    <GameStyle>
+    <Wrapper>
       <Container>
-        <Games>
+        <SlidersWrapper>
           <Filter
             activeGameIndex={activeGameIndex}
             setActiveGameIndex={setActiveGameIndex}
           />
+
+          <RecentlyPlayedGames data={SMALL_SLIDER_DATA} />
 
           {activeGameIndex === 0 && (
             <ContainerCarousel>
@@ -98,7 +67,7 @@ export const Game = () => {
               <GamesCarousel data={SLIDER_DATA_CARDS} />
             </ContainerCarousel>
           )}
-        </Games>
+        </SlidersWrapper>
 
         <div className='relative'>
           <Title>
@@ -108,11 +77,11 @@ export const Game = () => {
           <ImgA className='asideButton' src={A} />
         </div>
       </Container>
-    </GameStyle>
+    </Wrapper>
   );
 };
 
-const GameStyle = styled.div({
+const Wrapper = styled.div({
   display: 'flex',
   alignItems: 'center',
   flexDirection: 'column',
@@ -144,7 +113,7 @@ const Container = styled.div({
   },
 });
 
-const Games = styled.div({
+const SlidersWrapper = styled.div({
   marginBottom: '0px',
 });
 
