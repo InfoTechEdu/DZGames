@@ -18,12 +18,10 @@ export const CarouselSection = () => {
   const [slideIndex, setSlideIndex] = useState(0);
 
   const navigateToMurGame = useCallback(() => {
-    console.log('Navigating');
     navigate('/about-game');
   }, [navigate]);
 
   const navigateToEcologyGame = useCallback(() => {
-    console.log('Navigating');
     navigate('/ecology-game');
   }, [navigate]);
 

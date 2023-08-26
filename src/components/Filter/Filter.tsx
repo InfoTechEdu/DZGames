@@ -33,6 +33,7 @@ const Container = styled.section`
   display: flex;
   align-items: center;
   gap: 20px;
+  overflow: auto;
 
   margin-bottom: 40px;
 
