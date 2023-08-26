@@ -5,6 +5,7 @@ import A from '../../assets/A.svg';
 
 import { MainTitle } from '../../components/MainTitle/MainTitle';
 import { SubTitle } from '../../components/SubTitle/SubTitle';
+import { GamesSubtitle } from '../../components/GamesSubtitle/GamesSubtitle';
 import { SendMessageForm } from '../Main/SendMessageForm/SendMessageForm';
 import { Filter } from '../../components/Filter/Filter';
 import { GamesCarousel } from '../../components/GamesCarousel/GamesCarousel';
@@ -15,6 +16,7 @@ import { ReactComponent as Quiz } from '../../assets/filters/quiz.svg';
 import { RecentlyPlayedGames } from '../../components/RecentlyPlayedGames/RecentlyPlayedGames';
 import { SLIDER_DATA_CARDS, SMALL_SLIDER_DATA } from '../../shared/slider';
 
+import { ReactComponent as TimeMachine } from '../../assets/time-machine.svg';
 
 export const Games = () => {
   const [activeGameIndex, setActiveGameIndex] = useState(0);
@@ -28,6 +30,10 @@ export const Games = () => {
             setActiveGameIndex={setActiveGameIndex}
           />
 
+          <CarouselHeader>
+            <TimeMachine className='size' />
+            <SubTitle text='Вы недавно играли' />
+          </CarouselHeader>
           <RecentlyPlayedGames data={SMALL_SLIDER_DATA} />
 
           {activeGameIndex === 0 && (
@@ -41,7 +47,7 @@ export const Games = () => {
             <ContainerCarousel>
               <CarouselHeader>
                 <Grammar className='size' />
-                <SubTitle text='Функциональная грамотность' />
+                <GamesSubtitle text='Функциональная грамотность' />
               </CarouselHeader>
               
               <GamesCarousel data={SLIDER_DATA_CARDS} />
@@ -52,7 +58,7 @@ export const Games = () => {
             <ContainerCarousel>
               <CarouselHeader>
                 <Simulator className='size' />
-                <SubTitle text='Тренажеры' />
+                <GamesSubtitle text='Тренажеры' />
               </CarouselHeader>
               <GamesCarousel data={SLIDER_DATA_CARDS} />
             </ContainerCarousel>
@@ -62,7 +68,7 @@ export const Games = () => {
             <ContainerCarousel>
               <CarouselHeader>
                 <Quiz className='size' />
-                <SubTitle text='Викторины' />
+                <GamesSubtitle text='Викторины' />
               </CarouselHeader>
               <GamesCarousel data={SLIDER_DATA_CARDS} />
             </ContainerCarousel>
@@ -117,10 +123,6 @@ const SlidersWrapper = styled.div({
   marginBottom: '0px',
 });
 
-const Img = styled.img({
-  width: '100%',
-});
-
 const ImgA = styled.img({
   position: 'absolute',
   bottom: '-47px',
@@ -142,70 +144,11 @@ const CarouselHeader = styled.div`
 
   & svg {
     margin-right: 10px;
-    width: 48px;
-    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
 
     & path {
       fill: #000;
     }
   }
 `
-
-const Cards = styled.div({
-  display: 'flex',
-  gap: '24px',
-
-  '@media(max-width: 1024px)': {
-    flexWrap: 'wrap',
-  },
-
-  '@media(max-width: 856px)': {
-    justifyContent: 'center',
-  },
-});
-
-const Card = styled.div({
-  cursor: 'pointer',
-  display: 'flex',
-  flexDirection: 'column',
-  ':hover': {
-    boxShadow: '16px 16px 0px #FFCD4C',
-    borderRadius: '20px',
-    transition: '0.5s',
-  },
-
-  '@media(max-width: 1024px)': {
-    boxShadow: '16px 16px 0px #FFCD4C',
-    borderRadius: '20px',
-  },
-});
-
-const CardText = styled.div({
-  width: '100%',
-  maxWidth: '392px',
-  maxHeight: '198px',
-  background: '#F7F7F8',
-  borderRadius: '0px 0px 20px 20px',
-  padding: '24px',
-
-  display: 'flex',
-  alignItems: 'center',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  gap: '12px',
-});
-
-const CardTitle = styled.div({
-  fontSize: '30px',
-  fontWeight: '600',
-  maxWidth: '296px',
-
-  '@media(max-width: 820px)': {
-    fontSize: '24px',
-  },
-});
-
-const CardDescription = styled.div({
-  fontSize: '18px',
-  maxWidth: '296px',
-});

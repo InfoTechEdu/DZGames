@@ -1,10 +1,7 @@
 import { CarouselProvider, Slider, Slide } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-
-import { ReactComponent as TimeMachine } from '../../assets/time-machine.svg';
 
 interface IProps {
   data: {
@@ -16,7 +13,6 @@ interface IProps {
 }
 
 export const RecentlyPlayedGames = ({ data }: IProps) => {
-  const navigate = useNavigate();
 
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -31,19 +27,23 @@ export const RecentlyPlayedGames = ({ data }: IProps) => {
     };
   }, []);
 
+  const isMobile = width <= 600;
+
+  const visibleSlides = isMobile ? 4 : data.length
+
   return (
     <CarouselProvider
-      naturalSlideWidth={100}
-      naturalSlideHeight={100}
+      naturalSlideWidth={110}
+      naturalSlideHeight={110}
       totalSlides={data.length}
-      visibleSlides={data.length}
+      visibleSlides={visibleSlides}
       isIntrinsicHeight
     >
       <Slider style={{paddingBottom: '24px'}}>
         {data.map((item, i) => {
           return (
             <Slide key={i} index={i} style={{ width: 110, paddingRight: 20 }}>
-              <Content onClick={() => item.navigate && navigate(item.navigate)}>
+              <Content>
                 <Img alt='' src={item.img} />
                 {(item.title || item.description) && (
                   <CardText>
