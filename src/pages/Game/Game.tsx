@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import styled from 'styled-components';
 import A from '../../assets/A.svg';
 import GameImg from '../../assets/game.png';
@@ -7,7 +9,10 @@ import { SubTitle } from '../../components/SubTitle/SubTitle';
 import { SendMessageForm } from '../Main/SendMessageForm/SendMessageForm';
 import { Filter } from '../../components/Filter/Filter';
 import { CarouselMain } from '../../components/Carousel/Carousel';
-import { useState } from 'react';
+
+import { ReactComponent as Grammar } from '../../assets/filters/grammar.svg';
+import { ReactComponent as Simulator } from '../../assets/filters/simulator.svg';
+import { ReactComponent as Quiz } from '../../assets/filters/quiz.svg';
 
 const SLIDER_DATA_CARDS = [
   {
@@ -65,21 +70,31 @@ export const Game = () => {
 
           {(activeGameIndex === 0 || activeGameIndex === 1) && (
             <ContainerCarousel>
-              <MainTitle text='Функциональная грамотность' />
+              <CarouselHeader>
+                <Grammar className='size' />
+                <SubTitle text='Функциональная грамотность' />
+              </CarouselHeader>
+              
               <CarouselMain data={SLIDER_DATA_CARDS} />
             </ContainerCarousel>
           )}
 
           {(activeGameIndex === 0 || activeGameIndex === 2) && (
             <ContainerCarousel>
-              <MainTitle text='Тренажеры' />
+              <CarouselHeader>
+                <Simulator className='size' />
+                <SubTitle text='Тренажеры' />
+              </CarouselHeader>
               <CarouselMain data={SLIDER_DATA_CARDS} />
             </ContainerCarousel>
           )}
 
           {(activeGameIndex === 0 || activeGameIndex === 3) && (
             <ContainerCarousel>
-              <MainTitle text='Викторины' />
+              <CarouselHeader>
+                <Quiz className='size' />
+                <SubTitle text='Викторины' />
+              </CarouselHeader>
               <CarouselMain data={SLIDER_DATA_CARDS} />
             </ContainerCarousel>
           )}
@@ -151,6 +166,21 @@ const ImgA = styled.img({
 const ContainerCarousel = styled.div({
   marginBottom: '60px',
 });
+
+const CarouselHeader = styled.div`
+  display: flex;
+  align-items: center;
+
+  & svg {
+    margin-right: 10px;
+    width: 48px;
+    height: 48px;
+
+    & path {
+      fill: #000;
+    }
+  }
+`
 
 const Cards = styled.div({
   display: 'flex',

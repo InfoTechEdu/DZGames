@@ -4,7 +4,6 @@ import { ReactComponent as Joystick } from '../../assets/filters/joystick.svg';
 import { ReactComponent as Grammar } from '../../assets/filters/grammar.svg';
 import { ReactComponent as Simulator } from '../../assets/filters/simulator.svg';
 import { ReactComponent as Quiz } from '../../assets/filters/quiz.svg';
-import { useState } from 'react';
 
 const inactiveStyle = {
   background: 'none',
