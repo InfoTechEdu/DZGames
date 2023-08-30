@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 interface IProps {
   data: {
+    id: string;
     img: string;
     title?: string;
     description?: string;
@@ -46,7 +47,16 @@ export const GamesCarousel = ({ data }: IProps) => {
         {data.map((item, i) => {
           return (
             <Slide key={i} index={i} style={{ paddingRight: 24 }}>
-              <Content onClick={() => item.navigate && navigate(item.navigate)}>
+              <Content onClick={() => {
+                item.navigate && navigate(item.navigate)
+                const data = JSON.parse(localStorage.getItem('recentlySeenGames') ?? '[]')
+
+                if (!data.some(({ id }) => id === item.id)) {
+                  data.push(item)
+                  localStorage.setItem('recentlySeenGames', JSON.stringify(data))
+                }
+
+              }}>
                 <Img alt='' src={item.img} />
                 {(item.title || item.description) && (
                   <CardText>

@@ -1,25 +1,41 @@
-import { useState } from 'react';
+import { useMemo, useState } from "react";
 
-import styled from 'styled-components';
-import A from '../../assets/A.svg';
+import styled from "styled-components";
+import A from "../../assets/A.svg";
 
-import { MainTitle } from '../../components/MainTitle/MainTitle';
-import { SubTitle } from '../../components/SubTitle/SubTitle';
-import { GamesSubtitle } from '../../components/GamesSubtitle/GamesSubtitle';
-import { SendMessageForm } from '../Main/SendMessageForm/SendMessageForm';
-import { Filter } from '../../components/Filter/Filter';
-import { GamesCarousel } from '../../components/GamesCarousel/GamesCarousel';
+import { MainTitle } from "../../components/MainTitle/MainTitle";
+import { SubTitle } from "../../components/SubTitle/SubTitle";
+import { GamesSubtitle } from "../../components/GamesSubtitle/GamesSubtitle";
+import { SendMessageForm } from "../Main/SendMessageForm/SendMessageForm";
+import { Filter } from "../../components/Filter/Filter";
+import { GamesCarousel } from "../../components/GamesCarousel/GamesCarousel";
 
-import { ReactComponent as Grammar } from '../../assets/filters/grammar.svg';
-import { ReactComponent as Simulator } from '../../assets/filters/simulator.svg';
-import { ReactComponent as Quiz } from '../../assets/filters/quiz.svg';
-import { RecentlyPlayedGames } from '../../components/RecentlyPlayedGames/RecentlyPlayedGames';
-import { SLIDER_DATA_CARDS, SMALL_SLIDER_DATA } from '../../shared/slider';
+import { ReactComponent as Grammar } from "../../assets/filters/grammar.svg";
+import { ReactComponent as Simulator } from "../../assets/filters/simulator.svg";
+import { ReactComponent as Quiz } from "../../assets/filters/quiz.svg";
+import { RecentlyPlayedGames } from "../../components/RecentlyPlayedGames/RecentlyPlayedGames";
+import {
+  GRAMMAR_SLIDES,
+  QUIZ_SLIDES,
+  RECOMMENDED_GAMES_SLIDES,
+  SIMULATOR_SLIDES,
+  SMALL_SLIDER_DATA,
+} from "../../shared/slider";
 
-import { ReactComponent as TimeMachine } from '../../assets/time-machine.svg';
+import { ReactComponent as TimeMachine } from "../../assets/time-machine.svg";
 
 export const Games = () => {
   const [activeGameIndex, setActiveGameIndex] = useState(0);
+
+  const recentlySeenGames = useMemo(() => {
+    const data = JSON.parse(
+      localStorage.getItem("recentlySeenGames") ?? '[]'
+    );
+
+    return data.reverse()
+  }, [])
+
+  console.log(recentlySeenGames);
 
   return (
     <Wrapper>
@@ -30,57 +46,61 @@ export const Games = () => {
             setActiveGameIndex={setActiveGameIndex}
           />
 
-          <CarouselHeader>
-            <TimeMachine className='size' />
-            <SubTitle text='Вы недавно играли' />
-          </CarouselHeader>
-          <RecentlyPlayedGames data={SMALL_SLIDER_DATA} />
+          {recentlySeenGames.length > 0 && (
+            <>
+              <CarouselHeader>
+                <TimeMachine className="size" />
+                <SubTitle text="Вы недавно играли" />
+              </CarouselHeader>
+              <RecentlyPlayedGames data={recentlySeenGames} />
+            </>
+          )}
 
           {activeGameIndex === 0 && (
             <ContainerCarousel>
-              <MainTitle text='Рекомендуемые' />
-              <GamesCarousel data={SLIDER_DATA_CARDS} />
+              <MainTitle text="Рекомендуемые" />
+              <GamesCarousel data={RECOMMENDED_GAMES_SLIDES} />
             </ContainerCarousel>
           )}
 
           {(activeGameIndex === 0 || activeGameIndex === 1) && (
             <ContainerCarousel>
               <CarouselHeader>
-                <Grammar className='size' />
-                <GamesSubtitle text='Функциональная грамотность' />
+                <Grammar className="size" />
+                <GamesSubtitle text="Функциональная грамотность" />
               </CarouselHeader>
-              
-              <GamesCarousel data={SLIDER_DATA_CARDS} />
+
+              <GamesCarousel data={GRAMMAR_SLIDES} />
             </ContainerCarousel>
           )}
 
           {(activeGameIndex === 0 || activeGameIndex === 2) && (
             <ContainerCarousel>
               <CarouselHeader>
-                <Simulator className='size' />
-                <GamesSubtitle text='Тренажеры' />
+                <Simulator className="size" />
+                <GamesSubtitle text="Тренажеры" />
               </CarouselHeader>
-              <GamesCarousel data={SLIDER_DATA_CARDS} />
+              <GamesCarousel data={SIMULATOR_SLIDES} />
             </ContainerCarousel>
           )}
 
           {(activeGameIndex === 0 || activeGameIndex === 3) && (
             <ContainerCarousel>
               <CarouselHeader>
-                <Quiz className='size' />
-                <GamesSubtitle text='Викторины' />
+                <Quiz className="size" />
+                <GamesSubtitle text="Викторины" />
               </CarouselHeader>
-              <GamesCarousel data={SLIDER_DATA_CARDS} />
+              <GamesCarousel data={QUIZ_SLIDES} />
             </ContainerCarousel>
           )}
         </SlidersWrapper>
 
-        <div className='relative'>
+        <div className="relative">
           <Title>
-            <SubTitle text='Задавай вопросы и делись идеями' />
+            <SubTitle text="Задавай вопросы и делись идеями" />
           </Title>
           <SendMessageForm />
-          <ImgA className='asideButton' src={A} />
+          <ImgA className="asideButton" src={A} />
         </div>
       </Container>
     </Wrapper>
@@ -88,54 +108,54 @@ export const Games = () => {
 };
 
 const Wrapper = styled.div({
-  display: 'flex',
-  alignItems: 'center',
-  flexDirection: 'column',
-  width: '100%',
-  gap: '25px',
+  display: "flex",
+  alignItems: "center",
+  flexDirection: "column",
+  width: "100%",
+  gap: "25px",
 });
 
 const Title = styled.div({
-  display: 'none',
-  '@media(max-width: 650px)': {
-    display: 'block',
+  display: "none",
+  "@media(max-width: 650px)": {
+    display: "block",
   },
 });
 
 const Container = styled.div({
-  width: '100%',
-  maxWidth: '1224px',
-  display: 'flex',
-  flexDirection: 'column',
+  width: "100%",
+  maxWidth: "1224px",
+  display: "flex",
+  flexDirection: "column",
   // gap: '76px',
-  marginTop: '140px',
+  marginTop: "140px",
 
-  '@media(max-width: 820px)': {
-    marginTop: '72px',
+  "@media(max-width: 820px)": {
+    marginTop: "72px",
   },
 
-  '@media(max-width: 600px)': {
-    gap: '60px',
+  "@media(max-width: 600px)": {
+    gap: "60px",
   },
 });
 
 const SlidersWrapper = styled.div({
-  marginBottom: '0px',
+  marginBottom: "0px",
 });
 
 const ImgA = styled.img({
-  position: 'absolute',
-  bottom: '-47px',
-  left: '-56px',
+  position: "absolute",
+  bottom: "-47px",
+  left: "-56px",
 
-  '@media(max-width: 1340px)': {
-    bottom: '-15px',
-    left: '-10px',
+  "@media(max-width: 1340px)": {
+    bottom: "-15px",
+    left: "-10px",
   },
 });
 
 const ContainerCarousel = styled.div({
-  marginBottom: '60px',
+  marginBottom: "60px",
 });
 
 const CarouselHeader = styled.div`
@@ -151,4 +171,4 @@ const CarouselHeader = styled.div`
       fill: #000;
     }
   }
-`
+`;
