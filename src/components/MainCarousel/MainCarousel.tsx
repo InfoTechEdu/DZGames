@@ -7,14 +7,24 @@ import { ReactComponent as ArrowRight } from '../../assets/arrowRight.svg';
 import { ReactComponent as ArrowLeft } from '../../assets/arrowLeft.svg';
 import { PropsWithChildren } from 'react';
 
+interface ArrowProps {
+  currentSlide: number;
+  slideCount: number;
+  onClick: () => void;
+}
+
 const SlickButtonFix = ({
   currentSlide,
   slideCount,
+  onClick,
   children,
   ...props
-}: PropsWithChildren<{ currentSlide: number; slideCount: number }>) => (
-  <div {...props}>{children}</div>
-);
+}: PropsWithChildren<Partial<ArrowProps>>) =>
+  onClick && (
+    <div onClick={onClick} {...props}>
+      {children}
+    </div>
+  );
 
 const settings = {
   dots: false,

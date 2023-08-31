@@ -225,6 +225,22 @@ button:focus-visible {
   margin: 0;
 }
 
+.slick-next:before, .slick-prev:before {
+  display: none;
+}
+
+.slick-next, .slick-prev {
+  z-index: 10;
+}
+
+.slick-next {
+  right: 3px;
+}
+
+.slick-prev {
+  left: 7px
+}
+
 @media(min-width: 820px) {
   .menu {
     display: none;

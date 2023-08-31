@@ -22,6 +22,9 @@ const CAROUSEL_DATA = [
   { img: bgImageMedium, navigate: '/about-game' },
   { img: bgImageMedium, navigate: '/about-game' },
   { img: bgImageMedium, navigate: '/about-game' },
+  { img: bgImageMedium, navigate: '/about-game' },
+  { img: bgImageMedium, navigate: '/about-game' },
+  { img: bgImageMedium, navigate: '/about-game' },
 ];
 
 export const Main = () => {
