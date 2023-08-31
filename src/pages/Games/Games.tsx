@@ -19,7 +19,6 @@ import {
   QUIZ_SLIDES,
   RECOMMENDED_GAMES_SLIDES,
   SIMULATOR_SLIDES,
-  SMALL_SLIDER_DATA,
 } from "../../shared/slider";
 
 import { ReactComponent as TimeMachine } from "../../assets/time-machine.svg";
@@ -34,8 +33,6 @@ export const Games = () => {
 
     return data.reverse()
   }, [])
-
-  console.log(recentlySeenGames);
 
   return (
     <Wrapper>

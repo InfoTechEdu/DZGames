@@ -1,8 +1,35 @@
-import { CarouselProvider, Slider, Slide } from 'pure-react-carousel';
-import 'pure-react-carousel/dist/react-carousel.es.css';
-import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { CustomSlider } from '../CustomSlider/CustomSlider';
+
+const settings = {
+  dots: false,
+  infinite: false,
+  speed: 500,
+  slidesToShow: 5,
+  slidesToScroll: 1,
+  initialSlide: 0,
+  responsive: [
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 4,
+      },
+    },
+    {
+      breakpoint: 500,
+      settings: {
+        slidesToShow: 3,
+      },
+    },
+    {
+      breakpoint: 400,
+      settings: {
+        slidesToShow: 2,
+      },
+    },
+  ],
+};
 
 interface IProps {
   data: {
@@ -14,61 +41,52 @@ interface IProps {
 }
 
 export const RecentlyPlayedGames = ({ data }: IProps) => {
-  const [width, setWidth] = useState(window.innerWidth);
-
-  const navigate = useNavigate()
-
-  useEffect(() => {
-    const handleWindowSizeChange = () => {
-      setWidth(window.innerWidth);
-    };
-    window.addEventListener('resize', handleWindowSizeChange);
-
-    return () => {
-      window.removeEventListener('resize', handleWindowSizeChange);
-    };
-  }, []);
-
-  const isMobile = width <= 600;
-
-  const visibleSlides = isMobile ? 4 : data.length;
+  const navigate = useNavigate();
 
   return (
-    <CarouselProvider
-      naturalSlideWidth={110}
-      naturalSlideHeight={110}
-      totalSlides={data.length}
-      visibleSlides={visibleSlides}
-      isIntrinsicHeight
-    >
-      <Slider style={{ paddingBottom: '24px' }}>
+    <div style={{ maxWidth: 650, width: '100%', marginBottom: 60 }}>
+      <CustomSlider
+        {...settings}
+        swipe
+        className='recentlySeenSlider'
+        arrows={false}
+      >
         {data.map((item, i) => {
           return (
-            <Slide key={i} index={i} style={{ width: 110, paddingRight: 20 }}>
-              <Content onClick={() => item.navigate && navigate(item.navigate)}>
-                <Img alt='' src={item.img} />
-                {(item.title || item.description) && (
-                  <CardText>
-                    {item.title && <CardTitle>{item.title}</CardTitle>}
-                  </CardText>
-                )}
-              </Content>
-            </Slide>
+            <Content
+              key={i}
+              onClick={() => item.navigate && navigate(item.navigate)}
+            >
+              <Img alt='' src={item.img} />
+              {item.title && (
+                <CardText>
+                  {item.title && <CardTitle>{item.title}</CardTitle>}
+                </CardText>
+              )}
+            </Content>
           );
         })}
-      </Slider>
-    </CarouselProvider>
+      </CustomSlider>
+    </div>
   );
 };
 
-const Content = styled.div({
-  cursor: 'pointer',
-  display: 'flex',
-  flexDirection: 'column',
-});
+const Content = styled.div`
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  max-width: 110px;
+  outline: none;
+  padding-right: 24px;
+  overflow: hidden;
+  box-sizing: content-box;
+`;
 
 const Img = styled.img`
   border-radius: 14px;
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
 `;
 
 const CardText = styled.div`
@@ -79,6 +97,8 @@ const CardText = styled.div`
 const CardTitle = styled.div`
   font-size: 18px;
   font-weight: 500;
+  line-height: 108%;
+  letter-spacing: 0.18px;
 
   overflow: hidden;
   text-overflow: ellipsis;

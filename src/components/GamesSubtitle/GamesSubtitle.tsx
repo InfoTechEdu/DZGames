@@ -17,4 +17,13 @@ const StyledTitle = styled.h2<{ fontSize?: number }>`
   color: #0b0d22;
   margin-top: 30px;
   margin-bottom: 24px;
+
+  @media only screen and (max-width: 768px) {
+    font-size: 32px;
+  }
+
+  @media only screen and (max-width: 600px) {
+    margin-top: 0px;
+    margin-bottom: 12px;
+  }
 `;
