@@ -1,77 +1,81 @@
-import { CarouselProvider, Slider, Slide } from 'pure-react-carousel';
-import 'pure-react-carousel/dist/react-carousel.es.css';
-import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { CustomSlider } from '../CustomSlider/CustomSlider';
+
+const settings = {
+  dots: false,
+  infinite: false,
+  speed: 500,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  initialSlide: 0,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+      },
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      },
+    },
+  ],
+};
+
+interface SliderData {
+  id: string;
+  img: string;
+  title?: string;
+  description?: string;
+  navigate?: string;
+}
 
 interface IProps {
-  data: {
-    id: string;
-    img: string;
-    title?: string;
-    description?: string;
-    navigate?: string;
-  }[];
+  data: SliderData[];
 }
 
 export const GamesCarousel = ({ data }: IProps) => {
   const navigate = useNavigate();
 
-  const [width, setWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleWindowSizeChange = () => {
-      setWidth(window.innerWidth);
-    }
-    window.addEventListener("resize", handleWindowSizeChange);
-
-    return () => {
-      window.removeEventListener("resize", handleWindowSizeChange);
-    };
-  }, []);
-
-  const isMobile = width <= 600;
-  const isTablet = width >= 600 && width <= 1024;
-
-  const visibleSlides = isTablet ? 2 : (isMobile ? 1 : 3)
-
   return (
-    <CarouselProvider
-      naturalSlideWidth={100}
-      naturalSlideHeight={100}
-      totalSlides={data.length}
-      visibleSlides={visibleSlides}
-      isIntrinsicHeight
-    >
-      <Slider style={  {paddingBottom: '24px'}}>
-        {data.map((item, i) => {
-          return (
-            <Slide key={i} index={i} style={{ paddingRight: 24 }}>
-              <Content onClick={() => {
-                item.navigate && navigate(item.navigate)
-                const data = JSON.parse(localStorage.getItem('recentlySeenGames') ?? '[]')
+    <CustomSlider {...settings} swipe className='gameSlider'>
+      {data.map((item, i) => {
+        return (
+          <Content
+            key={i}
+            onClick={() => {
+              item.navigate && navigate(item.navigate);
+              const savedData = JSON.parse(
+                localStorage.getItem('recentlySeenGames') ?? '[]'
+              ) as SliderData[];
 
-                if (!data.some(({ id }) => id === item.id)) {
-                  data.push(item)
-                  localStorage.setItem('recentlySeenGames', JSON.stringify(data))
-                }
-
-              }}>
-                <Img alt='' src={item.img} />
-                {(item.title || item.description) && (
-                  <CardText>
-                    {item.title && <CardTitle>{item.title}</CardTitle>}
-                    {item.description && (
-                      <CardDescription>{item.description}</CardDescription>
-                    )}
-                  </CardText>
+              if (!savedData.some(({ id }) => id === item.id)) {
+                savedData.push(item);
+                localStorage.setItem(
+                  'recentlySeenGames',
+                  JSON.stringify(savedData)
+                );
+              }
+            }}
+          >
+            <Img alt='' src={item.img} />
+            {(item.title || item.description) && (
+              <CardText>
+                {item.title && <CardTitle>{item.title}</CardTitle>}
+                {item.description && (
+                  <CardDescription>{item.description}</CardDescription>
                 )}
-              </Content>
-            </Slide>
-          );
-        })}
-      </Slider>
-    </CarouselProvider>
+              </CardText>
+            )}
+          </Content>
+        );
+      })}
+    </CustomSlider>
   );
 };
 

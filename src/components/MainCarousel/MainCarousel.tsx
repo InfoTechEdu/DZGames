@@ -3,29 +3,6 @@ import styled from 'styled-components';
 
 import { CustomSlider } from '../CustomSlider/CustomSlider';
 
-import { ReactComponent as ArrowRight } from '../../assets/arrowRight.svg';
-import { ReactComponent as ArrowLeft } from '../../assets/arrowLeft.svg';
-import { PropsWithChildren } from 'react';
-
-interface ArrowProps {
-  currentSlide: number;
-  slideCount: number;
-  onClick: () => void;
-}
-
-const SlickButtonFix = ({
-  currentSlide,
-  slideCount,
-  onClick,
-  children,
-  ...props
-}: PropsWithChildren<Partial<ArrowProps>>) =>
-  onClick && (
-    <div onClick={onClick} {...props}>
-      {children}
-    </div>
-  );
-
 const settings = {
   dots: false,
   infinite: false,
@@ -64,20 +41,7 @@ export const MainCarousel = ({ data }: IProps) => {
   const navigate = useNavigate();
 
   return (
-    <CustomSlider
-      nextArrow={
-        <SlickButtonFix>
-          <ArrowRight />
-        </SlickButtonFix>
-      }
-      prevArrow={
-        <SlickButtonFix>
-          <ArrowLeft />
-        </SlickButtonFix>
-      }
-      {...settings}
-      swipe
-    >
+    <CustomSlider {...settings} swipe>
       {data.map((item, i) => {
         return (
           <SliderItem

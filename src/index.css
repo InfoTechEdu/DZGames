@@ -241,6 +241,15 @@ button:focus-visible {
   left: 7px
 }
 
+.gameSlider .slick-slide {
+  padding-right: 24px;
+  padding-bottom: 24px
+}
+
+.gameSlider .slick-next {
+  right: 27px
+}
+
 @media(min-width: 820px) {
   .menu {
     display: none;
