@@ -55,7 +55,13 @@ export const GamesCarousel = ({ data }: IProps) => {
               ) as SliderData[];
 
               if (!savedData.some(({ id }) => id === item.id)) {
+
+                if (savedData.length === 10) {
+                  savedData.shift()
+                }
+
                 savedData.push(item);
+
                 localStorage.setItem(
                   'recentlySeenGames',
                   JSON.stringify(savedData)
