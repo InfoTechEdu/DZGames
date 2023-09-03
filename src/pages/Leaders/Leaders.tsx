@@ -4,6 +4,7 @@ import { MainCarousel } from "../../components/MainCarousel/MainCarousel";
 import { CAROUSEL_DATA } from "../../shared/slider";
 import { ReactComponent as SelectImg } from "../../assets/select.svg";
 import { useState } from "react";
+import { SubTitle } from "../../components/SubTitle/SubTitle";
 
 interface GameItem {
   id: number;
@@ -74,8 +75,8 @@ export const Leaders = () => {
       <div>
         <MainCarousel data={CAROUSEL_DATA} />
       </div>
-      {/* <div>
         <SubTitle text='Таблица лидеров' />
+        <TableWrapper imageSrc={new URL('../../assets/table-bg.png', import.meta.url).href}>
         <Table>
           <tr>
             <td>№</td>
@@ -85,7 +86,7 @@ export const Leaders = () => {
             <td>Игры</td>
           </tr>
         </Table>
-      </div> */}
+      </TableWrapper>
     </LeaderContainer>
   );
 };
@@ -155,6 +156,23 @@ const Option = styled.button<{ isSelected: boolean }>`
   `}
 `;
 
-// const Table = styled.table`
-//   border: 1px solid black;
-// `;
+const TableWrapper = styled.div<{imageSrc: string}>`
+  width: 100%;
+  background: ${({ imageSrc }) => `url(${imageSrc})`};
+  height: 786px;
+  background-color: #F7F7F8;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+`;
+
+const Table = styled.table`
+  border: 1px solid black;
+  border-collapse: collapse;
+  width: 100%;
+  height: 100%;
+
+  & td, th {
+    border: 1px solid black
+  }
+`;
