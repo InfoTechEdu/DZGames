@@ -3,6 +3,8 @@ import { MainTitle } from '../../components/MainTitle/MainTitle';
 import { MainCarousel } from '../../components/MainCarousel/MainCarousel';
 import { CAROUSEL_DATA } from '../../shared/slider';
 import { ReactComponent as SelectImg } from '../../assets/select.svg';
+import { ReactComponent as PopupImg } from '../../assets/table_popup_btn.svg';
+import { ReactComponent as CloseImg } from '../../assets/close.svg';
 import { useEffect, useState } from 'react';
 import { SubTitle } from '../../components/SubTitle/SubTitle';
 import { Button } from '../../components/Button/Button';
@@ -44,7 +46,7 @@ interface TableItem {
   };
   statistics: {
     gamesPlayed: number;
-    winCount: number;
+    winCount?: number;
   };
 }
 
@@ -56,6 +58,9 @@ export const Leaders = () => {
 
   const [showPersonalData, setShowPersonalData] = useState(true);
 
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedTableItem, setSelectedTableItem] = useState<TableItem | null>(null);
+
   const toggleDropDown = () => {
     setShowDropdown((s) => !s);
   };
@@ -66,9 +71,17 @@ export const Leaders = () => {
   };
 
   const togglePersonalData = () => {
-    setShowPersonalData((s) => !s)
+    setShowPersonalData((s) => !s);
   };
 
+  const handleShowPopup = (tableItem: TableItem) => {
+    setShowPopup(true);
+    setSelectedTableItem(tableItem);
+  };
+
+  const handleHidePopup = () => {
+    setShowPopup(false);
+  };
 
   useEffect(() => {
     fetch(API_URL)
@@ -135,18 +148,16 @@ export const Leaders = () => {
                 </tr>
               </thead>
               <tbody>
-                {tableData.map(
-                  (
-                    {
+                {tableData.map((item, index) => {
+                    const {
                       id,
                       name,
                       position,
                       profilePhoto,
                       progressData: { points },
                       statistics: { gamesPlayed },
-                    },
-                    index
-                  ) => {
+                    } = item
+
                     return (
                       <tr key={id}>
                         <td>{index + 1}</td>
@@ -154,9 +165,12 @@ export const Leaders = () => {
                           <div>
                             <ProfilePhoto src={profilePhoto} alt={name} />
                             <span>{name}</span>
+                            <button onClick={() => handleShowPopup(item)}>
+                              <PopupImg />
+                            </button>
                           </div>
                         </td>
-                        <td>{position !== 'null' ? position : 'нет'}</td>
+                        <td>нет</td>
                         <td>{points}</td>
                         <td>{gamesPlayed}</td>
                       </tr>
@@ -177,6 +191,20 @@ export const Leaders = () => {
                           alt='Я'
                         />
                         <span>Я</span>
+                        <button
+                          onClick={() => {
+                            handleShowPopup({
+                              id: 'me',
+                              name: 'Я',
+                              position: '1',
+                              profilePhoto: '',
+                              progressData: { points: 100 },
+                              statistics: { gamesPlayed: 1 },
+                            })
+                          }}
+                        >
+                          <PopupImg />
+                        </button>
                       </div>
                     </td>
                     <td>1</td>
@@ -185,6 +213,31 @@ export const Leaders = () => {
                   </tr>
                 </tbody>
               </Table>
+            )}
+            {(showPopup && selectedTableItem) && (
+              <Popup>
+                <button onClick={handleHidePopup}>
+                  <CloseImg />
+                </button>
+
+                <SubTitle text={selectedTableItem.name} />
+                <div>
+                  <span>Место в рейтинге:</span>
+                  <span>{selectedTableItem.position}</span>
+                </div>
+                <div>
+                  <span>Класс:</span>
+                  <span>нет</span>
+                </div>
+                <div>
+                  <span>Очки:</span>
+                  <span>{selectedTableItem.progressData.points}</span>
+                </div>
+                <div>
+                  <span>Игры:</span>
+                  <span>{selectedTableItem.statistics.gamesPlayed}</span>
+                </div>
+              </Popup>
             )}
           </TableWrapper>
           <div style={{ margin: '0 auto' }}>
@@ -273,6 +326,8 @@ const TableWrapper = styled.div<{ imageSrc: string }>`
   border-radius: 20px;
 
   padding: 30px 42px;
+
+  position: relative;
 `;
 
 const Table = styled.table<{ withBorder?: boolean }>`
@@ -310,6 +365,12 @@ const Table = styled.table<{ withBorder?: boolean }>`
     padding-top: 22px;
   }
 
+  & tr td:nth-child(2) {
+    & button {
+      display: none;
+    }
+  }
+
   & th:first-of-type,
   & tr td:first-of-type {
     width: 5%;
@@ -334,9 +395,101 @@ const Table = styled.table<{ withBorder?: boolean }>`
   & tr td:last-of-type {
     width: 15%;
   }
+
+  @media screen and (max-width: 768px) {
+    & th:nth-child(3),
+    & tr td:nth-child(3),
+    & th:nth-child(4),
+    & tr td:nth-child(4),
+    & th:last-of-type,
+    & tr td:last-of-type {
+      display: none;
+    }
+
+    & th:first-of-type,
+    & tr td:first-of-type {
+      width: 10%;
+    }
+
+    & th:nth-child(2),
+    & tr td:nth-child(2) {
+      width: 90%;
+    }
+
+    & tr td:nth-child(2) {
+      & button {
+        display: block;
+      }
+    }
+
+    & div {
+      justify-content: space-between;
+    }
+  }
 `;
 
 const ProfilePhoto = styled.img`
   width: 32px;
   height: 32px;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const Popup = styled.div`
+  width: 288px;
+  padding: 24px;
+
+  border-radius: 20px;
+  background: var(--Linear, linear-gradient(180deg, #FF6F00 0%, #E9953E 100%));
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+
+  color: #fff;
+  
+
+  & div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%
+  }
+
+  & div+div {
+    margin-top: 12px
+  }
+
+  & h2 {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+
+    margin: 0;
+    margin-bottom: 24px;
+
+    color: #fff;
+  }
+
+  & button {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+
+    cursor: pointer;
+
+    & svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    & path {
+      fill: #fff
+    }
+  }
 `;
