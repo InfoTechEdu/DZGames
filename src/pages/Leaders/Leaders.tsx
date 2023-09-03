@@ -5,11 +5,42 @@ import { CAROUSEL_DATA } from "../../shared/slider";
 import { ReactComponent as SelectImg } from "../../assets/select.svg";
 import { useState } from "react";
 
+interface GameItem {
+  id: number;
+  title: string;
+}
+
+const gamesList: GameItem[] = [
+  {
+    id: 1,
+    title: "Юнга Мур и большая стройка котов-пиратов",
+  },
+  {
+    id: 2,
+    title: "Экология",
+  },
+  {
+    id: 3,
+    title: "Борьба Умов",
+  },
+  {
+    id: 4,
+    title: "Время Истории",
+  },
+];
+
 export const Leaders = () => {
   const [showDropdown, setShowDropdown] = useState(false);
 
+  const [selectedGame, setSelectedGame] = useState<GameItem | null>(null);
+
   const toggleDropDown = () => {
     setShowDropdown((s) => !s);
+  };
+
+  const handleGameSelect = (game: GameItem) => {
+    setSelectedGame(game);
+    setShowDropdown(false);
   };
 
   return (
@@ -17,18 +48,25 @@ export const Leaders = () => {
       <div>
         <MainTitle text="Выбери игру" />
         <div>
-          <SelectGame>
-            Или найди по названию
-            <button onClick={toggleDropDown}>
-              <SelectImg style={{ transform: showDropdown ? 'rotate(180deg)' : '' }} />
-            </button>
+          <SelectGame onClick={toggleDropDown}>
+            <span>{selectedGame?.title ?? "Или найди по названию"}</span>
+            <SelectImg
+              style={{ transform: showDropdown ? "rotate(180deg)" : "" }}
+            />
           </SelectGame>
           {showDropdown && (
             <Options>
-              <Option>Юнга Мур и большая стройка котов-пиратов</Option>
-              <Option>Экология</Option>
-              <Option>Борьба Умов</Option>
-              <Option>Время Истории</Option>
+              {gamesList.map((game) => {
+                return (
+                  <Option
+                    isSelected={selectedGame?.id === game.id}
+                    onClick={() => handleGameSelect(game)}
+                    key={game.id}
+                  >
+                    {game.title}
+                  </Option>
+                );
+              })}
             </Options>
           )}
         </div>
@@ -62,7 +100,7 @@ const LeaderContainer = styled.div({
   gap: "24px",
 });
 
-const SelectGame = styled.div`
+const SelectGame = styled.button`
   width: 392px;
   height: 43px;
   border: 1px solid #bda5ff;
@@ -76,10 +114,13 @@ const SelectGame = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  & span {
+    text-align: left;
+  }
 `;
 
 const Options = styled.div`
-
   position: absolute;
   z-index: 10;
   background-color: white;
@@ -89,11 +130,29 @@ const Options = styled.div`
   border-radius: 8px;
   border: 1px solid #bda5ff;
   margin-top: 7px;
+  overflow: hidden;
 `;
 
-const Option = styled.div`
+const Option = styled.button<{ isSelected: boolean }>`
+  display: block;
   color: #bda5ff;
   padding: 12px 16px;
+  width: 100%;
+  text-align: left;
+
+  font-size: 16px;
+
+  &:hover {
+    background-color: #bda5ff;
+    color: #fff;
+  }
+
+  ${({ isSelected }) =>
+    isSelected &&
+    `
+    background-color: #bda5ff;
+    color: #fff;
+  `}
 `;
 
 // const Table = styled.table`
