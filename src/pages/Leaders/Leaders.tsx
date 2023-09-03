@@ -1,10 +1,11 @@
-import styled from "styled-components";
-import { MainTitle } from "../../components/MainTitle/MainTitle";
-import { MainCarousel } from "../../components/MainCarousel/MainCarousel";
-import { CAROUSEL_DATA } from "../../shared/slider";
-import { ReactComponent as SelectImg } from "../../assets/select.svg";
-import { useEffect, useState } from "react";
-import { SubTitle } from "../../components/SubTitle/SubTitle";
+import styled from 'styled-components';
+import { MainTitle } from '../../components/MainTitle/MainTitle';
+import { MainCarousel } from '../../components/MainCarousel/MainCarousel';
+import { CAROUSEL_DATA } from '../../shared/slider';
+import { ReactComponent as SelectImg } from '../../assets/select.svg';
+import { useEffect, useState } from 'react';
+import { SubTitle } from '../../components/SubTitle/SubTitle';
+import { Button } from '../../components/Button/Button';
 
 interface GameItem {
   id: number;
@@ -14,24 +15,24 @@ interface GameItem {
 const gamesList: GameItem[] = [
   {
     id: 1,
-    title: "Юнга Мур и большая стройка котов-пиратов",
+    title: 'Юнга Мур и большая стройка котов-пиратов',
   },
   {
     id: 2,
-    title: "Экология",
+    title: 'Экология',
   },
   {
     id: 3,
-    title: "Борьба Умов",
+    title: 'Борьба Умов',
   },
   {
     id: 4,
-    title: "Время Истории",
+    title: 'Время Истории',
   },
 ];
 
 const API_URL =
-  "https://us-central1-dzgames-12ad8.cloudfunctions.net/DownloadTop10Leaderboard?game=battleofminds";
+  'https://us-central1-dzgames-12ad8.cloudfunctions.net/DownloadTop10Leaderboard?game=battleofminds';
 
 interface TableItem {
   id: string;
@@ -53,6 +54,8 @@ export const Leaders = () => {
 
   const [tableData, setTableData] = useState<TableItem[] | null>(null);
 
+  const [showPersonalData, setShowPersonalData] = useState(true);
+
   const toggleDropDown = () => {
     setShowDropdown((s) => !s);
   };
@@ -61,6 +64,11 @@ export const Leaders = () => {
     setSelectedGame(game);
     setShowDropdown(false);
   };
+
+  const togglePersonalData = () => {
+    setShowPersonalData((s) => !s)
+  };
+
 
   useEffect(() => {
     fetch(API_URL)
@@ -80,12 +88,12 @@ export const Leaders = () => {
   return (
     <LeaderContainer>
       <div>
-        <MainTitle text="Выбери игру" />
+        <MainTitle text='Выбери игру' />
         <div>
           <SelectGame onClick={toggleDropDown}>
-            <span>{selectedGame?.title ?? "Или найди по названию"}</span>
+            <span>{selectedGame?.title ?? 'Или найди по названию'}</span>
             <SelectImg
-              style={{ transform: showDropdown ? "rotate(180deg)" : "" }}
+              style={{ transform: showDropdown ? 'rotate(180deg)' : '' }}
             />
           </SelectGame>
           {showDropdown && (
@@ -110,10 +118,10 @@ export const Leaders = () => {
       </div>
       {tableData && (
         <>
-          <SubTitle text="Таблица лидеров" />
+          <SubTitle text='Таблица лидеров' />
           <TableWrapper
             imageSrc={
-              new URL("../../assets/table-bg.png", import.meta.url).href
+              new URL('../../assets/table-bg.png', import.meta.url).href
             }
           >
             <Table>
@@ -148,7 +156,7 @@ export const Leaders = () => {
                             <span>{name}</span>
                           </div>
                         </td>
-                        <td>{position}</td>
+                        <td>{position !== 'null' ? position : 'нет'}</td>
                         <td>{points}</td>
                         <td>{gamesPlayed}</td>
                       </tr>
@@ -157,23 +165,33 @@ export const Leaders = () => {
                 )}
               </tbody>
             </Table>
-            <Table withBorder>
-              <tbody>
-                <tr>
-                  <td>-</td>
-                  <td>
-                    <div>
-                      <ProfilePhoto src={tableData[0]?.profilePhoto} alt='Я' />
-                      <span>Я</span>
-                    </div>
-                  </td>
-                  <td>1</td>
-                  <td>100</td>
-                  <td>1</td>
-                </tr>
-              </tbody>
-            </Table>
+            {showPersonalData && (
+              <Table withBorder>
+                <tbody>
+                  <tr>
+                    <td>-</td>
+                    <td>
+                      <div>
+                        <ProfilePhoto
+                          src={tableData[0]?.profilePhoto}
+                          alt='Я'
+                        />
+                        <span>Я</span>
+                      </div>
+                    </td>
+                    <td>1</td>
+                    <td>100</td>
+                    <td>1</td>
+                  </tr>
+                </tbody>
+              </Table>
+            )}
           </TableWrapper>
+          <div style={{ margin: '0 auto' }}>
+            <Button width='332px' onClick={togglePersonalData}>
+              {showPersonalData ? 'Скрыть' : 'Показать'} мои данные в таблице
+            </Button>
+          </div>
         </>
       )}
     </LeaderContainer>
@@ -181,13 +199,13 @@ export const Leaders = () => {
 };
 
 const LeaderContainer = styled.div({
-  display: "flex",
-  flexDirection: "column",
-  margin: "0 auto",
-  width: "100%",
-  maxWidth: "1224px",
-  paddingTop: "80px",
-  gap: "24px",
+  display: 'flex',
+  flexDirection: 'column',
+  margin: '0 auto',
+  width: '100%',
+  maxWidth: '1224px',
+  paddingTop: '80px',
+  gap: '24px',
 });
 
 const SelectGame = styled.button`
@@ -252,14 +270,17 @@ const TableWrapper = styled.div<{ imageSrc: string }>`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  border-radius: 20px;
 
   padding: 30px 42px;
 `;
 
-const Table = styled.table<{withBorder?: boolean}>`
+const Table = styled.table<{ withBorder?: boolean }>`
   width: 100%;
 
-  ${({ withBorder }) => withBorder && `
+  ${({ withBorder }) =>
+    withBorder &&
+    `
     margin-top: 22px;
     border-top: 2px solid black;
   `};
@@ -289,28 +310,33 @@ const Table = styled.table<{withBorder?: boolean}>`
     padding-top: 22px;
   }
 
-  & th:first-of-type, & tr td:first-of-type {
-    width: 5%
+  & th:first-of-type,
+  & tr td:first-of-type {
+    width: 5%;
   }
 
-  & th:nth-child(2), & tr td:nth-child(2) {
-    width: 50%
+  & th:nth-child(2),
+  & tr td:nth-child(2) {
+    width: 50%;
   }
 
-  & th:nth-child(3), & tr td:nth-child(3) {
-    width: 15%
+  & th:nth-child(3),
+  & tr td:nth-child(3) {
+    width: 15%;
   }
 
-  & th:nth-child(4), & tr td:nth-child(4) {
-    width: 15%
+  & th:nth-child(4),
+  & tr td:nth-child(4) {
+    width: 15%;
   }
 
-  & th:last-of-type, & tr td:last-of-type {
-    width: 15%
+  & th:last-of-type,
+  & tr td:last-of-type {
+    width: 15%;
   }
 `;
 
 const ProfilePhoto = styled.img`
   width: 32px;
   height: 32px;
-`
+`;
