@@ -12,20 +12,9 @@ import { SubTitle } from '../../components/SubTitle/SubTitle';
 import { SendMessageForm } from './SendMessageForm/SendMessageForm';
 import { MainCarousel } from '../../components/MainCarousel/MainCarousel';
 
-import bgImageMedium from '../../assets/gameSliderItem.png';
 import { Button } from '../../components/Button/Button';
 import { useNavigate } from 'react-router-dom';
-
-const CAROUSEL_DATA = [
-  { img: bgImageMedium, navigate: '/about-game' },
-  { img: bgImageMedium, navigate: '/about-game' },
-  { img: bgImageMedium, navigate: '/about-game' },
-  { img: bgImageMedium, navigate: '/about-game' },
-  { img: bgImageMedium, navigate: '/about-game' },
-  { img: bgImageMedium, navigate: '/about-game' },
-  { img: bgImageMedium, navigate: '/about-game' },
-  { img: bgImageMedium, navigate: '/about-game' },
-];
+import { CAROUSEL_DATA } from '../../shared/slider';
 
 export const Main = () => {
   const navigate = useNavigate();

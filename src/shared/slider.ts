@@ -3,6 +3,8 @@ import EcologyGameImg from '../assets/ecology-game.png';
 
 import SmallGameImg from '../assets/slide-image-small.jpg';
 
+import bgImageMedium from '../assets/gameSliderItem.png';
+
 export const GRAMMAR_SLIDES = [
   {
     id: 'grammar1',
@@ -164,4 +166,15 @@ export const SMALL_SLIDER_DATA = [
     img: SmallGameImg,
     title: 'Юнга Мур и большая стройка котов-пиратов',
   },
+];
+
+export const CAROUSEL_DATA = [
+  { img: bgImageMedium, navigate: '/about-game' },
+  { img: bgImageMedium, navigate: '/about-game' },
+  { img: bgImageMedium, navigate: '/about-game' },
+  { img: bgImageMedium, navigate: '/about-game' },
+  { img: bgImageMedium, navigate: '/about-game' },
+  { img: bgImageMedium, navigate: '/about-game' },
+  { img: bgImageMedium, navigate: '/about-game' },
+  { img: bgImageMedium, navigate: '/about-game' },
 ];

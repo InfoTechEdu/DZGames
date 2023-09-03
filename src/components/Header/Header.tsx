@@ -51,7 +51,7 @@ export const Header = () => {
               <NavLink to='/about-us'>О нас</NavLink>
             </Li>
             <Li>
-              <NavLink to='/'>Лидеры</NavLink>
+              <NavLink to='/leaders'>Лидеры</NavLink>
             </Li>
           </Nav>
         </Wrapper>

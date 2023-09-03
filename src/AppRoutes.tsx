@@ -5,6 +5,7 @@ import { AboutGame } from "./pages/AboutGame/AboutGame";
 import { Games } from "./pages/Games/Games";
 import { EcologyGame } from "./pages/EcologyGame/EcologyGame";
 import { AuthStatus } from "./pages/Auth/AuthStatus";
+import { Leaders } from "./pages/Leaders/Leaders";
 // import { Index } from "./pages/EcologyGame/Game/Index";
 
 export const AppRoutes = () => {
@@ -12,6 +13,7 @@ export const AppRoutes = () => {
     <Routes>
       <Route index element={<Main />} />
       <Route path="/about-us" element={<AboutUs />} />
+      <Route path="/leaders" element={<Leaders />} />
       <Route path="about-game" element={<AboutGame />} />
       <Route path="/games" element={<Games />} />
       <Route path="/ecology-game" element={<EcologyGame />} />
