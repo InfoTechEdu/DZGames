@@ -27,7 +27,15 @@ a:hover {
 @font-face {
   font-family: "Museo Sans Cyrl";
   src: local("Museo Sans Cyrl"),
-    url("./assets/fonts/MuseoSansCyrl-500.otf") format("opentype") tech(color-COLRv1), url("./assets/fonts/MuseoSansCyrl-500.otf") format("opentype"), url("./assets/fonts/MuseoSansCyrl-500.woff") format("woff");
+    url("./assets/fonts/MuseoSansCyrl-500.otf") format("opentype") tech(color-COLRv1),
+    url("./assets/fonts/MuseoSansCyrl-500.otf") format("opentype"),
+    url("./assets/fonts/MuseoSansCyrl-500.woff") format("woff"),
+
+    url("./assets/fonts/MuseoSansCyrl-300.woff") format("woff"),
+    url("./assets/fonts/MuseoSansCyrl-300.ttf"),
+
+    url("./assets/fonts/MuseoSansCyrl-700.woff") format("woff"),
+    url("./assets/fonts/MuseoSansCyrl-700.ttf"),
 }
 
 * {
@@ -63,7 +71,9 @@ button {
   outline: none;
 }
 
-button, input, textarea {
+button,
+input,
+textarea {
   font-family: 'Museo Sans Cyrl';
 }
 
@@ -228,11 +238,13 @@ button:focus-visible {
   margin: 0;
 }
 
-.slick-next:before, .slick-prev:before {
+.slick-next:before,
+.slick-prev:before {
   display: none;
 }
 
-.slick-next, .slick-prev {
+.slick-next,
+.slick-prev {
   z-index: 10;
 }
 
