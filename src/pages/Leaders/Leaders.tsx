@@ -1,15 +1,17 @@
 import styled from 'styled-components';
 import { MainTitle } from '../../components/MainTitle/MainTitle';
 import { MainCarousel } from '../../components/MainCarousel/MainCarousel';
-import { CAROUSEL_DATA } from '../../shared/slider';
+
 import { ReactComponent as SelectImg } from '../../assets/select.svg';
 import { ReactComponent as PopupImg } from '../../assets/table_popup_btn.svg';
 import { ReactComponent as CloseImg } from '../../assets/close.svg';
-import { useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { SubTitle } from '../../components/SubTitle/SubTitle';
 import { Button } from '../../components/Button/Button';
 import { Overlay } from '../../components/Overlay/Overlay';
 import { CurlyArrow } from '../../components/CurlyArrow/CurlyArrow';
+
+import bgImageMedium from '../../assets/gameSliderItem.png';
 
 import A from "../../assets/A.svg";
 
@@ -44,6 +46,15 @@ const gamesList: GameItem[] = [
 const API_URL =
   'https://us-central1-dzgames-12ad8.cloudfunctions.net/DownloadTop10Leaderboard';
 
+
+export const CAROUSEL_DATA = [
+  { img: bgImageMedium, id: '1'},
+  { img: bgImageMedium, id: '2'},
+  { img: bgImageMedium, id: 'battleofminds'},
+  { img: bgImageMedium, id: '4' },
+  { img: bgImageMedium, id: 'attentiontrainer' },
+];
+
 interface TableItem {
   id: string;
   name: string;
@@ -61,6 +72,7 @@ interface TableItem {
 export const Leaders = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [selectedGame, setSelectedGame] = useState<GameItem | null>(null);
+  const [selectedGameId, setSelectedGameId] = useState('');
 
   const [tableData, setTableData] = useState<TableItem[] | null>(null);
 
@@ -73,28 +85,34 @@ export const Leaders = () => {
     setShowDropdown((s) => !s);
   };
 
+  const getTableData = useCallback((id: string) => {
+    fetch(`${API_URL}?game=${id}`)
+    .then((data) => data.json())
+    .then((json: any) => {
+      if (!json) {
+        setTableData(null);
+
+        return
+      }
+
+      const finalData = Object.entries(json).map(([id, item]) => {
+        return {
+          id,
+          ...item as any,
+        };
+      });
+
+      setTableData(finalData);
+    })
+  }, [])
+
   const handleGameSelect = (game: GameItem) => {
+    if (game.id === selectedGame?.id) return
+
     setSelectedGame(game);
     setShowDropdown(false);
 
-    fetch(`${API_URL}?game=${game.id}`)
-      .then((data) => data.json())
-      .then((json: any) => {
-        if (!json) {
-          setTableData(null);
-
-          return
-        }
-
-        const finalData = Object.entries(json).map(([id, item]) => {
-          return {
-            id,
-            ...item as any,
-          };
-        });
-
-        setTableData(finalData);
-      })
+    getTableData(game.id)
   };
 
   const togglePersonalData = () => {
@@ -120,21 +138,12 @@ export const Leaders = () => {
     }
   }
 
-  // useEffect(() => {
-  //   fetch(API_URL)
-  //     .then((data) => data.json())
-  //     .then((json: any) => {
-  //       console.log(json)
-  //       const finalData = Object.entries(json).map(([id, item]) => {
-  //         return {
-  //           id,
-  //           ...item as any,
-  //         };
-  //       });
+  const onItemClick = (id: string) => {
+    if (selectedGameId === id) return
 
-  //       setTableData(finalData);
-  //     });
-  // }, []);
+    setSelectedGameId(id)
+    getTableData(id)
+  }
 
   return (
     <LeaderContainer>
@@ -165,9 +174,7 @@ export const Leaders = () => {
           )}
         </div>
       </div>
-      <div>
-        <MainCarousel data={CAROUSEL_DATA} />
-      </div>
+      <MainCarousel onItemClick={onItemClick} data={CAROUSEL_DATA} />
       {tableData ? (
         <>
           <SubTitle withMarginTop={false} text='Таблица лидеров' />

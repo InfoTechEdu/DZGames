@@ -29,15 +29,17 @@ const settings = {
 };
 
 interface IProps {
+  onItemClick?: (id: string) => void
   data: {
     img: string;
     title?: string;
     description?: string;
     navigate?: string;
+    id?: string,
   }[];
 }
 
-export const MainCarousel = ({ data }: IProps) => {
+export const MainCarousel = ({ onItemClick, data }: IProps) => {
   const navigate = useNavigate();
 
   return (
@@ -45,7 +47,15 @@ export const MainCarousel = ({ data }: IProps) => {
       {data.map((item, i) => {
         return (
           <SliderItem
-            onClick={() => item.navigate && navigate(item.navigate)}
+            onClick={() => {
+              if (onItemClick && item?.id) {
+                onItemClick(item.id)
+
+                return
+              }
+
+              item.navigate && navigate(item.navigate)
+            }}
             key={i}
           >
             <Img src={item.img} />
