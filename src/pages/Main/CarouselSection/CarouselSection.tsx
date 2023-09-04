@@ -284,6 +284,7 @@ const CustomIndicator = styled.button<{
   overflow: hidden;
 
   z-index: 200;
+  background-color: white;
 
   & div {
     background-color: #ff7001;
