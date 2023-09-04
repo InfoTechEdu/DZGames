@@ -14,31 +14,35 @@ import { CurlyArrow } from '../../components/CurlyArrow/CurlyArrow';
 import A from "../../assets/A.svg";
 
 interface GameItem {
-  id: number;
+  id: string;
   title: string;
 }
 
 const gamesList: GameItem[] = [
   {
-    id: 1,
+    id: '1',
     title: 'Юнга Мур и большая стройка котов-пиратов',
   },
   {
-    id: 2,
+    id: '2',
     title: 'Экология',
   },
   {
-    id: 3,
+    id: 'battleofminds',
     title: 'Борьба Умов',
   },
   {
-    id: 4,
+    id: '4',
     title: 'Время Истории',
+  },
+  {
+    id: 'attentiontrainer',
+    title: 'Тренажер внимания',
   },
 ];
 
 const API_URL =
-  'https://us-central1-dzgames-12ad8.cloudfunctions.net/DownloadTop10Leaderboard?game=battleofminds';
+  'https://us-central1-dzgames-12ad8.cloudfunctions.net/DownloadTop10Leaderboard';
 
 interface TableItem {
   id: string;
@@ -72,6 +76,25 @@ export const Leaders = () => {
   const handleGameSelect = (game: GameItem) => {
     setSelectedGame(game);
     setShowDropdown(false);
+
+    fetch(`${API_URL}?game=${game.id}`)
+      .then((data) => data.json())
+      .then((json: any) => {
+        if (!json) {
+          setTableData(null);
+
+          return
+        }
+
+        const finalData = Object.entries(json).map(([id, item]) => {
+          return {
+            id,
+            ...item as any,
+          };
+        });
+
+        setTableData(finalData);
+      })
   };
 
   const togglePersonalData = () => {
@@ -95,24 +118,23 @@ export const Leaders = () => {
     if (showPopup) {
       handleHidePopup()
     }
-
-    console.log(123)
   }
 
-  useEffect(() => {
-    fetch(API_URL)
-      .then((data) => data.json())
-      .then((json) => {
-        const finalData = Object.entries(json).map(([id, item]) => {
-          return {
-            id,
-            ...item,
-          };
-        });
+  // useEffect(() => {
+  //   fetch(API_URL)
+  //     .then((data) => data.json())
+  //     .then((json: any) => {
+  //       console.log(json)
+  //       const finalData = Object.entries(json).map(([id, item]) => {
+  //         return {
+  //           id,
+  //           ...item as any,
+  //         };
+  //       });
 
-        setTableData(finalData);
-      });
-  }, []);
+  //       setTableData(finalData);
+  //     });
+  // }, []);
 
   return (
     <LeaderContainer>
@@ -146,7 +168,7 @@ export const Leaders = () => {
       <div>
         <MainCarousel data={CAROUSEL_DATA} />
       </div>
-      {tableData && (
+      {tableData ? (
         <>
           <SubTitle withMarginTop={false} text='Таблица лидеров' />
           <TableWrapper
@@ -263,7 +285,7 @@ export const Leaders = () => {
             </Button>
           </div>
         </>
-      )}
+      ) : <SubTitle text='Нет данных' />}
       {
         (showDropdown || showPopup) && (
           <Overlay withBackground={false} onClick={onHide} />
@@ -313,7 +335,6 @@ const Options = styled.div`
   background-color: white;
 
   width: 392px;
-  height: 172px;
   border-radius: 8px;
   border: 1px solid #bda5ff;
   margin-top: 7px;
