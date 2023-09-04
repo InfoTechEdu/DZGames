@@ -11,6 +11,8 @@ import { Button } from '../../components/Button/Button';
 import { Overlay } from '../../components/Overlay/Overlay';
 import { CurlyArrow } from '../../components/CurlyArrow/CurlyArrow';
 
+import A from "../../assets/A.svg";
+
 interface GameItem {
   id: number;
   title: string;
@@ -152,6 +154,7 @@ export const Leaders = () => {
               new URL('../../assets/table-bg.png', import.meta.url).href
             }
           >
+            <ImgA className="asideButton" src={A} />
             <Table>
               <thead>
                 <tr>
@@ -520,3 +523,15 @@ const Popup = styled.div`
     }
   }
 `;
+
+const ImgA = styled.img({
+  position: 'absolute',
+  right: '-46px',
+  top: '-51px',
+  transform: 'rotate(45deg)',
+
+  '@media(max-width: 1340px)': {
+    right: '-10px',
+    top: '-23px',
+  },
+});

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 import A from "../../assets/A.svg";
-import { Form } from "../../components/Form/Form";
 import { SubTitle } from "../../components/SubTitle/SubTitle";
 import { GrayBlock } from "../../components/GrayBlock/GrayBlock";
 import { Description } from "../../components/Description/Description";

@@ -118,16 +118,6 @@ const ImgL = styled.img({
   },
 });
 
-const ImgR = styled.img({
-  position: 'absolute',
-  left: '-174px',
-  bottom: '-218px',
-
-  '@media(max-width: 1580px)': {
-    display: 'none',
-  },
-});
-
 const Container = styled.div({
   width: '100%',
   maxWidth: '1224px',
