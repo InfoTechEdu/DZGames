@@ -8,6 +8,7 @@ import { ReactComponent as CloseImg } from '../../assets/close.svg';
 import { useEffect, useState } from 'react';
 import { SubTitle } from '../../components/SubTitle/SubTitle';
 import { Button } from '../../components/Button/Button';
+import { Overlay } from '../../components/Overlay/Overlay';
 
 interface GameItem {
   id: number;
@@ -83,6 +84,18 @@ export const Leaders = () => {
     setShowPopup(false);
   };
 
+  const onHide = () => {
+    if (showDropdown) {
+      setShowDropdown(false)
+    }
+
+    if (showPopup) {
+      handleHidePopup()
+    }
+
+    console.log(123)
+  }
+
   useEffect(() => {
     fetch(API_URL)
       .then((data) => data.json())
@@ -102,7 +115,7 @@ export const Leaders = () => {
     <LeaderContainer>
       <div>
         <MainTitle text='Выбери игру' />
-        <div>
+        <div style={{ position: 'relative' }}>
           <SelectGame onClick={toggleDropDown}>
             <span>{selectedGame?.title ?? 'Или найди по названию'}</span>
             <SelectImg
@@ -152,7 +165,6 @@ export const Leaders = () => {
                     const {
                       id,
                       name,
-                      position,
                       profilePhoto,
                       progressData: { points },
                       statistics: { gamesPlayed },
@@ -247,6 +259,11 @@ export const Leaders = () => {
           </div>
         </>
       )}
+      {
+        (showDropdown || showPopup) && (
+          <Overlay withBackground={false} onClick={onHide} />
+        )
+      }
     </LeaderContainer>
   );
 };
@@ -279,11 +296,15 @@ const SelectGame = styled.button`
   & span {
     text-align: left;
   }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const Options = styled.div`
   position: absolute;
-  z-index: 10;
+  z-index: 100;
   background-color: white;
 
   width: 392px;
@@ -292,6 +313,10 @@ const Options = styled.div`
   border: 1px solid #bda5ff;
   margin-top: 7px;
   overflow: hidden;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const Option = styled.button<{ isSelected: boolean }>`
@@ -448,7 +473,7 @@ const Popup = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 20;
+  z-index: 100;
 
   color: #fff;
   

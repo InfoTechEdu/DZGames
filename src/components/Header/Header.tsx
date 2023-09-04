@@ -85,7 +85,7 @@ const HeaderStyle = styled.header({
   marginBottom: '40px',
 
   position: 'absolute',
-  zIndex: '200',
+  zIndex: 20,
   marginLeft: '-20px',
   paddingLeft: '20px',
   paddingRight: '20px',
