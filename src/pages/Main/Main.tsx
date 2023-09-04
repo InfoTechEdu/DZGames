@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 import GroupLessons from '../../assets/groupLessons.svg';
 import LeftArrow from '../../assets/left_arrow.svg';
-import RightArrow from '../../assets/right_arrow.svg';
 import { CarouselSection } from './CarouselSection/CarouselSection';
 import { MainTitle } from '../../components/MainTitle/MainTitle';
 
@@ -15,6 +14,7 @@ import { MainCarousel } from '../../components/MainCarousel/MainCarousel';
 import { Button } from '../../components/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { CAROUSEL_DATA } from '../../shared/slider';
+import { CurlyArrow } from '../../components/CurlyArrow/CurlyArrow';
 
 export const Main = () => {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ export const Main = () => {
         <div style={{ marginTop: 60 }} className='relative'>
           <MainTitle text='Наши игры' />
           <CarouselSection />
-          <ImgR src={RightArrow} />
+          <CurlyArrow />
           <ImgS className='asideButton' src={S} />
         </div>
 
@@ -107,22 +107,6 @@ const ImgA = styled.img({
     left: '-20px',
   },
 });
-
-const ImgDoctor = styled.img`
-  position: absolute;
-  right: 20px;
-  bottom: 0;
-  display: none;
-
-  @media only screen and (max-width: 991px) {
-    display: block;
-  }
-
-  @media only screen and (max-width: 768px) {
-    width: 200px;
-    right: auto;
-  }
-`;
 
 const ImgL = styled.img({
   position: 'absolute',

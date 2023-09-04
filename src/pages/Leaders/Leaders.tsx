@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { SubTitle } from '../../components/SubTitle/SubTitle';
 import { Button } from '../../components/Button/Button';
 import { Overlay } from '../../components/Overlay/Overlay';
+import { CurlyArrow } from '../../components/CurlyArrow/CurlyArrow';
 
 interface GameItem {
   id: number;
@@ -113,8 +114,9 @@ export const Leaders = () => {
 
   return (
     <LeaderContainer>
-      <div>
+      <div style={{ position: 'relative' }}>
         <MainTitle text='Выбери игру' />
+        <CurlyArrow style={{ top: 92, left: -175 }} />
         <div style={{ position: 'relative' }}>
           <SelectGame onClick={toggleDropDown}>
             <span>{selectedGame?.title ?? 'Или найди по названию'}</span>
@@ -144,7 +146,7 @@ export const Leaders = () => {
       </div>
       {tableData && (
         <>
-          <SubTitle text='Таблица лидеров' />
+          <SubTitle withMarginTop={false} text='Таблица лидеров' />
           <TableWrapper
             imageSrc={
               new URL('../../assets/table-bg.png', import.meta.url).href
