@@ -14,6 +14,7 @@ import { CurlyArrow } from '../../components/CurlyArrow/CurlyArrow';
 import bgImageMedium from '../../assets/gameSliderItem.png';
 
 import A from "../../assets/A.svg";
+import { ConfirmationModal } from '../../components/ConfirmationModal/ConfirmationModal';
 
 interface GameItem {
   id: string;
@@ -76,7 +77,7 @@ export const Leaders = () => {
 
   const [tableData, setTableData] = useState<TableItem[] | null>(null);
 
-  const [showPersonalData, setShowPersonalData] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   const [showPopup, setShowPopup] = useState(false);
   const [selectedTableItem, setSelectedTableItem] = useState<TableItem | null>(null);
@@ -115,9 +116,17 @@ export const Leaders = () => {
     getTableData(game.id)
   };
 
-  const togglePersonalData = () => {
-    setShowPersonalData((s) => !s);
+  const onShowModal = () => {
+    setShowModal(true);
   };
+
+  const onModalClose = () => {
+    setShowModal(false);
+  }
+
+  const onConfirmUserHiding = () => {
+
+  }
 
   const handleShowPopup = (tableItem: TableItem) => {
     setShowPopup(true);
@@ -225,41 +234,39 @@ export const Leaders = () => {
                 )}
               </tbody>
             </Table>
-            {showPersonalData && (
-              <Table withBorder>
-                <tbody>
-                  <tr>
-                    <td>-</td>
-                    <td>
-                      <div>
-                        <ProfilePhoto
-                          src={tableData[0]?.profilePhoto}
-                          alt='Я'
-                        />
-                        <span>Я</span>
-                        <button
-                          onClick={() => {
-                            handleShowPopup({
-                              id: 'me',
-                              name: 'Я',
-                              position: '1',
-                              profilePhoto: '',
-                              progressData: { points: 100 },
-                              statistics: { gamesPlayed: 1 },
-                            })
-                          }}
-                        >
-                          <PopupImg />
-                        </button>
-                      </div>
-                    </td>
-                    <td>1</td>
-                    <td>100</td>
-                    <td>1</td>
-                  </tr>
-                </tbody>
-              </Table>
-            )}
+            <Table withBorder>
+              <tbody>
+                <tr>
+                  <td>-</td>
+                  <td>
+                    <div>
+                      <ProfilePhoto
+                        src={tableData[0]?.profilePhoto}
+                        alt='Я'
+                      />
+                      <span>Я</span>
+                      <button
+                        onClick={() => {
+                          handleShowPopup({
+                            id: 'me',
+                            name: 'Я',
+                            position: '1',
+                            profilePhoto: '',
+                            progressData: { points: 100 },
+                            statistics: { gamesPlayed: 1 },
+                          })
+                        }}
+                      >
+                        <PopupImg />
+                      </button>
+                    </div>
+                  </td>
+                  <td>1</td>
+                  <td>100</td>
+                  <td>1</td>
+                </tr>
+              </tbody>
+            </Table>
             {(showPopup && selectedTableItem) && (
               <Popup>
                 <button onClick={handleHidePopup}>
@@ -287,8 +294,8 @@ export const Leaders = () => {
             )}
           </TableWrapper>
           <div style={{ margin: '0 auto' }}>
-            <Button width='332px' onClick={togglePersonalData}>
-              {showPersonalData ? 'Скрыть' : 'Показать'} мои данные в таблице
+            <Button width='332px' onClick={onShowModal}>
+              Скрыть мои данные в таблице
             </Button>
           </div>
         </>
@@ -298,6 +305,13 @@ export const Leaders = () => {
           <Overlay withBackground={false} onClick={onHide} />
         )
       }
+      {showModal && (
+        <ConfirmationModal
+          onCancel={onModalClose}
+          onConfirm={onConfirmUserHiding}
+          title='Действительно хотите скрыть данные?'
+        />
+      )}
     </LeaderContainer>
   );
 };
