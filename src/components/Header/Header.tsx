@@ -151,6 +151,10 @@ const Li = styled.li`
   color: #0b0d22;
   list-style-type: none;
 
+  & a {
+    font-weight: 500;
+  }
+
   & a.active {
     border-bottom: 2px solid #ffa000;
   }
