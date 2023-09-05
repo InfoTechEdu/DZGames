@@ -44,9 +44,9 @@ const gamesList: GameItem[] = [
   },
 ];
 
-const API_URL =
-  'https://us-central1-dzgames-12ad8.cloudfunctions.net/DownloadTop10Leaderboard';
+const API_URL = 'https://us-central1-dzgames-12ad8.cloudfunctions.net';
 
+const userId = localStorage.getItem('userId');
 
 export const CAROUSEL_DATA = [
   { img: bgImageMedium, id: '1'},
@@ -82,12 +82,14 @@ export const Leaders = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedTableItem, setSelectedTableItem] = useState<TableItem | null>(null);
 
+  const [isUserHidden, setIsUserHidden] = useState(Boolean(userId))
+
   const toggleDropDown = () => {
     setShowDropdown((s) => !s);
   };
 
   const getTableData = useCallback((id: string) => {
-    fetch(`${API_URL}?game=${id}`)
+    fetch(`${API_URL}/DownloadTop10Leaderboard?game=${id}`)
     .then((data) => data.json())
     .then((json: any) => {
       if (!json) {
@@ -105,6 +107,7 @@ export const Leaders = () => {
 
       setTableData(finalData);
     })
+    .catch(console.error)
   }, [])
 
   const handleGameSelect = (game: GameItem) => {
@@ -125,7 +128,17 @@ export const Leaders = () => {
   }
 
   const onConfirmUserHiding = () => {
-
+    fetch(`${API_URL}/UpdateUserLeaderboardDisplayStatus?userId=${userId}&enabled=false`)
+    .then((res) => {
+      if (res.ok) {
+        localStorage.setItem('userId', '7c35493ffd7316a4322fe6061a01cc4c8ebbb8b0')
+        setIsUserHidden(true)
+      }
+    })
+    .catch(console.error)
+    .finally(() => {
+      onModalClose()
+    })
   }
 
   const handleShowPopup = (tableItem: TableItem) => {
@@ -219,7 +232,7 @@ export const Leaders = () => {
                         <td>
                           <div>
                             <ProfilePhoto src={profilePhoto} alt={name} />
-                            <span>{name}</span>
+                            <span>{userId === id && isUserHidden ? 'Скрыт' : name}</span>
                             <button onClick={() => handleShowPopup(item)}>
                               <PopupImg />
                             </button>
