@@ -14,6 +14,7 @@ export interface LeadersItem {
         gamesPlayed: number;
         winCount?: number;
     };
+    displayInLeaderboard?: boolean
 }
 
 export interface GameItem {
@@ -42,6 +43,10 @@ export const gamesList: GameItem[] = [
         id: "attentiontrainer",
         title: "Тренажер внимания",
     },
+    {
+        id: "arithmetic",
+        title: "Арифметика",
+    },
 ];
 
 export const LEADERS_CAROUSEL_DATA = [
@@ -50,11 +55,12 @@ export const LEADERS_CAROUSEL_DATA = [
     { img: bgImageMedium, id: "battleofminds" },
     { img: bgImageMedium, id: "4" },
     { img: bgImageMedium, id: "attentiontrainer" },
+    { img: bgImageMedium, id: "arithmetic" },
 ];
 
-export const fetchLeadersDataById = async (id: string) => {
+export const fetchLeadersDataById = async (gameId: string, userId: string) => {
     try {
-        const res = await fetch(`${API_URL}/DownloadTop10Leaderboard?game=${id}`);
+        const res = await fetch(`${API_URL}/DownloadTop10Leaderboard?game=${gameId}&userId=${userId}`);
         return await res.json()
     } catch (error) {
         console.error(error)

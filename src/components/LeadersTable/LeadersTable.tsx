@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { ReactComponent as PopupImg } from "../../assets/table_popup_btn.svg";
 import { DEFAULT_PROFILE_PHOTO, LeadersItem } from "../../shared/leaders";
 
-const userId = localStorage.getItem("userId")
+const userId = localStorage.getItem("userId");
 
 interface Props {
   leadersList: LeadersItem[];
@@ -34,9 +34,13 @@ export const LeadersTable = ({
               id,
               name,
               progressData: { totalPoints },
+              displayInLeaderboard = true,
             } = item;
 
-            const gamesPlayed = item.statistics?.gamesPlayed
+            const gamesPlayed = item.statistics?.gamesPlayed;
+
+            const shouldHideUser =
+              displayInLeaderboard === false || (userId === id && isUserHidden);
 
             return (
               <tr key={id}>
@@ -44,11 +48,11 @@ export const LeadersTable = ({
                 <td>
                   <div>
                     <ProfilePhoto src={DEFAULT_PROFILE_PHOTO} alt={name} />
-                    {
-                      userId === id && isUserHidden ? (
-                        <HiddenUserName>Пользователь скрыт</HiddenUserName>
-                      ) : <span>{name}</span>
-                    }
+                    {shouldHideUser ? (
+                      <HiddenUserName>Пользователь скрыт</HiddenUserName>
+                    ) : (
+                      <span>{name}</span>
+                    )}
                     <button onClick={() => handleShowPopup(item)}>
                       <PopupImg />
                     </button>
@@ -204,5 +208,5 @@ const ProfilePhoto = styled.img`
 `;
 
 const HiddenUserName = styled.span`
-  color: gray
-`
+  color: gray;
+`;

@@ -51,10 +51,10 @@ export const Leaders = () => {
     setShowDropdown((s) => !s);
   };
 
-  const getLeadersData = useCallback(async (id: string) => {
+  const getLeadersData = useCallback(async (gameId: string) => {
     setIsLoading(true);
 
-    const data = await fetchLeadersDataById(id);
+    const data = await fetchLeadersDataById(gameId, userId);
 
     if (!data) {
       setLeadersList(null);
