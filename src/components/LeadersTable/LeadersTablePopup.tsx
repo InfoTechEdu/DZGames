@@ -30,11 +30,11 @@ export const LeadersTablePopup = ({
       </div>
       <div>
         <span>Очки:</span>
-        <span>{selectedLeadersItem.progressData.points}</span>
+        <span>{selectedLeadersItem.progressData?.totalPoints}</span>
       </div>
       <div>
         <span>Игры:</span>
-        <span>{selectedLeadersItem.statistics.gamesPlayed}</span>
+        <span>{selectedLeadersItem?.statistics?.gamesPlayed}</span>
       </div>
     </Popup>
   );

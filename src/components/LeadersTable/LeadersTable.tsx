@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 import { ReactComponent as PopupImg } from "../../assets/table_popup_btn.svg";
-import { LeadersItem } from "../../shared/leaders";
+import { DEFAULT_PROFILE_PHOTO, LeadersItem } from "../../shared/leaders";
 
-const userId = localStorage.getItem("userId");
+const userId = localStorage.getItem("userId")
 
 interface Props {
   leadersList: LeadersItem[];
@@ -33,27 +33,29 @@ export const LeadersTable = ({
             const {
               id,
               name,
-              profilePhoto,
-              progressData: { points },
-              statistics: { gamesPlayed },
+              progressData: { totalPoints },
             } = item;
+
+            const gamesPlayed = item.statistics?.gamesPlayed
 
             return (
               <tr key={id}>
                 <td>{index + 1}</td>
                 <td>
                   <div>
-                    <ProfilePhoto src={profilePhoto} alt={name} />
-                    <span>
-                      {userId === id && isUserHidden ? "Скрыт" : name}
-                    </span>
+                    <ProfilePhoto src={DEFAULT_PROFILE_PHOTO} alt={name} />
+                    {
+                      userId === id && isUserHidden ? (
+                        <HiddenUserName>Пользователь скрыт</HiddenUserName>
+                      ) : <span>{name}</span>
+                    }
                     <button onClick={() => handleShowPopup(item)}>
                       <PopupImg />
                     </button>
                   </div>
                 </td>
                 <td>нет</td>
-                <td>{points}</td>
+                <td>{totalPoints}</td>
                 <td>{gamesPlayed}</td>
               </tr>
             );
@@ -66,7 +68,7 @@ export const LeadersTable = ({
             <td>-</td>
             <td>
               <div>
-                <ProfilePhoto src={leadersList[0]?.profilePhoto} alt="Я" />
+                <ProfilePhoto src={DEFAULT_PROFILE_PHOTO} alt="Я" />
                 <span>Я</span>
                 <button
                   onClick={() => {
@@ -75,7 +77,7 @@ export const LeadersTable = ({
                       name: "Я",
                       position: "1",
                       profilePhoto: "",
-                      progressData: { points: 100 },
+                      progressData: { totalPoints: 100 },
                       statistics: { gamesPlayed: 1 },
                     });
                   }}
@@ -200,3 +202,7 @@ const ProfilePhoto = styled.img`
     display: none;
   }
 `;
+
+const HiddenUserName = styled.span`
+  color: gray
+`

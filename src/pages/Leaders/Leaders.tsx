@@ -10,20 +10,25 @@ import { CurlyArrow } from "../../components/CurlyArrow/CurlyArrow";
 
 import { ConfirmationModal } from "../../components/ConfirmationModal/ConfirmationModal";
 import {
+  DEFAULT_USER_ID,
   GameItem,
   LEADERS_CAROUSEL_DATA,
   LeadersItem,
+  fetchLeadersDataById,
+  hideUserInLeadersTable,
 } from "../../shared/leaders";
 import { LeadersTable } from "../../components/LeadersTable/LeadersTable";
 
 import A from "../../assets/A.svg";
 import { LeadersTablePopup } from "../../components/LeadersTable/LeadersTablePopup";
 import { DropDown } from "../../components/DropDown/DropDown";
-import { API_URL } from "../../shared/general";
 
-const userId = localStorage.getItem("userId");
+const userId = localStorage.getItem("userId") || DEFAULT_USER_ID;
 
-const TABLE_BACKGROUND_IMG = new URL("../../assets/table-bg.png", import.meta.url).href
+const TABLE_BACKGROUND_IMG = new URL(
+  "../../assets/table-bg.png",
+  import.meta.url
+).href;
 
 export const Leaders = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -46,29 +51,27 @@ export const Leaders = () => {
     setShowDropdown((s) => !s);
   };
 
-  const getLeadersData = useCallback((id: string) => {
+  const getLeadersData = useCallback(async (id: string) => {
     setIsLoading(true);
 
-    fetch(`${API_URL}/DownloadTop10Leaderboard?game=${id}`)
-      .then((data) => data.json())
-      .then((json: any) => {
-        if (!json) {
-          setLeadersList(null);
+    const data = await fetchLeadersDataById(id);
 
-          return;
-        }
+    if (!data) {
+      setLeadersList(null);
+      setIsLoading(false);
 
-        const finalData = Object.entries(json).map(([id, item]) => {
-          return {
-            id,
-            ...(item as any),
-          };
-        });
+      return;
+    }
 
-        setLeadersList(finalData);
-      })
-      .catch(console.error)
-      .finally(() => setIsLoading(false));
+    const mappedDataToIds = Object.entries(data).map(([id, item]) => {
+      return {
+        id,
+        ...(item as any),
+      };
+    });
+
+    setLeadersList(mappedDataToIds);
+    setIsLoading(false);
   }, []);
 
   const handleGameSelect = (game: GameItem) => {
@@ -88,24 +91,17 @@ export const Leaders = () => {
     setShowConfirmationModal(false);
   };
 
-  const onConfirmUserHiding = () => {
-    fetch(
-      `${API_URL}/UpdateUserLeaderboardDisplayStatus?userId=${userId}&enabled=false`
-    )
-      .then((res) => {
-        if (res.ok) {
-          localStorage.setItem(
-            "userId",
-            "7c35493ffd7316a4322fe6061a01cc4c8ebbb8b0"
-          );
-          setIsUserHidden(true);
-        }
-      })
-      .catch(console.error)
-      .finally(() => {
-        onModalClose();
-      });
-  };
+  const onConfirmUserHiding = useCallback(async () => {
+    if (!userId) return;
+
+    const res = await hideUserInLeadersTable(userId);
+    if (res?.ok) {
+      localStorage.setItem("userId", userId);
+      setIsUserHidden(true);
+    }
+
+    onModalClose();
+  }, []);
 
   const handleShowPopup = (leadersItem: LeadersItem) => {
     setShowPopup(true);
@@ -152,9 +148,11 @@ export const Leaders = () => {
         data={LEADERS_CAROUSEL_DATA}
       />
 
-      <SubTitle withMarginTop={false} text="Таблица лидеров" />
-      {isLoading ? <SubTitle text="Идет загрузка данных..." /> : leadersList ? (
+      {isLoading ? (
+        <SubTitle text="Идет загрузка данных..." />
+      ) : leadersList ? (
         <>
+          <SubTitle withMarginTop={false} text="Таблица лидеров" />
           <TableWrapper imageSrc={TABLE_BACKGROUND_IMG}>
             <ImgA className="asideButton" src={A} />
             <LeadersTable
@@ -171,7 +169,11 @@ export const Leaders = () => {
             )}
           </TableWrapper>
 
-          <Button style={{ margin: "0 auto" }} width="332px" onClick={onShowModal}>
+          <Button
+            style={{ margin: "0 auto" }}
+            width="332px"
+            onClick={onShowModal}
+          >
             Скрыть мои данные в таблице
           </Button>
         </>

@@ -1,4 +1,5 @@
 import bgImageMedium from "../assets/gameSliderItem.png";
+import { API_URL } from "./general";
 
 export interface LeadersItem {
     id: string;
@@ -6,9 +7,10 @@ export interface LeadersItem {
     position: string;
     profilePhoto: string;
     progressData: {
-        points: number;
+        points?: number;
+        totalPoints?: number;
     };
-    statistics: {
+    statistics?: {
         gamesPlayed: number;
         winCount?: number;
     };
@@ -18,7 +20,6 @@ export interface GameItem {
     id: string;
     title: string;
 }
-
 
 export const gamesList: GameItem[] = [
     {
@@ -50,3 +51,27 @@ export const LEADERS_CAROUSEL_DATA = [
     { img: bgImageMedium, id: "4" },
     { img: bgImageMedium, id: "attentiontrainer" },
 ];
+
+export const fetchLeadersDataById = async (id: string) => {
+    try {
+        const res = await fetch(`${API_URL}/DownloadTop10Leaderboard?game=${id}`);
+        return await res.json()
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export const hideUserInLeadersTable = async (userId: string) => {
+    try {
+        const res = fetch(
+            `${API_URL}/UpdateUserLeaderboardDisplayStatus?userId=${userId}&enabled=false`
+        )
+        return res
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export const DEFAULT_PROFILE_PHOTO = 'https://storage.googleapis.com/dzgamesdebug/battleofminds/badge_3.png'
+
+export const DEFAULT_USER_ID = "7c35493ffd7316a4322fe6061a01cc4c8ebbb8b0";
