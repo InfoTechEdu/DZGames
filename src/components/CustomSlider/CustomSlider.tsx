@@ -18,11 +18,11 @@ const SliderArrowButton = ({
   children,
   ...props
 }: PropsWithChildren<Partial<ArrowProps>>) =>
-  onClick && (
+  onClick ? (
     <div onClick={onClick} {...props}>
       {children}
     </div>
-  );
+  ): null;
 
   const nextArrow = (
     <SliderArrowButton>
