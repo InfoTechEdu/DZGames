@@ -12,7 +12,7 @@ export const GRAMMAR_SLIDES = [
     title: 'Ф_граммотность_1',
     description:
       'Используй свои знания и навыки и помоги котам построить городок для туристов',
-    navigate: '/about-game',
+    navigate: '/attentiontrainer',
   },
   {
     id: 'grammar2',
@@ -36,7 +36,7 @@ export const GRAMMAR_SLIDES = [
     title: 'Ф_граммотность_4',
     description:
       'Используй свои знания и навыки и помоги котам построить городок для туристов',
-    navigate: '/about-game',
+    navigate: '/ecology-game',
   },
   {
     id: 'grammar5',
@@ -50,12 +50,12 @@ export const GRAMMAR_SLIDES = [
 
 export const SIMULATOR_SLIDES = [
   {
-    id: 'simulator1',
+    id: 'attentiontrainer',
     img: GameImg,
-    title: 'Тренажер_1',
+    title: 'Тренажер внимания',
     description:
-      'Используй свои знания и навыки и помоги котам построить городок для туристов',
-    navigate: '/about-game',
+      'Главное сосредоточиться',
+    navigate: '/ecology-game',
   },
   {
     id: 'simulator2',
@@ -63,7 +63,7 @@ export const SIMULATOR_SLIDES = [
     title: 'Тренажер_2',
     description:
       'Соблюдение баланса между экологией и производством всегда было непростой задачей',
-    navigate: '/ecology-game',
+    navigate: '/attention_trainer',
   },
   {
     id: 'simulator3',
