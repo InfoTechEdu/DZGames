@@ -24,14 +24,14 @@ const buttons = [
   },
   {
     id: 3,
-    text: 'Тренажеры',
-    icon: <Simulator className='size' />,
-  },
-  {
-    id: 4,
     text: 'Викторины',
     icon: <Quiz className='size' />,
   },
+  {
+    id: 4,
+    text: 'Тренажеры',
+    icon: <Simulator className='size' />,
+  }
 ];
 
 type Props = {
