@@ -6,16 +6,32 @@ interface UnityGameRedirectProps {
 }
 
 const UnityGameRedirect: React.FC<UnityGameRedirectProps> = ({ redirectPath }) => {
-  const navigate = useNavigate();
+    useEffect(() => {
+      // Открываем новую вкладку с указанным URL
+      const newTab = window.open(redirectPath, '_blank');
+      
+      // Если новую вкладку не удалось открыть, можно перенаправить текущую
+      if (!newTab) {
+        window.location.href = redirectPath;
+      }
+    }, [redirectPath]);
+  
+    // Этот компонент не рендерит ничего, так как выполняет открытие новой вкладки
+    return null;
+  };
 
-  useEffect(() => {
+  //Redirect без открытия новой вкладки (not working: происходит редирект, но игра не запускается)
+// const UnityGameRedirect: React.FC<UnityGameRedirectProps> = ({ redirectPath }) => {
+//   const navigate = useNavigate();
 
-    // Выполняем перенаправление на указанный путь
-    navigate(redirectPath);
-  }, [navigate, redirectPath]);
+//   useEffect(() => {
 
-  // Этот компонент не рендерит ничего, так как выполняет перенаправление
-  return null;
-};
+//     // Выполняем перенаправление на указанный путь
+//     navigate(redirectPath);
+//   }, [navigate, redirectPath]);
+
+//   // Этот компонент не рендерит ничего, так как выполняет перенаправление
+//   return null;
+// };
 
 export default UnityGameRedirect;

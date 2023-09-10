@@ -30,8 +30,8 @@ export const AppRoutes = () => {
         />
 
         <Route
-          path="/build/e/index.html"
-          element={<UnityGameRedirect redirectPath="/build/anothergame/index.html" />}
+          path="/battleofminds"
+          element={<UnityGameRedirect redirectPath="/builds/battleofminds/index.html" />}
         />
     </Routes>
   );
