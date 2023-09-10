@@ -74,6 +74,16 @@ export const Games = () => {
           {(activeGameIndex === 0 || activeGameIndex === 2) && (
             <ContainerCarousel>
               <CarouselHeader>
+                <Quiz className="size" />
+                <GamesSubtitle text="Викторины" />
+              </CarouselHeader>
+              <GamesCarousel data={QUIZ_SLIDES} />
+            </ContainerCarousel>
+          )}
+
+          {(activeGameIndex === 0 || activeGameIndex === 3) && (
+            <ContainerCarousel>
+              <CarouselHeader>
                 <Simulator className="size" />
                 <GamesSubtitle text="Тренажеры" />
               </CarouselHeader>
@@ -81,15 +91,7 @@ export const Games = () => {
             </ContainerCarousel>
           )}
 
-          {(activeGameIndex === 0 || activeGameIndex === 3) && (
-            <ContainerCarousel>
-              <CarouselHeader>
-                <Quiz className="size" />
-                <GamesSubtitle text="Викторины" />
-              </CarouselHeader>
-              <GamesCarousel data={QUIZ_SLIDES} />
-            </ContainerCarousel>
-          )}
+
         </SlidersWrapper>
 
         <div className="relative">

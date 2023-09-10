@@ -25,14 +25,13 @@ export const AppRoutes = () => {
 
       {/* Перенаправление на разные страницы с помощью UnityGameRedirect */}
       <Route
-          path="/attentiontrainer"
-          element={<UnityGameRedirect redirectPath="/builds/ecology/index.html" />}
-        />
-
-        <Route
-          path="/battleofminds"
-          element={<UnityGameRedirect redirectPath="/builds/battleofminds/index.html" />}
-        />
+        path="/attentiontrainer"
+        element={<UnityGameRedirect redirectPath="/builds/attentiontrainer/index.html" />}
+      />
+      <Route
+        path="/tanksquiz"
+        element={<UnityGameRedirect redirectPath="/builds/tanksquiz/index.html" />}
+      />
     </Routes>
   );
 };

@@ -1,9 +1,11 @@
 import GameImg from '../assets/game.png';
+import SmallGameImg from '../assets/slide-image-small.jpg';
 import EcologyGameImg from '../assets/ecology-game.png';
 
-import SmallGameImg from '../assets/slide-image-small.jpg';
-
 import bgImageMedium from '../assets/gameSliderItem.png';
+import bgImageMediumEcology from '../assets/ecology_carousel_item.png'
+import bgImageMediumTanksquiz from '../assets/tanksquiz_carousel_item.png'
+import bgImageMediumAttentiontrainer from '../assets/attentiontrainer_carousel_item.png'
 
 export const GRAMMAR_SLIDES = [
   {
@@ -150,8 +152,8 @@ export const SMALL_SLIDER_DATA = [
     navigate: '/about-game',
   },
   {
-    img: SmallGameImg,
-    title: 'Юнга Мур и большая стройка котов-пиратов',
+    img: EcologyGameImg,
+    title: 'Экология',
     navigate: '/ecology-game',
   },
   {
@@ -170,11 +172,7 @@ export const SMALL_SLIDER_DATA = [
 
 export const CAROUSEL_DATA = [
   { img: bgImageMedium, navigate: '/about-game' },
-  { img: bgImageMedium, navigate: '/about-game' },
-  { img: bgImageMedium, navigate: '/about-game' },
-  { img: bgImageMedium, navigate: '/about-game' },
-  { img: bgImageMedium, navigate: '/about-game' },
-  { img: bgImageMedium, navigate: '/about-game' },
-  { img: bgImageMedium, navigate: '/about-game' },
-  { img: bgImageMedium, navigate: '/about-game' },
+  { img: bgImageMediumAttentiontrainer, navigate: '/attentiontrainer' },
+  { img: bgImageMediumTanksquiz, navigate: '/tanksquiz' },
+  { img: bgImageMediumEcology, navigate: '/ecology-game' }
 ];

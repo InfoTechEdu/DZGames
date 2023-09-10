@@ -29,7 +29,7 @@ export const Main = () => {
         </div>
 
         <div>
-          <SubTitle text='Попробуй викторины' />
+          <SubTitle text='Попробуй наши игры' />
           <MainCarousel data={CAROUSEL_DATA} />
 
           <ButtonWrapper>
