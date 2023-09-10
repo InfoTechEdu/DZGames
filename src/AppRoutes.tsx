@@ -32,6 +32,14 @@ export const AppRoutes = () => {
         path="/tanksquiz"
         element={<UnityGameRedirect redirectPath="/builds/tanksquiz/index.html" />}
       />
+      <Route
+        path="/grammarspaceshooter"
+        element={<UnityGameRedirect redirectPath="/builds/grammarspaceshooter/index.html" />}
+      />
+      <Route
+        path="/arithmetic"
+        element={<UnityGameRedirect redirectPath="/builds/arithmetic/index.html" />}
+      />
     </Routes>
   );
 };

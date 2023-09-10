@@ -6,143 +6,72 @@ import bgImageMedium from '../assets/gameSliderItem.png';
 import bgImageMediumEcology from '../assets/ecology_carousel_item.png'
 import bgImageMediumTanksquiz from '../assets/tanksquiz_carousel_item.png'
 import bgImageMediumAttentiontrainer from '../assets/attentiontrainer_carousel_item.png'
+import bgImageMediumArithmetic from '../assets/arithmetic_carousel_item.png';
+import bgImageMediumGrammarspaceshooter from '../assets/grammarspaceshooter_carousel_item.png';
 
 export const GRAMMAR_SLIDES = [
   {
-    id: 'grammar1',
-    img: GameImg,
-    title: 'Ф_граммотность_1',
-    description:
-      'Используй свои знания и навыки и помоги котам построить городок для туристов',
-    navigate: '/attentiontrainer',
-  },
-  {
-    id: 'grammar2',
-    img: EcologyGameImg,
-    title: 'Ф_граммотность_2',
-    description:
-      'Соблюдение баланса между экологией и производством всегда было непростой задачей',
-    navigate: '/ecology-game',
-  },
-  {
-    id: 'grammar3',
-    img: GameImg,
-    title: 'Ф_граммотность_3',
-    description:
-      'Используй свои знания и навыки и помоги котам построить городок для туристов',
-      navigate: '/about-game',
-  },
-  {
-    id: 'grammar4',
-    img: GameImg,
-    title: 'Ф_граммотность_4',
-    description:
-      'Используй свои знания и навыки и помоги котам построить городок для туристов',
-    navigate: '/ecology-game',
-  },
-  {
-    id: 'grammar5',
-    img: GameImg,
-    title: 'Ф_граммотность_5',
+    id: 'mur',
+    img: bgImageMedium,
+    title: 'Юнга Мур и большая стройка котов-пиратов',
     description:
       'Используй свои знания и навыки и помоги котам построить городок для туристов',
     navigate: '/about-game',
   },
+  {
+    id: 'ecology',
+    img: EcologyGameImg,
+    title: 'Экология',
+    description:
+      'Соблюдение баланса между экологией и производством всегда было непростой задачей',
+    navigate: '/ecology-game',
+  }
 ];
 
 export const SIMULATOR_SLIDES = [
   {
     id: 'attentiontrainer',
-    img: GameImg,
+    img: bgImageMediumAttentiontrainer,
     title: 'Тренажер внимания',
     description:
       'Главное сосредоточиться',
-    navigate: '/ecology-game',
+    navigate: '/attentiontrainer',
   },
   {
-    id: 'simulator2',
-    img: EcologyGameImg,
-    title: 'Тренажер_2',
+    id: 'arithmetic',
+    img: bgImageMediumArithmetic,
+    title: 'Арифметик',
     description:
-      'Соблюдение баланса между экологией и производством всегда было непростой задачей',
-    navigate: '/attention_trainer',
+      'Сразись за звание арифметического чемпиона',
+    navigate: '/arithmetic',
   },
   {
-    id: 'simulator3',
-    img: GameImg,
-    title: 'Тренажер_3',
+    id: 'grammarspaceshooter',
+    img: bgImageMediumGrammarspaceshooter,
+    title: 'Грамматический шутер',
     description:
-      'Используй свои знания и навыки и помоги котам построить городок для туристов',
-    navigate: '/ecology-game',
-  },
-  {
-    id: 'simulator4',
-    img: GameImg,
-    title: 'Тренажер_4',
-    description:
-      'Используй свои знания и навыки и помоги котам построить городок для туристов',
-    navigate: '/ecology-game',
-  },
-  {
-    id: 'simulator5',
-    img: GameImg,
-    title: 'Тренажер_5',
-    description:
-      'Используй свои знания и навыки и помоги котам построить городок для туристов',
-    navigate: '/ecology-game',
-  },
+      'ВетреНый или ВетреННый?',
+    navigate: '/grammarspaceshooter',
+  }
 ];
 
 export const QUIZ_SLIDES = [
   {
-    id: 'quiz1',
-    img: GameImg,
-    title: 'Викторина_1',
+    id: 'tanksquiz',
+    img: bgImageMediumTanksquiz,
+    title: 'TanksQuiz',
     description:
-      'Используй свои знания и навыки и помоги котам построить городок для туристов',
-    navigate: '/about-game',
-  },
-  {
-    id: 'quiz2',
-    img: EcologyGameImg,
-    title: 'Викторина_2',
-    description:
-      'Соблюдение баланса между экологией и производством всегда было непростой задачей',
-    navigate: '/ecology-game',
-  },
-  {
-    id: 'quiz3',
-    img: GameImg,
-    title: 'Викторина_3',
-    description:
-      'Используй свои знания и навыки и помоги котам построить городок для туристов',
-    navigate: '/ecology-game',
-  },
-  {
-    id: 'quiz4',
-    img: GameImg,
-    title: 'Викторина_4',
-    description:
-      'Используй свои знания и навыки и помоги котам построить городок для туристов',
-    navigate: '/ecology-game',
-  },
-  {
-    id: 'quiz5',
-    img: GameImg,
-    title: 'Викторина_5',
-    description:
-      'Используй свои знания и навыки и помоги котам построить городок для туристов',
-    navigate: '/ecology-game',
-  },
+      'Отвечай на вопросы, собирай снаряды и освободи территорию от врагов!',
+    navigate: '/tanksquiz',
+  }
 ];
 
 export const RECOMMENDED_GAMES_SLIDES = [
-  SIMULATOR_SLIDES[1],
-  SIMULATOR_SLIDES[2],
   GRAMMAR_SLIDES[0],
   GRAMMAR_SLIDES[1],
-  QUIZ_SLIDES[3],
-  QUIZ_SLIDES[4],
+  SIMULATOR_SLIDES[1],
+  SIMULATOR_SLIDES[0],
+  QUIZ_SLIDES[0]
 ];
 
 export const SMALL_SLIDER_DATA = [
