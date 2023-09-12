@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { CustomSlider } from '../CustomSlider/CustomSlider';
 
-const settings = {
+const SLIDER_SETTINGS = {
   dots: false,
   infinite: false,
   speed: 500,
@@ -43,7 +43,7 @@ export const GamesCarousel = ({ data }: IProps) => {
   const navigate = useNavigate();
 
   return (
-    <CustomSlider {...settings} swipe className='gameSlider'>
+    <CustomSlider {...SLIDER_SETTINGS} swipe className='gameSlider'>
       {data.map((item, i) => {
         return (
           <Content

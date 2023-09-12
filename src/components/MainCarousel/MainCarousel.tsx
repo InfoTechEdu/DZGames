@@ -1,9 +1,9 @@
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
-import { CustomSlider } from '../CustomSlider/CustomSlider';
+import { CustomSlider } from "../CustomSlider/CustomSlider";
 
-const settings = {
+const SLIDER_SETTINGS = {
   dots: false,
   infinite: false,
   speed: 500,
@@ -29,33 +29,25 @@ const settings = {
 };
 
 interface IProps {
-  onItemClick?: (id: string) => void
+  onItemClick?: (id: string) => void;
   data: {
     img: string;
     title?: string;
     description?: string;
     navigate?: string;
-    id?: string,
+    id?: string;
   }[];
 }
 
 export const MainCarousel = ({ onItemClick, data }: IProps) => {
-  const navigate = useNavigate();
-
   return (
-    <CustomSlider {...settings} swipe>
+    <CustomSlider {...SLIDER_SETTINGS} swipe>
       {data.map((item, i) => {
         return (
           <SliderItem
-            onClick={() => {
-              if (onItemClick && item?.id) {
-                onItemClick(item.id)
-
-                return
-              }
-
-              item.navigate && navigate(item.navigate)
-            }}
+            target="_blank"
+            to={item?.navigate ?? ""}
+            onClick={(e) => !item?.navigate && e.preventDefault()}
             key={i}
           >
             <Img src={item.img} />
@@ -66,7 +58,7 @@ export const MainCarousel = ({ onItemClick, data }: IProps) => {
   );
 };
 
-const SliderItem = styled.div`
+const SliderItem = styled(Link)`
   cursor: pointer;
   border-radius: 20px;
   padding: 5px;

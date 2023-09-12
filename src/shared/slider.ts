@@ -101,7 +101,7 @@ export const SMALL_SLIDER_DATA = [
 
 export const CAROUSEL_DATA = [
   { img: bgImageMedium, navigate: '/about-game' },
-  { img: bgImageMediumAttentiontrainer, navigate: '/attentiontrainer' },
-  { img: bgImageMediumTanksquiz, navigate: '/tanksquiz' },
+  { img: bgImageMediumAttentiontrainer, navigate: '/builds/attentiontrainer/index.html' },
+  { img: bgImageMediumTanksquiz, navigate: '/builds/tanksquiz/index.html' },
   { img: bgImageMediumEcology, navigate: '/ecology-game' }
 ];

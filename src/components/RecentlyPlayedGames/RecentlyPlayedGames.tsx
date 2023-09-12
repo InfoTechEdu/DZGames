@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { CustomSlider } from '../CustomSlider/CustomSlider';
 
-const settings = {
+const SLIDER_SETTINGS = {
   dots: false,
   infinite: false,
   speed: 500,
@@ -46,7 +46,7 @@ export const RecentlyPlayedGames = ({ data }: IProps) => {
   return (
     <div style={{ maxWidth: 650, width: '100%', marginBottom: 60 }}>
       <CustomSlider
-        {...settings}
+        {...SLIDER_SETTINGS}
         swipe
         className='recentlySeenSlider'
         arrows={false}
