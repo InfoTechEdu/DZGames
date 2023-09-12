@@ -26,7 +26,7 @@ export const LeadersTablePopup = ({
       </div>
       <div>
         <span>Класс:</span>
-        <span>нет</span>
+        <span>{(selectedLeadersItem.grade === null ? "Нет" : selectedLeadersItem.grade)}</span>
       </div>
       <div>
         <span>Очки:</span>

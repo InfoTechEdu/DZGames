@@ -4,6 +4,7 @@ import { API_URL } from "./general";
 export interface LeadersItem {
     id: string;
     name: string;
+    grade?: number;
     position: string;
     profilePhoto: string;
     progressData: {
@@ -60,7 +61,7 @@ export const LEADERS_CAROUSEL_DATA = [
 
 export const fetchLeadersDataById = async (gameId: string, userId: string) => {
     try {
-        const res = await fetch(`${API_URL}/DownloadTop10Leaderboard?game=${gameId}&userId=${userId}`);
+        const res = await fetch(`${API_URL}/DownloadTop10LeaderboardForDashboard?game=${gameId}&userId=${userId}`);
         return await res.json()
     } catch (error) {
         console.error(error)

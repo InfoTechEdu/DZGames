@@ -5,6 +5,9 @@ import { Header } from './components/Header/Header';
 import { ScrollToTopController } from './containers/ScrollToTopController/ScrollToTopController';
 
 function App() {
+  // Uncomment this to cleare Recently seen games list at first entering
+  // localStorage.removeItem('recentlySeenGames');
+
   return (
     <>
       <div className='App'>
