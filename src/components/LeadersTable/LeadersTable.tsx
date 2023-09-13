@@ -33,7 +33,7 @@ export const LeadersTable = ({
             const {
               id,
               name,
-              progressData: { totalPoints },
+              progressData,
               displayInLeaderboard = true,
             } = item;
 
@@ -59,7 +59,7 @@ export const LeadersTable = ({
                   </div>
                 </td>
                 <td>нет</td>
-                <td>{totalPoints}</td>
+                <td>{progressData?.totalPoints}</td>
                 <td>{gamesPlayed}</td>
               </tr>
             );

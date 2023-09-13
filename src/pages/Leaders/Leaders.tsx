@@ -56,14 +56,14 @@ export const Leaders = () => {
 
     const data = await fetchLeadersDataById(gameId, userId);
 
-    if (!data) {
+    if (!data.requestedUserData) {
       setLeadersList(null);
       setIsLoading(false);
 
       return;
     }
 
-    const mappedDataToIds = Object.entries(data).map(([id, item]) => {
+    const mappedDataToIds = Object.entries(data.requestedUserData).map(([id, item]) => {
       return {
         id,
         ...(item as any),
