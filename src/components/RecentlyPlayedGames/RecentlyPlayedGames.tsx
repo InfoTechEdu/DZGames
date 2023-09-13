@@ -1,6 +1,7 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { CustomSlider } from '../CustomSlider/CustomSlider';
+import { GameSliderData } from '../../shared/slider';
 
 const SLIDER_SETTINGS = {
   dots: false,
@@ -32,17 +33,10 @@ const SLIDER_SETTINGS = {
 };
 
 interface IProps {
-  data: {
-    img: string;
-    title?: string;
-    description?: string;
-    navigate?: string;
-  }[];
+  data: GameSliderData[]
 }
 
 export const RecentlyPlayedGames = ({ data }: IProps) => {
-  const navigate = useNavigate();
-
   return (
     <div style={{ maxWidth: 650, width: '100%', marginBottom: 60 }}>
       <CustomSlider
@@ -52,18 +46,26 @@ export const RecentlyPlayedGames = ({ data }: IProps) => {
         arrows={false}
       >
         {data.map((item, i) => {
+          const linkToGame = item.description ? item.descriptionLink : item.playLink
+
           return (
-            <Content
+            <SliderLinkItem
               key={i}
-              onClick={() => item.navigate && navigate(item.navigate)}
+              to={linkToGame ?? ""}
+              target="_blank"
+              onClick={(e) => {
+                if (!linkToGame) {
+                  e.preventDefault();
+                }
+              }}
             >
               <Img alt='' src={item.img} />
-              {item.title && (
-                <CardText>
-                  {item.title && <CardTitle>{item.title}</CardTitle>}
-                </CardText>
-              )}
-            </Content>
+                {item.title && (
+                  <CardText>
+                    {item.title && <CardTitle>{item.title}</CardTitle>}
+                  </CardText>
+                )}
+            </SliderLinkItem>
           );
         })}
       </CustomSlider>
@@ -71,8 +73,7 @@ export const RecentlyPlayedGames = ({ data }: IProps) => {
   );
 };
 
-const Content = styled.div`
-  cursor: pointer;
+const SliderLinkItem = styled(Link)`
   display: flex;
   flex-direction: column;
   max-width: 110px;

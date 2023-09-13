@@ -1,6 +1,7 @@
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import { CustomSlider } from '../CustomSlider/CustomSlider';
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { CustomSlider } from "../CustomSlider/CustomSlider";
+import { GameSliderData, saveGameToLocalStorage } from "../../shared/slider";
 
 const SLIDER_SETTINGS = {
   dots: false,
@@ -27,49 +28,32 @@ const SLIDER_SETTINGS = {
   ],
 };
 
-interface SliderData {
-  id: string;
-  img: string;
-  title?: string;
-  description?: string;
-  navigate?: string;
-}
-
 interface IProps {
-  data: SliderData[];
+  data: GameSliderData[];
 }
 
 export const GamesCarousel = ({ data }: IProps) => {
-  const navigate = useNavigate();
-
   return (
-    <CustomSlider {...SLIDER_SETTINGS} swipe className='gameSlider'>
+    <CustomSlider {...SLIDER_SETTINGS} swipe className="gameSlider">
       {data.map((item, i) => {
+        const linkToGame = item.description ? item.descriptionLink : item.playLink
+
         return (
-          <Content
+          <SliderLinkItem
             key={i}
-            onClick={() => {
-              item.navigate && navigate(item.navigate);
-              const savedData = JSON.parse(
-                localStorage.getItem('recentlySeenGames') ?? '[]'
-              ) as SliderData[];
+            to={linkToGame ?? ""}
+            target="_blank"
+            onClick={(e) => {
+              if (!linkToGame) {
+                e.preventDefault();
 
-              if (!savedData.some(({ id }) => id === item.id)) {
-
-                if (savedData.length === 10) {
-                  savedData.shift()
-                }
-
-                savedData.push(item);
-
-                localStorage.setItem(
-                  'recentlySeenGames',
-                  JSON.stringify(savedData)
-                );
+                return;
               }
+
+              saveGameToLocalStorage(item);
             }}
           >
-            <Img alt='' src={item.img} />
+            <Img alt="" src={item.img} />
             {(item.title || item.description) && (
               <CardText>
                 {item.title && <CardTitle>{item.title}</CardTitle>}
@@ -78,62 +62,62 @@ export const GamesCarousel = ({ data }: IProps) => {
                 )}
               </CardText>
             )}
-          </Content>
+          </SliderLinkItem>
         );
       })}
     </CustomSlider>
   );
 };
 
-const Content = styled.div({
-  cursor: 'pointer',
-  display: 'flex',
-  flexDirection: 'column',
-  height: '466px',
-  overflow: 'hidden',
-  borderRadius: '20px',
+const SliderLinkItem = styled(Link)({
+  cursor: "pointer",
+  display: "flex",
+  flexDirection: "column",
+  height: "466px",
+  overflow: "hidden",
+  borderRadius: "20px",
 
-  ':hover': {
-    boxShadow: '16px 16px 0px #FFCD4C',
-    transition: '0.5s',
+  ":hover": {
+    boxShadow: "16px 16px 0px #FFCD4C",
+    transition: "0.5s",
   },
 
-  '@media(max-width: 1024px)': {
-    boxShadow: '16px 16px 0px #FFCD4C',
-    borderRadius: '20px',
+  "@media(max-width: 1024px)": {
+    boxShadow: "16px 16px 0px #FFCD4C",
+    borderRadius: "20px",
   },
 });
 
 const Img = styled.img({
-  width: '100%',
-  height: '50%',
-  objectFit: 'cover',
+  width: "100%",
+  height: "50%",
+  objectFit: "cover",
 });
 
 const CardText = styled.div({
-  width: '100%',
-  height: '50%',
-  background: '#F7F7F8',
-  borderRadius: '0px 0px 20px 20px',
-  padding: '24px',
+  width: "100%",
+  height: "50%",
+  background: "#F7F7F8",
+  borderRadius: "0px 0px 20px 20px",
+  padding: "24px",
 
-  display: 'flex',
-  alignItems: 'flex-start',
-  flexDirection: 'column',
-  justifyContent: 'flex-start',
-  gap: '12px',
+  display: "flex",
+  alignItems: "flex-start",
+  flexDirection: "column",
+  justifyContent: "flex-start",
+  gap: "12px",
 });
 
 const CardTitle = styled.div({
-  fontSize: '30px',
-  fontWeight: '600',
+  fontSize: "30px",
+  fontWeight: "600",
 
-  '@media(max-width: 1100px)': {
-    fontSize: '26px',
+  "@media(max-width: 1100px)": {
+    fontSize: "26px",
   },
 
-  '@media(max-width: 820px)': {
-    fontSize: '24px',
+  "@media(max-width: 820px)": {
+    fontSize: "24px",
   },
 });
 

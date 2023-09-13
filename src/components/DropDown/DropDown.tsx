@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { ReactComponent as SelectImg } from "../../assets/select.svg";
-import { GameItem, gamesList } from "../../shared/leaders";
+import { GameItem, LEADERS_GAMES_LIST } from "../../shared/leaders";
 
 interface Props {
   selectedGame: GameItem | null;
@@ -26,7 +26,7 @@ export const DropDown = ({
       </SelectGame>
       {showDropdown && (
         <Options>
-          {gamesList.map((game) => {
+          {LEADERS_GAMES_LIST.map((game) => {
             return (
               <Option
                 isSelected={selectedGame?.id === game.id}

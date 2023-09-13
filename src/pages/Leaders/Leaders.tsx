@@ -12,7 +12,6 @@ import { ConfirmationModal } from "../../components/ConfirmationModal/Confirmati
 import {
   DEFAULT_USER_ID,
   GameItem,
-  LEADERS_CAROUSEL_DATA,
   LeadersItem,
   fetchLeadersDataById,
   hideUserInLeadersTable,
@@ -22,6 +21,7 @@ import { LeadersTable } from "../../components/LeadersTable/LeadersTable";
 import A from "../../assets/A.svg";
 import { LeadersTablePopup } from "../../components/LeadersTable/LeadersTablePopup";
 import { DropDown } from "../../components/DropDown/DropDown";
+import { LEADERS_CAROUSEL_SLIDES } from "../../shared/slider";
 
 const userId = localStorage.getItem("userId") || DEFAULT_USER_ID;
 
@@ -145,7 +145,7 @@ export const Leaders = () => {
 
       <MainCarousel
         onItemClick={onCarouselItemClick}
-        data={LEADERS_CAROUSEL_DATA}
+        data={LEADERS_CAROUSEL_SLIDES}
       />
 
       {isLoading ? (

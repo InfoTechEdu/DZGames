@@ -13,7 +13,7 @@ import { MainCarousel } from '../../components/MainCarousel/MainCarousel';
 
 import { Button } from '../../components/Button/Button';
 import { useNavigate } from 'react-router-dom';
-import { CAROUSEL_DATA } from '../../shared/slider';
+import { MAIN_CAROUSEL_SLIDES } from '../../shared/slider';
 import { CurlyArrow } from '../../components/CurlyArrow/CurlyArrow';
 
 export const Main = () => {
@@ -30,7 +30,7 @@ export const Main = () => {
 
         <div>
           <SubTitle text='Попробуй наши игры' />
-          <MainCarousel data={CAROUSEL_DATA} />
+          <MainCarousel data={MAIN_CAROUSEL_SLIDES} />
 
           <ButtonWrapper>
             <Button

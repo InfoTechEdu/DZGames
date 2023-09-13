@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { CustomSlider } from "../CustomSlider/CustomSlider";
+import { GameSliderData } from "../../shared/slider";
 
 const SLIDER_SETTINGS = {
   dots: false,
@@ -30,19 +31,14 @@ const SLIDER_SETTINGS = {
 
 interface IProps {
   onItemClick?: (id: string) => void;
-  data: {
-    img: string;
-    title?: string;
-    description?: string;
-    navigate?: string;
-    id?: string;
-  }[];
+  data: GameSliderData[];
 }
 
 export const MainCarousel = ({ onItemClick, data }: IProps) => {
   return (
     <CustomSlider {...SLIDER_SETTINGS} swipe>
       {data.map((item, i) => {
+        const linkToGame = item.description ? item.descriptionLink : item.playLink
 
         if (onItemClick) {
           return (
@@ -52,6 +48,7 @@ export const MainCarousel = ({ onItemClick, data }: IProps) => {
                   onItemClick(item.id)
                 }
               }}
+              key={i}
             >
               <Img src={item.img} />
             </SliderDivItem>
@@ -61,8 +58,8 @@ export const MainCarousel = ({ onItemClick, data }: IProps) => {
         return (
           <SliderLinkItem
             target="_blank"
-            to={item?.navigate ?? ""}
-            onClick={(e) => !item?.navigate && e.preventDefault()}
+            to={linkToGame ?? ''}
+            onClick={(e) => !linkToGame && e.preventDefault()}
             key={i}
           >
             <Img src={item.img} />

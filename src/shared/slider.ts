@@ -1,12 +1,12 @@
-import SmallGameImg from '../assets/slide-image-small.jpg';
-import EcologyGameImg from '../assets/ecology-game.png';
-
+import bgImageMediumEcology from '../assets/ecology-game.png';
 import bgImageMedium from '../assets/gameSliderItem.png';
-import bgImageMediumEcology from '../assets/ecology_carousel_item.png'
 import bgImageMediumTanksquiz from '../assets/tanksquiz_carousel_item.png'
 import bgImageMediumAttentiontrainer from '../assets/attentiontrainer_carousel_item.png'
 import bgImageMediumArithmetic from '../assets/arithmetic_carousel_item.png';
 import bgImageMediumGrammarspaceshooter from '../assets/grammarspaceshooter_carousel_item.png';
+
+const TANKS_QUIZ_LINK = '/builds/tanksquiz/index.html';
+const ATTENTION_TRAINER_LINK = '/builds/attentiontrainer/index.html';
 
 export const GRAMMAR_SLIDES = [
   {
@@ -15,15 +15,15 @@ export const GRAMMAR_SLIDES = [
     title: 'Юнга Мур и большая стройка котов-пиратов',
     description:
       'Используй свои знания и навыки и помоги котам построить городок для туристов',
-    navigate: '/about-game',
+      descriptionLink: '/about-game',
   },
   {
     id: 'ecology',
-    img: EcologyGameImg,
+    img: bgImageMediumEcology,
     title: 'Экология',
     description:
       'Соблюдение баланса между экологией и производством всегда было непростой задачей',
-    navigate: '/ecology-game',
+      descriptionLink: '/ecology-game',
   }
 ];
 
@@ -34,7 +34,8 @@ export const SIMULATOR_SLIDES = [
     title: 'Тренажер внимания',
     description:
       'Главное сосредоточиться',
-    navigate: '/attentiontrainer',
+    playLink: ATTENTION_TRAINER_LINK,
+    descriptionLink: '/about-game'
   },
   {
     id: 'arithmetic',
@@ -42,7 +43,7 @@ export const SIMULATOR_SLIDES = [
     title: 'Арифметик',
     description:
       'Сразись за звание арифметического чемпиона',
-    navigate: '/arithmetic',
+    descriptionLink: '/about-game',
   },
   {
     id: 'grammarspaceshooter',
@@ -50,7 +51,7 @@ export const SIMULATOR_SLIDES = [
     title: 'Грамматический шутер',
     description:
       'ВетреНый или ВетреННый?',
-    navigate: '/grammarspaceshooter',
+    descriptionLink: '/grammarspaceshooter',
   }
 ];
 
@@ -61,7 +62,22 @@ export const QUIZ_SLIDES = [
     title: 'TanksQuiz',
     description:
       'Отвечай на вопросы, собирай снаряды и освободи территорию от врагов!',
-    navigate: '/tanksquiz',
+    playLink: TANKS_QUIZ_LINK,
+    descriptionLink: '/about-game'
+  },
+  {
+    id: 'battleofminds',
+    img: bgImageMedium,
+    title: 'Борьба умов',
+    description: 'Борьба умов',
+    descriptionLink: '/about-game'
+  },
+  {
+    id: 'historyTime',
+    img: bgImageMedium,
+    title: 'Время истории',
+    description: 'Время истории',
+    descriptionLink: '/about-game'
   }
 ];
 
@@ -73,34 +89,47 @@ export const RECOMMENDED_GAMES_SLIDES = [
   QUIZ_SLIDES[0]
 ];
 
-export const SMALL_SLIDER_DATA = [
-  {
-    img: SmallGameImg,
-    title: 'Юнга Мур и большая стройка котов-пиратов',
-    navigate: '/about-game',
-  },
-  {
-    img: EcologyGameImg,
-    title: 'Экология',
-    navigate: '/ecology-game',
-  },
-  {
-    img: SmallGameImg,
-    title: 'Юнга Мур и большая стройка котов-пиратов',
-  },
-  {
-    img: SmallGameImg,
-    title: 'Юнга Мур и большая стройка котов-пиратов',
-  },
-  {
-    img: SmallGameImg,
-    title: 'Юнга Мур и большая стройка котов-пиратов',
-  },
+export const MAIN_CAROUSEL_SLIDES = [
+  GRAMMAR_SLIDES[0],
+  SIMULATOR_SLIDES[0],
+  QUIZ_SLIDES[0],
+  GRAMMAR_SLIDES[1],
 ];
 
-export const CAROUSEL_DATA = [
-  { img: bgImageMedium, navigate: '/about-game' },
-  { img: bgImageMediumAttentiontrainer, navigate: '/builds/attentiontrainer/index.html' },
-  { img: bgImageMediumTanksquiz, navigate: '/builds/tanksquiz/index.html' },
-  { img: bgImageMediumEcology, navigate: '/ecology-game' }
+export interface GameSliderData {
+  id: string;
+  img: string;
+  title?: string;
+  description?: string;
+  descriptionLink?: string;
+  playLink?: string;
+}
+
+export const saveGameToLocalStorage = (item: GameSliderData) => {
+  const savedData = JSON.parse(
+    localStorage.getItem('recentlySeenGames') ?? '[]'
+  ) as GameSliderData[];
+
+  if (!savedData.some(({ id }) => id === item.id)) {
+
+    if (savedData.length === 10) {
+      savedData.shift()
+    }
+
+    savedData.push(item);
+
+    localStorage.setItem(
+      'recentlySeenGames',
+      JSON.stringify(savedData)
+    );
+  }
+}
+
+export const LEADERS_CAROUSEL_SLIDES = [
+  GRAMMAR_SLIDES[0],
+  GRAMMAR_SLIDES[1],
+  QUIZ_SLIDES[1],
+  QUIZ_SLIDES[2],
+  SIMULATOR_SLIDES[0],
+  SIMULATOR_SLIDES[1],
 ];

@@ -1,7 +1,3 @@
-import bgImageMedium from "../assets/gameSliderItem.png";
-import bgImageMediumEcology from '../assets/ecology_carousel_item.png'
-import bgImageMediumAttentiontrainer from '../assets/attentiontrainer_carousel_item.png'
-
 import { API_URL } from "./general";
 
 export interface LeadersItem {
@@ -26,7 +22,7 @@ export interface GameItem {
     title: string;
 }
 
-export const gamesList: GameItem[] = [
+export const LEADERS_GAMES_LIST: GameItem[] = [
     {
         id: "1",
         title: "Юнга Мур и большая стройка котов-пиратов",
@@ -51,15 +47,6 @@ export const gamesList: GameItem[] = [
         id: "arithmetic",
         title: "Арифметика",
     },
-];
-
-export const LEADERS_CAROUSEL_DATA = [ 
-    { img: bgImageMedium, id: "1" },
-    { img: bgImageMediumEcology, id: "2" },
-    { img: bgImageMedium, id: "battleofminds" },
-    { img: bgImageMedium, id: "4" },
-    { img: bgImageMediumAttentiontrainer, id: "attentiontrainer" },
-    { img: bgImageMedium, id: "arithmetic" },
 ];
 
 export const fetchLeadersDataById = async (gameId: string, userId: string) => {
