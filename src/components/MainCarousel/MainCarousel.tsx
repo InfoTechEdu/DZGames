@@ -43,23 +43,47 @@ export const MainCarousel = ({ onItemClick, data }: IProps) => {
   return (
     <CustomSlider {...SLIDER_SETTINGS} swipe>
       {data.map((item, i) => {
+
+        if (onItemClick) {
+          return (
+            <SliderDivItem
+              onClick={() => {
+                if (onItemClick && item?.id) {
+                  onItemClick(item.id)
+                }
+              }}
+            >
+              <Img src={item.img} />
+            </SliderDivItem>
+          );
+        }
+
         return (
-          <SliderItem
+          <SliderLinkItem
             target="_blank"
             to={item?.navigate ?? ""}
             onClick={(e) => !item?.navigate && e.preventDefault()}
             key={i}
           >
             <Img src={item.img} />
-          </SliderItem>
+          </SliderLinkItem>
         );
       })}
     </CustomSlider>
   );
 };
 
-const SliderItem = styled(Link)`
+const SliderDivItem = styled.div`
   cursor: pointer;
+  border-radius: 20px;
+  padding: 5px;
+  width: 100%;
+
+  outline: none;
+  overflow: hidden;
+`;
+
+const SliderLinkItem = styled(Link)`
   border-radius: 20px;
   padding: 5px;
   width: 100%;

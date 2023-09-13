@@ -1,4 +1,3 @@
-import GameImg from '../assets/game.png';
 import SmallGameImg from '../assets/slide-image-small.jpg';
 import EcologyGameImg from '../assets/ecology-game.png';
 
