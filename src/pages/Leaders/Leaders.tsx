@@ -13,6 +13,7 @@ import {
   DEFAULT_USER_ID,
   GameItem,
   LeadersItem,
+  LeadersPopupItem,
   fetchLeadersDataById,
   hideUserInLeadersTable,
 } from "../../shared/leaders";
@@ -22,8 +23,9 @@ import A from "../../assets/A.svg";
 import { LeadersTablePopup } from "../../components/LeadersTable/LeadersTablePopup";
 import { DropDown } from "../../components/DropDown/DropDown";
 import { LEADERS_CAROUSEL_SLIDES } from "../../shared/slider";
+import { CurrentUserTable } from "../../components/LeadersTable/CurrentUserTable";
 
-const userId = localStorage.getItem("userId") || DEFAULT_USER_ID;
+const userId = localStorage.getItem("userId") ?? DEFAULT_USER_ID;
 
 const TABLE_BACKGROUND_IMG = new URL(
   "../../assets/table-bg.png",
@@ -36,12 +38,13 @@ export const Leaders = () => {
   const [selectedGameId, setSelectedGameId] = useState("");
 
   const [leadersList, setLeadersList] = useState<LeadersItem[] | null>(null);
+  const [currentUserLeadersData, setCurrentUserLeadersData] = useState<LeadersItem | null>(null);
 
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 
   const [showPopup, setShowPopup] = useState(false);
   const [selectedLeadersItem, setSelectedLeadersItem] =
-    useState<LeadersItem | null>(null);
+    useState<LeadersPopupItem | null>(null);
 
   const [isUserHidden, setIsUserHidden] = useState(Boolean(userId));
 
@@ -56,21 +59,25 @@ export const Leaders = () => {
 
     const data = await fetchLeadersDataById(gameId, userId);
 
-    if (!data.requestedUserData) {
+    console.log(data);
+
+    if (!data.users && !data.requestedUserData) {
       setLeadersList(null);
+      setCurrentUserLeadersData(null);
       setIsLoading(false);
 
       return;
     }
 
-    const mappedDataToIds = Object.entries(data.requestedUserData).map(([id, item]) => {
+    const mappedLeadersDataToIds = Object.entries(data.users).map(([id, item]) => {
       return {
         id,
-        ...(item as any),
+        ...item as any,
       };
     });
 
-    setLeadersList(mappedDataToIds);
+    setLeadersList(mappedLeadersDataToIds);
+    setCurrentUserLeadersData(data.requestedUserData);
     setIsLoading(false);
   }, []);
 
@@ -103,7 +110,7 @@ export const Leaders = () => {
     onModalClose();
   }, []);
 
-  const handleShowPopup = (leadersItem: LeadersItem) => {
+  const handleShowPopup = (leadersItem: LeadersPopupItem) => {
     setShowPopup(true);
     setSelectedLeadersItem(leadersItem);
   };
@@ -160,6 +167,13 @@ export const Leaders = () => {
               leadersList={leadersList}
               isUserHidden={isUserHidden}
             />
+
+            {currentUserLeadersData && (
+              <CurrentUserTable
+                handleShowPopup={handleShowPopup}
+                currentUserLeadersData={currentUserLeadersData}
+              />
+            )}
 
             {showPopup && selectedLeadersItem && (
               <LeadersTablePopup

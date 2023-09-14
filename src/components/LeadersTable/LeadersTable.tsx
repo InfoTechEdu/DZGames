@@ -1,13 +1,17 @@
 import styled from "styled-components";
 
 import { ReactComponent as PopupImg } from "../../assets/table_popup_btn.svg";
-import { DEFAULT_PROFILE_PHOTO, LeadersItem } from "../../shared/leaders";
+import {
+  DEFAULT_PROFILE_PHOTO,
+  LeadersItem,
+  LeadersPopupItem,
+} from "../../shared/leaders";
 
 const userId = localStorage.getItem("userId");
 
 interface Props {
   leadersList: LeadersItem[];
-  handleShowPopup: (value: LeadersItem) => void;
+  handleShowPopup: (value: LeadersPopupItem) => void;
   isUserHidden: boolean;
 }
 
@@ -33,11 +37,13 @@ export const LeadersTable = ({
             const {
               id,
               name,
+              grade,
+              position,
               progressData,
               displayInLeaderboard = true,
             } = item;
 
-            const gamesPlayed = item.statistics?.gamesPlayed;
+            const gamesPlayed = item.statistics?.gamesPlayed ?? 0;
 
             const shouldHideUser =
               displayInLeaderboard === false || (userId === id && isUserHidden);
@@ -53,7 +59,17 @@ export const LeadersTable = ({
                     ) : (
                       <span>{name}</span>
                     )}
-                    <button onClick={() => handleShowPopup(item)}>
+                    <button
+                      onClick={() =>
+                        handleShowPopup({
+                          name: "Я",
+                          position,
+                          grade,
+                          totalPoints: progressData.totalPoints,
+                          gamesPlayed,
+                        })
+                      }
+                    >
                       <PopupImg />
                     </button>
                   </div>
@@ -64,36 +80,6 @@ export const LeadersTable = ({
               </tr>
             );
           })}
-        </tbody>
-      </Table>
-      <Table withBorder>
-        <tbody>
-          <tr>
-            <td>-</td>
-            <td>
-              <div>
-                <ProfilePhoto src={DEFAULT_PROFILE_PHOTO} alt="Я" />
-                <span>Я</span>
-                <button
-                  onClick={() => {
-                    handleShowPopup({
-                      id: "me",
-                      name: "Я",
-                      position: "1",
-                      profilePhoto: "",
-                      progressData: { totalPoints: 100 },
-                      statistics: { gamesPlayed: 1 },
-                    });
-                  }}
-                >
-                  <PopupImg />
-                </button>
-              </div>
-            </td>
-            <td>1</td>
-            <td>100</td>
-            <td>1</td>
-          </tr>
         </tbody>
       </Table>
     </>

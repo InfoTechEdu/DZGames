@@ -1,11 +1,11 @@
-import { LeadersItem } from "../../shared/leaders";
+import { LeadersPopupItem } from "../../shared/leaders";
 import { SubTitle } from "../SubTitle/SubTitle";
 
 import { ReactComponent as CloseImg } from "../../assets/close.svg";
 import styled from "styled-components";
 
 interface Props {
-  selectedLeadersItem: LeadersItem;
+  selectedLeadersItem: LeadersPopupItem;
   handleHidePopup: () => void;
 }
 
@@ -26,15 +26,15 @@ export const LeadersTablePopup = ({
       </div>
       <div>
         <span>Класс:</span>
-        <span>{(selectedLeadersItem.grade === null ? "Нет" : selectedLeadersItem.grade)}</span>
+        <span>{(selectedLeadersItem.grade || "Нет")}</span>
       </div>
       <div>
         <span>Очки:</span>
-        <span>{selectedLeadersItem.progressData?.totalPoints}</span>
+        <span>{selectedLeadersItem.totalPoints}</span>
       </div>
       <div>
         <span>Игры:</span>
-        <span>{selectedLeadersItem?.statistics?.gamesPlayed}</span>
+        <span>{selectedLeadersItem?.gamesPlayed}</span>
       </div>
     </Popup>
   );

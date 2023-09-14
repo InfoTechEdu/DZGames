@@ -22,6 +22,14 @@ export interface GameItem {
     title: string;
 }
 
+export interface LeadersPopupItem {
+    name: string;
+    grade?: number;
+    position: string;
+    totalPoints?: number;
+    gamesPlayed: number;
+}
+
 export const LEADERS_GAMES_LIST: GameItem[] = [
     {
         id: "1",
@@ -49,9 +57,10 @@ export const LEADERS_GAMES_LIST: GameItem[] = [
     },
 ];
 
-export const fetchLeadersDataById = async (gameId: string, userId: string) => {
+export const fetchLeadersDataById = async (gameId: string, userId?: string) => {
     try {
-        const res = await fetch(`${API_URL}/DownloadTop10LeaderboardForDashboard?game=${gameId}&userId=${userId}`);
+        const userIdParam = userId ? `&userId=${userId}` : '';
+        const res = await fetch(`${API_URL}/DownloadTop10LeaderboardForDashboard?game=${gameId}${userIdParam}`);
         return await res.json()
     } catch (error) {
         console.error(error)
