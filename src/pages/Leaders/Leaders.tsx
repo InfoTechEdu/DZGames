@@ -59,8 +59,6 @@ export const Leaders = () => {
 
     const data = await fetchLeadersDataById(gameId, userId);
 
-    console.log(data);
-
     if (!data.users && !data.requestedUserData) {
       setLeadersList(null);
       setCurrentUserLeadersData(null);

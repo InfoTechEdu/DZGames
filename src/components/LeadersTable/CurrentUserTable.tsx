@@ -46,9 +46,9 @@ export const CurrentUserTable = ({
               </button>
             </div>
           </td>
-          <td>1</td>
-          <td>100</td>
-          <td>1</td>
+          <td>{grade || 'Нет'}</td>
+          <td>{progressData.totalPoints}</td>
+          <td>{statistics?.gamesPlayed}</td>
         </tr>
       </tbody>
     </Table>
