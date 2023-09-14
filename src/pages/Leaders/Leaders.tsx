@@ -49,6 +49,7 @@ export const Leaders = () => {
   const [isUserHidden, setIsUserHidden] = useState(Boolean(userId));
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isHidingLoading, setIsHidingLoading] = useState(false);
 
   const toggleDropDown = () => {
     setShowDropdown((s) => !s);
@@ -99,12 +100,15 @@ export const Leaders = () => {
   const onConfirmUserHiding = useCallback(async () => {
     if (!userId) return;
 
+    setIsHidingLoading(true)
+
     const res = await hideUserInLeadersTable(userId);
     if (res?.ok) {
       localStorage.setItem("userId", userId);
       setIsUserHidden(true);
     }
 
+    setIsHidingLoading(false)
     onModalClose();
   }, []);
 
@@ -199,6 +203,7 @@ export const Leaders = () => {
 
       {showConfirmationModal && (
         <ConfirmationModal
+          isLoading={isHidingLoading}
           onCancel={onModalClose}
           onConfirm={onConfirmUserHiding}
           title="Действительно хотите скрыть данные?"

@@ -6,10 +6,12 @@ export const ConfirmationModal = ({
   title,
   onCancel,
   onConfirm,
+  isLoading,
 }: {
   title: string;
   onCancel: () => void;
   onConfirm: () => void;
+  isLoading?: boolean;
 }) => {
   return (
     <>
@@ -17,8 +19,20 @@ export const ConfirmationModal = ({
       <Modal>
         <SubTitle withMarginTop={false} text={title} />
         <ButtonwsWrapper>
-          <Button onClick={onConfirm}>Да</Button>
-          <Button onClick={onCancel}>Нет</Button>
+          <Button
+            disabled={isLoading}
+            isLoading={isLoading}
+            onClick={onConfirm}
+          >
+            Да
+          </Button>
+          <Button
+            isLoading={isLoading}
+            disabled={isLoading}
+            onClick={onCancel}
+          >
+            Нет
+          </Button>
         </ButtonwsWrapper>
       </Modal>
     </>
@@ -74,26 +88,26 @@ const ButtonwsWrapper = styled.div`
   }
 `;
 
-const Button = styled.button({
-  backgroundColor: "#FFF3E8",
-  border: "none",
-  height: "50px",
-  maxWidth: "288px",
-  width: "100%",
-  borderRadius: "24px",
-  padding: "16px 30px",
-  color: "#FFA000",
-  fontSize: "18px",
-  fontWeight: "600",
-  transition: ".2s",
+const Button = styled.button<{ isLoading?: boolean }>`
+  background-color: ${({ isLoading }) => (isLoading ? "#EFEFEF" : "#FFF3E8")};
+  color: ${({ isLoading }) => (isLoading ? "#BBBBBB" : "#FFA000")};
+  border: none;
+  height: 50px;
+  max-width: 288px;
+  width: 100%;
+  border-radius: 24px;
+  padding: 16px 30px;
+  font-size: 18px;
+  font-weight: 600;
+  transition: 0.2s;
 
-  "&:hover": {
-    backgroundColor: "#FFA000",
-    color: "white",
-  },
+  &:hover {
+    background-color: #ffa000;
+    color: white;
+  }
 
-  "&:active": {
-    backgroundColor: "#FF7001",
-    color: "white",
-  },
-});
+  &:active {
+    background-color: #ff7001;
+    color: white;
+  }
+`;
