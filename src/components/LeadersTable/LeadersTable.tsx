@@ -7,8 +7,6 @@ import {
   LeadersPopupItem,
 } from "../../shared/leaders";
 
-const userId = localStorage.getItem("userId");
-
 interface Props {
   leadersList: LeadersItem[];
   handleShowPopup: (value: LeadersPopupItem) => void;
@@ -34,6 +32,8 @@ export const LeadersTable = ({
         </thead>
         <tbody>
           {leadersList.map((item, index) => {
+            const userId = localStorage.getItem("userId");
+
             const {
               id,
               name,
