@@ -89,8 +89,8 @@ const ButtonwsWrapper = styled.div`
 `;
 
 const Button = styled.button<{ isLoading?: boolean }>`
-  background-color: ${({ isLoading }) => (isLoading ? "#EFEFEF" : "#FFF3E8")};
-  color: ${({ isLoading }) => (isLoading ? "#BBBBBB" : "#FFA000")};
+  background-color: ${({ isLoading }) => (isLoading ? "#D9D9D9" : "#FFF3E8")};
+  color: ${({ isLoading }) => (isLoading ? "#FFFFFF" : "#FFA000")};
   border: none;
   height: 50px;
   max-width: 288px;
@@ -102,7 +102,7 @@ const Button = styled.button<{ isLoading?: boolean }>`
   transition: 0.2s;
 
   &:hover {
-    background-color: #ffa000;
+    background-color: ${({ isLoading }) => (isLoading ? "#D9D9D9" : "#ffa000")};
     color: white;
   }
 
