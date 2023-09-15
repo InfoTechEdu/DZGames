@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { ReactComponent as SelectImg } from "../../assets/select.svg";
+import { ReactComponent as ArrowDown } from "../../assets/arrowDown.svg";
 import { GameItem, LEADERS_GAMES_LIST } from "../../shared/leaders";
 
 interface Props {
@@ -20,7 +20,7 @@ export const DropDown = ({
     <Wrapper>
       <SelectGame onClick={toggleDropDown}>
         <span>{selectedGame?.title ?? "Или найди по названию"}</span>
-        <SelectImg
+        <ArrowDown
           style={{ transform: showDropdown ? "rotate(180deg)" : "" }}
         />
       </SelectGame>

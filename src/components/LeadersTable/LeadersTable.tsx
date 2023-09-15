@@ -1,22 +1,29 @@
 import styled from "styled-components";
 
 import { ReactComponent as PopupImg } from "../../assets/table_popup_btn.svg";
+import { ReactComponent as ArrowDown } from "../../assets/arrowDown.svg";
+
 import {
   DEFAULT_PROFILE_PHOTO,
   LeadersItem,
   LeadersPopupItem,
+  SortType,
 } from "../../shared/leaders";
 
 interface Props {
   leadersList: LeadersItem[];
   handleShowPopup: (value: LeadersPopupItem) => void;
   isUserHidden: boolean;
+  onSort: () => void;
+  sortType: SortType;
 }
 
 export const LeadersTable = ({
   leadersList,
   handleShowPopup,
   isUserHidden,
+  onSort,
+  sortType,
 }: Props) => {
   return (
     <>
@@ -26,7 +33,16 @@ export const LeadersTable = ({
             <th>№</th>
             <th>Имя</th>
             <th>Класс</th>
-            <th>Очки</th>
+            <th onClick={onSort}>
+              Очки
+              {sortType !== "" && (
+                <ArrowDown
+                  style={
+                    sortType === "asc" ? { transform: "rotate(180deg)" } : {}
+                  }
+                />
+              )}
+            </th>
             <th>Игры</th>
           </tr>
         </thead>
@@ -101,6 +117,16 @@ const Table = styled.table<{ withBorder?: boolean }>`
     font-weight: 600;
 
     text-align: left;
+    position: relative;
+
+    & svg {
+      position: absolute;
+      top: 0;
+    }
+
+    & path {
+      fill: black;
+    }
   }
 
   & td {

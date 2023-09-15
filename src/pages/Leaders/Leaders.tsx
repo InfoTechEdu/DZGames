@@ -14,6 +14,7 @@ import {
   GameItem,
   LeadersItem,
   LeadersPopupItem,
+  SortType,
   fetchLeadersDataById,
   hideUserInLeadersTable,
 } from "../../shared/leaders";
@@ -41,6 +42,7 @@ export const Leaders = () => {
   const [leadersList, setLeadersList] = useState<LeadersItem[] | null>(null);
   const [currentUserLeadersData, setCurrentUserLeadersData] =
     useState<LeadersItem | null>(null);
+  const [sortType, setSortType] = useState<SortType>("");
 
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [showFinalModal, setShowFinalModal] = useState(false);
@@ -152,6 +154,21 @@ export const Leaders = () => {
     getLeadersData(id);
   };
 
+  const onSortLeaders = () => {
+    setSortType(sortType === '' || sortType === 'desc' ? 'asc' : 'desc')
+
+    setLeadersList((l) => {
+      if (!l) return null;
+    
+      return [...l].sort((a, b) => {
+        const pointsA = a.progressData.totalPoints || 0;
+        const pointsB = b.progressData.totalPoints || 0;
+    
+        return sortType === "asc" ? pointsA - pointsB : pointsB - pointsA;
+      });
+    });
+  };
+
   return (
     <Wrapper>
       <LeadersHeader style={{ position: "relative" }}>
@@ -180,6 +197,8 @@ export const Leaders = () => {
             <ImgA className="asideButton" src={A} />
             <LeadersTable
               handleShowPopup={handleShowPopup}
+              onSort={onSortLeaders}
+              sortType={sortType}
               leadersList={leadersList}
               isUserHidden={isUserHidden}
             />

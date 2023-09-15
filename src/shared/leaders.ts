@@ -81,3 +81,5 @@ export const hideUserInLeadersTable = async (userId: string) => {
 export const DEFAULT_PROFILE_PHOTO = 'https://storage.googleapis.com/dzgamesdebug/battleofminds/badge_3.png'
 
 export const DEFAULT_USER_ID = "7c35493ffd7316a4322fe6061a01cc4c8ebbb8b0";
+
+export type SortType = '' | 'asc' | 'desc';
