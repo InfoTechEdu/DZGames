@@ -14,6 +14,7 @@ import {
   GameItem,
   LeadersItem,
   LeadersPopupItem,
+  SortType,
   fetchLeadersDataById,
   hideUserInLeadersTable,
 } from "../../shared/leaders";
@@ -24,6 +25,7 @@ import { LeadersTablePopup } from "../../components/LeadersTable/LeadersTablePop
 import { DropDown } from "../../components/DropDown/DropDown";
 import { LEADERS_CAROUSEL_SLIDES } from "../../shared/slider";
 import { CurrentUserTable } from "../../components/LeadersTable/CurrentUserTable";
+import { FinalModal } from "../../components/FinalModal/FinalModal";
 
 const userId = localStorage.getItem("userId") ?? DEFAULT_USER_ID;
 
@@ -38,9 +40,12 @@ export const Leaders = () => {
   const [selectedGameId, setSelectedGameId] = useState("");
 
   const [leadersList, setLeadersList] = useState<LeadersItem[] | null>(null);
-  const [currentUserLeadersData, setCurrentUserLeadersData] = useState<LeadersItem | null>(null);
+  const [currentUserLeadersData, setCurrentUserLeadersData] =
+    useState<LeadersItem | null>(null);
+  const [sortType, setSortType] = useState<SortType>("");
 
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
+  const [showFinalModal, setShowFinalModal] = useState(false);
 
   const [showPopup, setShowPopup] = useState(false);
   const [selectedLeadersItem, setSelectedLeadersItem] =
@@ -68,12 +73,14 @@ export const Leaders = () => {
       return;
     }
 
-    const mappedLeadersDataToIds = Object.entries(data.users).map(([id, item]) => {
-      return {
-        id,
-        ...item as any,
-      };
-    });
+    const mappedLeadersDataToIds = Object.entries(data.users).map(
+      ([id, item]) => {
+        return {
+          id,
+          ...(item as any),
+        };
+      }
+    );
 
     setLeadersList(mappedLeadersDataToIds);
     setCurrentUserLeadersData(data.requestedUserData);
@@ -89,18 +96,26 @@ export const Leaders = () => {
     getLeadersData(game.id);
   };
 
-  const onShowModal = () => {
+  const onConfirmationModalShow = () => {
     setShowConfirmationModal(true);
   };
 
-  const onModalClose = () => {
+  const onConfirmationModalClose = () => {
     setShowConfirmationModal(false);
+  };
+
+  const onFinalModalClose = () => {
+    setShowFinalModal(false);
+  };
+
+  const onFinalModalShow = () => {
+    setShowFinalModal(true);
   };
 
   const onConfirmUserHiding = useCallback(async () => {
     if (!userId) return;
 
-    setIsHidingLoading(true)
+    setIsHidingLoading(true);
 
     const res = await hideUserInLeadersTable(userId);
     if (res?.ok) {
@@ -108,8 +123,9 @@ export const Leaders = () => {
       setIsUserHidden(true);
     }
 
-    setIsHidingLoading(false)
-    onModalClose();
+    setIsHidingLoading(false);
+    onConfirmationModalClose();
+    onFinalModalShow();
   }, []);
 
   const handleShowPopup = (leadersItem: LeadersPopupItem) => {
@@ -136,6 +152,21 @@ export const Leaders = () => {
 
     setSelectedGameId(id);
     getLeadersData(id);
+  };
+
+  const onSortLeaders = () => {
+    setSortType(sortType === '' || sortType === 'desc' ? 'asc' : 'desc')
+
+    setLeadersList((l) => {
+      if (!l) return null;
+    
+      return [...l].sort((a, b) => {
+        const pointsA = a.progressData.totalPoints || 0;
+        const pointsB = b.progressData.totalPoints || 0;
+    
+        return sortType === "asc" ? pointsA - pointsB : pointsB - pointsA;
+      });
+    });
   };
 
   return (
@@ -166,6 +197,8 @@ export const Leaders = () => {
             <ImgA className="asideButton" src={A} />
             <LeadersTable
               handleShowPopup={handleShowPopup}
+              onSort={onSortLeaders}
+              sortType={sortType}
               leadersList={leadersList}
               isUserHidden={isUserHidden}
             />
@@ -188,7 +221,7 @@ export const Leaders = () => {
           <Button
             style={{ margin: "0 auto" }}
             width="332px"
-            onClick={onShowModal}
+            onClick={onConfirmationModalShow}
           >
             Скрыть мои данные в таблице
           </Button>
@@ -204,9 +237,16 @@ export const Leaders = () => {
       {showConfirmationModal && (
         <ConfirmationModal
           isLoading={isHidingLoading}
-          onCancel={onModalClose}
+          onCancel={onConfirmationModalClose}
           onConfirm={onConfirmUserHiding}
           title="Действительно хотите скрыть данные?"
+        />
+      )}
+
+      {showFinalModal && (
+        <FinalModal
+          title="Tеперь ваше имя скрыто в таблице лидеров"
+          onClose={onFinalModalClose}
         />
       )}
     </Wrapper>
