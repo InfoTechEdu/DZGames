@@ -51,8 +51,6 @@ export const Leaders = () => {
   const [selectedLeadersItem, setSelectedLeadersItem] =
     useState<LeadersPopupItem | null>(null);
 
-  const [isUserHidden, setIsUserHidden] = useState(Boolean(userId));
-
   const [isLoading, setIsLoading] = useState(false);
   const [isHidingLoading, setIsHidingLoading] = useState(false);
 
@@ -120,7 +118,20 @@ export const Leaders = () => {
     const res = await hideUserInLeadersTable(userId);
     if (res?.ok) {
       localStorage.setItem("userId", userId);
-      setIsUserHidden(true);
+      setLeadersList((l) => {
+        if (!l) return null;
+
+        return l.map((leader) => {
+          if (leader.id === userId) {
+            return {
+              ...leader,
+              displayInLeaderboards: false
+            }
+          }
+
+          return leader
+        })
+      })
     }
 
     setIsHidingLoading(false);
@@ -200,7 +211,6 @@ export const Leaders = () => {
               onSort={onSortLeaders}
               sortType={sortType}
               leadersList={leadersList}
-              isUserHidden={isUserHidden}
             />
 
             {currentUserLeadersData && (

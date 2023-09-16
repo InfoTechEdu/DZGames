@@ -13,7 +13,6 @@ import {
 interface Props {
   leadersList: LeadersItem[];
   handleShowPopup: (value: LeadersPopupItem) => void;
-  isUserHidden: boolean;
   onSort: () => void;
   sortType: SortType;
 }
@@ -21,7 +20,6 @@ interface Props {
 export const LeadersTable = ({
   leadersList,
   handleShowPopup,
-  isUserHidden,
   onSort,
   sortType,
 }: Props) => {
