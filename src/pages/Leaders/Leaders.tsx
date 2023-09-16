@@ -82,7 +82,7 @@ export const Leaders = () => {
       const pointsA = a.progressData.totalPoints || 0;
       const pointsB = b.progressData.totalPoints || 0;
   
-      return pointsA - pointsB;
+      return pointsB - pointsA;
     }));
     
     setCurrentUserLeadersData(data.requestedUserData);

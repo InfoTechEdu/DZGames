@@ -13,10 +13,7 @@ interface Props {
   handleShowPopup: (value: LeadersPopupItem) => void;
 }
 
-export const LeadersTable = ({
-  leadersList,
-  handleShowPopup,
-}: Props) => {
+export const LeadersTable = ({ leadersList, handleShowPopup }: Props) => {
   return (
     <>
       <Table>
@@ -73,7 +70,7 @@ export const LeadersTable = ({
                     </button>
                   </div>
                 </td>
-                <td>{grade || 'Нет'}</td>
+                <td>{grade || "Нет"}</td>
                 <td>{progressData?.totalPoints}</td>
                 <td>{gamesPlayed}</td>
               </tr>
