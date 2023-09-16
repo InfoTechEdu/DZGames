@@ -14,7 +14,7 @@ export interface LeadersItem {
         gamesPlayed: number;
         winCount?: number;
     };
-    displayInLeaderboard?: boolean
+    displayInLeaderboards?: boolean
 }
 
 export interface GameItem {

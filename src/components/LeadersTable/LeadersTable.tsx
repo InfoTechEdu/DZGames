@@ -56,13 +56,13 @@ export const LeadersTable = ({
               grade,
               position,
               progressData,
-              displayInLeaderboard = true,
+              displayInLeaderboards = true,
             } = item;
 
             const gamesPlayed = item.statistics?.gamesPlayed ?? 0;
 
             const shouldHideUser =
-              displayInLeaderboard === false || (userId === id && isUserHidden);
+              displayInLeaderboards === false && userId === id;
 
             return (
               <tr key={id}>
