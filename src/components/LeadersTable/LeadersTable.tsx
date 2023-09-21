@@ -1,30 +1,19 @@
 import styled from "styled-components";
 
 import { ReactComponent as PopupImg } from "../../assets/table_popup_btn.svg";
-import { ReactComponent as ArrowDown } from "../../assets/arrowDown.svg";
 
 import {
   DEFAULT_PROFILE_PHOTO,
   LeadersItem,
   LeadersPopupItem,
-  SortType,
 } from "../../shared/leaders";
 
 interface Props {
   leadersList: LeadersItem[];
   handleShowPopup: (value: LeadersPopupItem) => void;
-  isUserHidden: boolean;
-  onSort: () => void;
-  sortType: SortType;
 }
 
-export const LeadersTable = ({
-  leadersList,
-  handleShowPopup,
-  isUserHidden,
-  onSort,
-  sortType,
-}: Props) => {
+export const LeadersTable = ({ leadersList, handleShowPopup }: Props) => {
   return (
     <>
       <Table>
@@ -33,16 +22,7 @@ export const LeadersTable = ({
             <th>№</th>
             <th>Имя</th>
             <th>Класс</th>
-            <th onClick={onSort}>
-              Очки
-              {sortType !== "" && (
-                <ArrowDown
-                  style={
-                    sortType === "asc" ? { transform: "rotate(180deg)" } : {}
-                  }
-                />
-              )}
-            </th>
+            <th>Очки</th>
             <th>Игры</th>
           </tr>
         </thead>
@@ -56,13 +36,13 @@ export const LeadersTable = ({
               grade,
               position,
               progressData,
-              displayInLeaderboard = true,
+              displayInLeaderboards = true,
             } = item;
 
             const gamesPlayed = item.statistics?.gamesPlayed ?? 0;
 
             const shouldHideUser =
-              displayInLeaderboard === false || (userId === id && isUserHidden);
+              displayInLeaderboards === false && userId === id;
 
             return (
               <tr key={id}>
@@ -90,7 +70,7 @@ export const LeadersTable = ({
                     </button>
                   </div>
                 </td>
-                <td>нет</td>
+                <td>{grade || "Нет"}</td>
                 <td>{progressData?.totalPoints}</td>
                 <td>{gamesPlayed}</td>
               </tr>
