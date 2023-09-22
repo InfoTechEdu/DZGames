@@ -31,22 +31,22 @@ export interface LeadersPopupItem {
 }
 
 export const LEADERS_GAMES_LIST: GameItem[] = [
-    {
-        id: "1",
-        title: "Юнга Мур и большая стройка котов-пиратов",
-    },
-    {
-        id: "2",
-        title: "Экология",
-    },
+    // {
+    //     id: "1",
+    //     title: "Юнга Мур и большая стройка котов-пиратов",
+    // },
+    // {
+    //     id: "2",
+    //     title: "Экология",
+    // },
     {
         id: "battleofminds",
         title: "Борьба Умов",
     },
-    {
-        id: "4",
-        title: "Время Истории",
-    },
+    // {
+    //     id: "4",
+    //     title: "Время Истории",
+    // },
     {
         id: "attentiontrainer",
         title: "Тренажер внимания",
@@ -55,11 +55,16 @@ export const LEADERS_GAMES_LIST: GameItem[] = [
         id: "arithmetic",
         title: "Арифметика",
     },
+    {
+        id: "tanksquiz",
+        title: "TanksQuiz",
+    },
 ];
 
 export const fetchLeadersDataById = async (gameId: string, userId?: string) => {
     try {
         const userIdParam = userId ? `&userId=${userId}` : '';
+        console.log("Trying fetching game with id: " + gameId)
         const res = await fetch(`${API_URL}/DownloadTop10LeaderboardForDashboard?game=${gameId}${userIdParam}`);
         return await res.json()
     } catch (error) {

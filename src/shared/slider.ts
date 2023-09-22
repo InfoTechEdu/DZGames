@@ -7,6 +7,8 @@ import bgImageMediumGrammarspaceshooter from '../assets/grammarspaceshooter_caro
 
 const TANKS_QUIZ_LINK = '/builds/tanksquiz/index.html';
 const ATTENTION_TRAINER_LINK = '/builds/attentiontrainer/index.html';
+const ARITHMETIC_LINK = '/builds/arithmetic/index.html';
+const GRAMMAR_SPACE_SHOOTER_LINK = '/builds/grammarspaceshooter/index.html';
 
 export const GRAMMAR_SLIDES = [
   {
@@ -35,7 +37,7 @@ export const SIMULATOR_SLIDES = [
     description:
       'Главное сосредоточиться',
     playLink: ATTENTION_TRAINER_LINK,
-    descriptionLink: '/about-game'
+    descriptionLink: '/builds/attentiontrainer/index.html'
   },
   {
     id: 'arithmetic',
@@ -43,7 +45,8 @@ export const SIMULATOR_SLIDES = [
     title: 'Арифметик',
     description:
       'Сразись за звание арифметического чемпиона',
-    descriptionLink: '/about-game',
+    playLink: ARITHMETIC_LINK,
+    descriptionLink: '/builds/arithmetic/index.html'
   },
   {
     id: 'grammarspaceshooter',
@@ -51,7 +54,8 @@ export const SIMULATOR_SLIDES = [
     title: 'Грамматический шутер',
     description:
       'ВетреНый или ВетреННый?',
-    descriptionLink: '/grammarspaceshooter',
+      playLink: GRAMMAR_SPACE_SHOOTER_LINK,
+    descriptionLink: '/builds/grammarspaceshooter/index.html'
   }
 ];
 
@@ -63,22 +67,23 @@ export const QUIZ_SLIDES = [
     description:
       'Отвечай на вопросы, собирай снаряды и освободи территорию от врагов!',
     playLink: TANKS_QUIZ_LINK,
-    descriptionLink: '/about-game'
-  },
-  {
-    id: 'battleofminds',
-    img: bgImageMedium,
-    title: 'Борьба умов',
-    description: 'Борьба умов',
-    descriptionLink: '/about-game'
-  },
-  {
-    id: 'historyTime',
-    img: bgImageMedium,
-    title: 'Время истории',
-    description: 'Время истории',
-    descriptionLink: '/about-game'
+    descriptionLink: '/builds/tanksquiz/index.html'
   }
+  // ,
+  // {
+  //   id: 'battleofminds',
+  //   img: bgImageMedium,
+  //   title: 'Борьба умов',
+  //   description: 'Борьба умов',
+  //   descriptionLink: '/builds/battleofminds/index.html',
+  // },
+  // {
+  //   id: 'timeofhistory',
+  //   img: bgImageMedium,
+  //   title: 'Время истории',
+  //   description: 'Время истории',
+  //   descriptionLink: '/builds/timeofhistory/index.html',
+  // }
 ];
 
 export const RECOMMENDED_GAMES_SLIDES = [
@@ -126,10 +131,11 @@ export const saveGameToLocalStorage = (item: GameSliderData) => {
 }
 
 export const LEADERS_CAROUSEL_SLIDES = [
-  GRAMMAR_SLIDES[0],
-  GRAMMAR_SLIDES[1],
-  QUIZ_SLIDES[1],
-  QUIZ_SLIDES[2],
+  // GRAMMAR_SLIDES[0],
+  // GRAMMAR_SLIDES[1],
+  QUIZ_SLIDES[0],
+  // QUIZ_SLIDES[2],
   SIMULATOR_SLIDES[0],
   SIMULATOR_SLIDES[1],
+  SIMULATOR_SLIDES[2],
 ];
