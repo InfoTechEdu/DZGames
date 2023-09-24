@@ -10,7 +10,7 @@ import { CurlyArrow } from "../../components/CurlyArrow/CurlyArrow";
 
 import { ConfirmationModal } from "../../components/ConfirmationModal/ConfirmationModal";
 import {
-  DEFAULT_USER_ID,
+  // DEFAULT_USER_ID,
   GameItem,
   LeadersItem,
   LeadersPopupItem,
@@ -27,7 +27,7 @@ import { CurrentUserTable } from "../../components/LeadersTable/CurrentUserTable
 import { FinalModal } from "../../components/FinalModal/FinalModal";
 import { getItemFromCookies, setItemToCookies } from "../../shared/cookies";
 
-const userId = getItemFromCookies('userId') ?? DEFAULT_USER_ID;
+const userId = getItemFromCookies('userId');// ?? DEFAULT_USER_ID;
 
 const TABLE_BACKGROUND_IMG = new URL(
   "../../assets/table-bg.png",
@@ -122,7 +122,7 @@ export const Leaders = () => {
 
     const res = await hideUserInLeadersTable(userId);
     if (res?.ok) {
-      setItemToCookies('userId', userId)
+      // setItemToCookies('userId', userId)
   
       setLeadersList((l) => {
         if (!l) return null;
