@@ -27,7 +27,9 @@ import { CurrentUserTable } from "../../components/LeadersTable/CurrentUserTable
 import { FinalModal } from "../../components/FinalModal/FinalModal";
 import { getItemFromCookies, setItemToCookies } from "../../shared/cookies";
 
-const userId = getItemFromCookies('userId');// ?? DEFAULT_USER_ID;
+// const userId = getItemFromCookies('userId');// ?? DEFAULT_USER_ID;
+// const userId = "7c35493ffd7316a4322fe6061a01cc4c8ebbb8b0"; //for tests
+const userId = getItemFromCookies('userId') ?? undefined;
 
 const TABLE_BACKGROUND_IMG = new URL(
   "../../assets/table-bg.png",
@@ -217,7 +219,7 @@ export const Leaders = () => {
             )}
           </TableWrapper>
 
-          {userId && (
+          {currentUserLeadersData && (
             <Button
               style={{ margin: "0 auto" }}
               width="332px"
