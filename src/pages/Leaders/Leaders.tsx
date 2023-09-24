@@ -25,8 +25,9 @@ import { DropDown } from "../../components/DropDown/DropDown";
 import { LEADERS_CAROUSEL_SLIDES } from "../../shared/slider";
 import { CurrentUserTable } from "../../components/LeadersTable/CurrentUserTable";
 import { FinalModal } from "../../components/FinalModal/FinalModal";
+import { getItemFromCookies, setItemToCookies } from "../../shared/cookies";
 
-const userId = localStorage.getItem("userId") ?? DEFAULT_USER_ID;
+const userId = getItemFromCookies('userId') ?? DEFAULT_USER_ID;
 
 const TABLE_BACKGROUND_IMG = new URL(
   "../../assets/table-bg.png",
@@ -121,7 +122,8 @@ export const Leaders = () => {
 
     const res = await hideUserInLeadersTable(userId);
     if (res?.ok) {
-      localStorage.setItem("userId", userId);
+      setItemToCookies('userId', userId)
+  
       setLeadersList((l) => {
         if (!l) return null;
 
