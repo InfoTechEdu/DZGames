@@ -62,9 +62,8 @@ export const Leaders = () => {
 
     const data = await fetchLeadersDataById(gameId, userId);
 
-    if (!data.users && !data.requestedUserData) {
+    if (!data.users) {
       setLeadersList(null);
-      setCurrentUserLeadersData(null);
       setIsLoading(false);
 
       return;
@@ -79,13 +78,15 @@ export const Leaders = () => {
       }
     );
 
-    setLeadersList(mappedLeadersDataToIds.sort((a, b) => {
-      const pointsA = a.progressData.totalPoints || 0;
-      const pointsB = b.progressData.totalPoints || 0;
-  
-      return pointsB - pointsA;
-    }));
-    
+    setLeadersList(
+      mappedLeadersDataToIds.sort((a, b) => {
+        const pointsA = a.progressData.totalPoints || 0;
+        const pointsB = b.progressData.totalPoints || 0;
+
+        return pointsB - pointsA;
+      })
+    );
+
     setCurrentUserLeadersData(data.requestedUserData);
     setIsLoading(false);
   }, []);
@@ -123,7 +124,6 @@ export const Leaders = () => {
     const res = await hideUserInLeadersTable(userId);
     if (res?.ok) {
       // setItemToCookies('userId', userId)
-  
       setLeadersList((l) => {
         if (!l) return null;
 
@@ -131,13 +131,13 @@ export const Leaders = () => {
           if (leader.id === userId) {
             return {
               ...leader,
-              displayInLeaderboards: false
-            }
+              displayInLeaderboards: false,
+            };
           }
 
-          return leader
-        })
-      })
+          return leader;
+        });
+      });
     }
 
     setIsHidingLoading(false);
@@ -217,13 +217,15 @@ export const Leaders = () => {
             )}
           </TableWrapper>
 
-          <Button
-            style={{ margin: "0 auto" }}
-            width="332px"
-            onClick={onConfirmationModalShow}
-          >
-            Скрыть мои данные в таблице
-          </Button>
+          {userId && (
+            <Button
+              style={{ margin: "0 auto" }}
+              width="332px"
+              onClick={onConfirmationModalShow}
+            >
+              Скрыть мои данные в таблице
+            </Button>
+          )}
         </>
       ) : (
         <SubTitle text="Нет данных" />
