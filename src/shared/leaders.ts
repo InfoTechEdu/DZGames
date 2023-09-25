@@ -39,14 +39,18 @@ export const LEADERS_GAMES_LIST: GameItem[] = [
     //     id: "2",
     //     title: "Экология",
     // },
-    {
-        id: "battleofminds",
-        title: "Борьба Умов",
-    },
+    // {
+    //     id: "battleofminds",
+    //     title: "Борьба Умов",
+    // },
     // {
     //     id: "4",
     //     title: "Время Истории",
     // },
+    {
+        id: "grammarspaceshooter",
+        title: "Граматический шутер",
+    },
     {
         id: "attentiontrainer",
         title: "Тренажер внимания",

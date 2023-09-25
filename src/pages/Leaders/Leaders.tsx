@@ -63,7 +63,8 @@ export const Leaders = () => {
     setIsLoading(true);
 
     const data = await fetchLeadersDataById(gameId, userId);
-
+    console.log("[debug] Leaderboard data was get: " + data);
+  
     if (!data.users) {
       setLeadersList(null);
       setIsLoading(false);
