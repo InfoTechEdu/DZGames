@@ -63,7 +63,7 @@ export const Leaders = () => {
     setIsLoading(true);
 
     const data = await fetchLeadersDataById(gameId, userId);
-    console.log("[debug] Leaderboard data was get: " + data);
+    console.log("[debug] Leaderboard data was get: " + JSON.stringify(data));
   
     if (!data.users) {
       setLeadersList(null);
@@ -83,10 +83,12 @@ export const Leaders = () => {
 
     setLeadersList(
       mappedLeadersDataToIds.sort((a, b) => {
-        const pointsA = a.progressData.totalPoints || 0;
-        const pointsB = b.progressData.totalPoints || 0;
+        // const pointsA = a.progressData.totalPoints || 0;
+        // const pointsB = b.progressData.totalPoints || 0;
+        const positionA = a.position || 0;
+        const positionB = b.position || 0;
 
-        return pointsB - pointsA;
+        return positionA - positionB;
       })
     );
 

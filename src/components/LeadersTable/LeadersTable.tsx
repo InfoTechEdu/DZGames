@@ -73,7 +73,9 @@ export const LeadersTable = ({ leadersList, handleShowPopup }: Props) => {
                 </td>
                 <td>{grade || "Нет"}</td>
                 <td>{progressData?.totalPoints}</td>
-                <td>{gamesPlayed}</td>
+                {/* #TEMP. Edit */}
+                <td>{gamesPlayed !== 0 ? gamesPlayed : "-"}</td>
+                {/* <td>-</td> */}
               </tr>
             );
           })}

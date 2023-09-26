@@ -133,9 +133,9 @@ export const saveGameToLocalStorage = (item: GameSliderData) => {
 export const LEADERS_CAROUSEL_SLIDES = [
   // GRAMMAR_SLIDES[0],
   // GRAMMAR_SLIDES[1],
-  QUIZ_SLIDES[0],
   // QUIZ_SLIDES[2],
-  SIMULATOR_SLIDES[0],
   SIMULATOR_SLIDES[1],
+  SIMULATOR_SLIDES[0],
+  QUIZ_SLIDES[0],
   SIMULATOR_SLIDES[2],
 ];

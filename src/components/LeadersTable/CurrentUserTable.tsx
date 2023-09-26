@@ -23,7 +23,7 @@ export const CurrentUserTable = ({
     <Table withBorder>
       <tbody>
         <tr>
-          <td>{position}</td>
+          <td>{position === "null" || position === null || position === undefined ? "-" : position}</td>
           <td>
             <div>
               <ProfilePhoto
@@ -48,7 +48,10 @@ export const CurrentUserTable = ({
           </td>
           <td>{grade || 'Нет'}</td>
           <td>{progressData.totalPoints}</td>
-          <td>{statistics?.gamesPlayed ?? 0}</td>
+          {/* #TEMP. Edit */}
+          {/* #refactor */}
+          <td>{statistics?.gamesPlayed === null ? "-" : (statistics?.gamesPlayed === 0 ? "-" : statistics?.gamesPlayed)}</td>
+          {/* <td>-</td> */}
         </tr>
       </tbody>
     </Table>
