@@ -85,8 +85,8 @@ export const Leaders = () => {
       mappedLeadersDataToIds.sort((a, b) => {
         // const pointsA = a.progressData.totalPoints || 0;
         // const pointsB = b.progressData.totalPoints || 0;
-        const positionA = a.position || 0;
-        const positionB = b.position || 0;
+        const positionA = (a.position === null || a.position === "null") ? Number.MAX_SAFE_INTEGER : a.position;
+        const positionB = (b.position === null || b.position === "null") ? Number.MAX_SAFE_INTEGER : b.position;
 
         return positionA - positionB;
       })
