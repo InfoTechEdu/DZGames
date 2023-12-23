@@ -17,6 +17,7 @@
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.10.0",
     "react-slick": "^0.29.0",
+    "react-yandex-metrika": "^2.6.0",
     "styled-components": "^5.3.9",
     "vite-plugin-svgr": "^2.4.0"
   },

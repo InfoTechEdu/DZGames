@@ -46,8 +46,8 @@ export const RecentlyPlayedGames = ({ data }: IProps) => {
         arrows={false}
       >
         {data.map((item, i) => {
+          const recentImgSrc = item.imgRecent ?? item.img;
           const linkToGame = item.description ? item.descriptionLink : item.playLink
-
           return (
             <SliderLinkItem
               key={i}
@@ -59,7 +59,9 @@ export const RecentlyPlayedGames = ({ data }: IProps) => {
                 }
               }}
             >
-              <Img alt='' src={item.img} />
+              
+              <Img alt=''  src={recentImgSrc} />
+              
                 {item.title && (
                   <CardText>
                     {item.title && <CardTitle>{item.title}</CardTitle>}

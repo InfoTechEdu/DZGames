@@ -1,14 +1,31 @@
 import styled from 'styled-components';
+//bg image
 import bgImage from '../../../assets/slider-bg.png';
-import bgImageMedium from '../../../assets/slider-bg-medium.png';
 import bgImageEcology from '../../../assets/slider-bg-ecology.png';
-import bgImageMediumEcology from '../../../assets/slider-bg-medium-ecology.png';
+import bgImageBattleOfMinds from '../../../assets/slider-bg-battleofminds.png';
+import bgImageTimeOfHistory from '../../../assets/slider-bg-timeofhistory.png';
+
+//slider opacity
 import sliderOpacity from '../../../assets/slider-opacity.png';
 import sliderOpacityEcology from '../../../assets/slider-opacity-ecology.png';
+import sliderOpacityBattleOfMinds from '../../../assets/slider-opacity-battleofminds.png';
+import sliderOpacityTimeOfHistory from '../../../assets/slider-opacity-timeofhistory.png';
+
+//bg image medium
+import bgImageMedium from '../../../assets/slider-bg-medium.png';
+import bgImageMediumEcology from '../../../assets/slider-bg-medium-ecology.png';
+import bgImageMediumBattleOfMinds from '../../../assets/slider-bg-medium-battleofminds.png';
+
+//bg image phone medium
+import bgImagePhoneMediumBattleOfMinds from '../../../assets/slider-bg-phone-medium-battleofminds.png';
+import bgImagePhoneMediumTimeOfHistory from '../../../assets/slider-bg-phone-medium-timeofhistory.png';
+
+
 import { Carousel } from 'react-responsive-carousel';
 import { Button } from '../../../components/Button/Button';
 import { useEffect, useMemo, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ym from 'react-yandex-metrika';
 
 const INTERVAL = 6000;
 
@@ -18,21 +35,97 @@ export const CarouselSection = () => {
   const [slideIndex, setSlideIndex] = useState(0);
 
   const navigateToMurGame = useCallback(() => {
+    ym('reachGoal', 'open-yunga-mur-from-carousel')
     navigate('/about-game');
   }, [navigate]);
 
   const navigateToEcologyGame = useCallback(() => {
+    ym('reachGoal', 'open-ecology-game-from-carousel')
     navigate('/ecology-game');
+  }, [navigate]);
+
+  const navigateToBattleOfMindsGame = useCallback(() => {
+    ym('reachGoal', 'open-battleofminds-game-from-carousel')
+    const URL = `/builds/battleofminds/index.html`;
+    window.open(URL, '_blank')?.focus();
+
+    const sendEventToAnalytics = async () => {
+      //#analytics
+      let uid = localStorage.getItem('uid');
+      if (!uid) {
+        localStorage.setItem('uid', generateUserId());
+        uid = localStorage.getItem('uid');
+      }
+      function generateUserId() {
+        var possibleChars =
+          'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var userId = '';
+        for (var j = 0; j < 20; j++)
+          userId += possibleChars.charAt(
+            Math.floor(Math.random() * possibleChars.length)
+          );
+        return userId;
+      }
+      const response = await fetch(
+        `https://functions.yandexcloud.net/d4ec1o5pg8he0c6aej8g?game=battleofminds&uid=${uid}`
+      );
+
+      sendEventToAnalytics();
+    };
+
+
+
+    navigate('/');
+  }, [navigate]);
+
+  const navigateToTimeOfHistoryGame = useCallback(() => {
+    ym('reachGoal', 'open-timeofhistory-game-from-carousel')
+    const URL = `/builds/timeofhistory/index.html`;
+    window.open(URL, '_blank')?.focus();
+
+    const sendEventToAnalytics = async () => {
+      //#analytics
+      let uid = localStorage.getItem('uid');
+      if (!uid) {
+        localStorage.setItem('uid', generateUserId());
+        uid = localStorage.getItem('uid');
+      }
+      function generateUserId() {
+        var possibleChars =
+          'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var userId = '';
+        for (var j = 0; j < 20; j++)
+          userId += possibleChars.charAt(
+            Math.floor(Math.random() * possibleChars.length)
+          );
+        return userId;
+      }
+      const response = await fetch(
+        `https://functions.yandexcloud.net/d4ec1o5pg8he0c6aej8g?game=timeofhistory&uid=${uid}`
+      );
+
+      sendEventToAnalytics();
+    };
+
+
+
+    navigate('/');
   }, [navigate]);
 
   const buttons = useMemo(
     () => [
+      <Button onClick={navigateToBattleOfMindsGame} width='100%'>
+        Играть в браузере
+      </Button>,
       <Button onClick={navigateToMurGame} width='100%'>
         Скачать для Windows
       </Button>,
-      <Button onClick={navigateToEcologyGame} width='100%'>
+      <Button onClick={navigateToTimeOfHistoryGame} width='100%'>
         Играть в браузере
       </Button>,
+      // <Button onClick={navigateToEcologyGame} width='100%'>
+      //   Играть в браузере
+      // </Button>,
     ],
     [navigateToMurGame, navigateToEcologyGame]
   );
@@ -80,6 +173,17 @@ export const CarouselSection = () => {
         }}
       >
         <SliderItem className='mySliderItem'>
+          <LeftBattleOfMinds />
+          <InnerBattleOfMinds>
+            <Wrapper>
+              <h2>Борьба умов</h2>
+              <p>
+                Сразись с игроками в онлайн викторине!
+              </p>
+            </Wrapper>
+          </InnerBattleOfMinds>
+        </SliderItem>
+        <SliderItem className='mySliderItem'>
           <Left />
           <Inner>
             <Wrapper>
@@ -92,6 +196,17 @@ export const CarouselSection = () => {
           </Inner>
         </SliderItem>
         <SliderItem className='mySliderItem'>
+          <LeftTimeOfHistory />
+          <InnerTimeOfHistory>
+            <Wrapper>
+              <h2>Время истории</h2>
+              <p>
+                Шкала времени и исторические события в онлайн-викторине{' '}
+              </p>
+            </Wrapper>
+          </InnerTimeOfHistory>
+        </SliderItem>
+        {/* <SliderItem className='mySliderItem'>
           <LeftEcology />
           <InnerEcology>
             <Wrapper>
@@ -102,7 +217,7 @@ export const CarouselSection = () => {
               </p>
             </Wrapper>
           </InnerEcology>
-        </SliderItem>
+        </SliderItem> */}
         {/* <SliderItem className='mySliderItem'>
           <Left />
           <Inner>
@@ -270,6 +385,68 @@ const LeftEcology = styled.div`
     background-image: url('${bgImageEcology}');
   }
 `;
+const LeftBattleOfMinds = styled.div`
+  display: flex;
+  flex: 1;
+  height: 100%;
+  overflow: hidden;
+
+  border-radius: 20px 0 0 20px;
+
+  background-image: url('${bgImageBattleOfMinds}');
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: cover;
+
+  @media only screen and (max-width: 1100px) {
+    width: 50%;
+  }
+
+  @media only screen and (max-width: 820px) {
+    background-image: url('${bgImageMediumBattleOfMinds}');
+  }
+
+  @media only screen and (max-width: 690px) {
+    width: 100%;
+    height: 266px;
+    flex: auto;
+
+    border-radius: 20px 20px 0 0;
+
+    background-image: url('${bgImagePhoneMediumBattleOfMinds}');
+  }
+`;
+const LeftTimeOfHistory = styled.div`
+  display: flex;
+  flex: 1;
+  height: 100%;
+  overflow: hidden;
+
+  border-radius: 20px 0 0 20px;
+
+  background-image: url('${bgImageTimeOfHistory}');
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: cover;
+
+  @media only screen and (max-width: 1100px) {
+    width: 50%;
+  }
+
+  @media only screen and (max-width: 820px) {
+    background-image: url('${bgImagePhoneMediumTimeOfHistory}');
+  }
+
+  @media only screen and (max-width: 690px) {
+    width: 100%;
+    height: 266px;
+    flex: auto;
+
+    border-radius: 20px 20px 0 0;
+
+    background-image: url('${bgImagePhoneMediumTimeOfHistory}');
+  }
+`;
 
 const CustomIndicator = styled.button<{
   isSelected: boolean;
@@ -292,7 +469,7 @@ const CustomIndicator = styled.button<{
     height: 4px;
     border-radius: 5px;
     animation: ${({ isSelected }) =>
-      isSelected && `changeWidth ${INTERVAL / 1000}s linear`};
+    isSelected && `changeWidth ${INTERVAL / 1000}s linear`};
 
     @keyframes changeWidth {
       0% {
@@ -361,6 +538,80 @@ const InnerEcology = styled.div`
   position: relative;
 
   background-image: url('${sliderOpacityEcology}');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  @media only screen and (max-width: 1100px) {
+    width: 50%;
+  }
+
+  @media only screen and (max-width: 820px) {
+    padding: 86px 24px 38px 24px;
+  }
+
+  @media only screen and (max-width: 690px) {
+    width: 100%;
+    height: 378px;
+
+    padding: 52px 24px 24px 24px;
+
+    border-radius: 0 0 20px 20px;
+  }
+`;
+const InnerBattleOfMinds = styled.div`
+  height: 100%;
+  width: 520px;
+  padding: 96px 48px 48px 48px;
+  border-radius: 0 20px 20px 0;
+
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  z-index: 200;
+
+  position: relative;
+
+  background-image: url('${sliderOpacityBattleOfMinds}');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  @media only screen and (max-width: 1100px) {
+    width: 50%;
+  }
+
+  @media only screen and (max-width: 820px) {
+    padding: 86px 24px 38px 24px;
+  }
+
+  @media only screen and (max-width: 690px) {
+    width: 100%;
+    height: 378px;
+
+    padding: 52px 24px 24px 24px;
+
+    border-radius: 0 0 20px 20px;
+  }
+`;
+const InnerTimeOfHistory = styled.div`
+  height: 100%;
+  width: 520px;
+  padding: 96px 48px 48px 48px;
+  border-radius: 0 20px 20px 0;
+
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  z-index: 200;
+
+  position: relative;
+
+  background-image: url('${sliderOpacityTimeOfHistory}');
   background-repeat: no-repeat;
   background-size: cover;
 

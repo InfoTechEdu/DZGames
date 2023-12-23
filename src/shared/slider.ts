@@ -4,11 +4,24 @@ import bgImageMediumTanksquiz from '../assets/tanksquiz_carousel_item.png'
 import bgImageMediumAttentiontrainer from '../assets/attentiontrainer_carousel_item.png'
 import bgImageMediumArithmetic from '../assets/arithmetic_carousel_item.png';
 import bgImageMediumGrammarspaceshooter from '../assets/grammarspaceshooter_carousel_item.png';
+import bgImageMediumBattleofminds from '../assets/battleofminds_carousel_item.png';
+import bgImageSmallBannerBattleofminds from '../assets/battleofminds_small_banner.png';
+import bgImageMediumLogictrainer from '../assets/logictrainer_carousel_item.png';
+import bgImageSmallBannerLogicTrainer from '../assets/logictrainer_small_banner.png';
+import bgImageMediumTimeOfHistory from '../assets/timeofhistory_carousel_item.png';
+import bgImageSmallBannerTimeOfHIstory from '../assets/timeofhistory_small_banner.png';
+
+import bgImageRecentBattleofminds from '../assets/battleofminds_recent_item.png';
+import bgImageRecentLogictrainer from '../assets/logictrainer_recent_item.png';
+import bgImageRecentTimeofhistory from '../assets/timeofhistory_recent_item.png';
 
 const TANKS_QUIZ_LINK = '/builds/tanksquiz/index.html';
 const ATTENTION_TRAINER_LINK = '/builds/attentiontrainer/index.html';
 const ARITHMETIC_LINK = '/builds/arithmetic/index.html';
 const GRAMMAR_SPACE_SHOOTER_LINK = '/builds/grammarspaceshooter/index.html';
+const BATTLE_OF_MINDS_LINK = `/builds/battleofminds/index.html`;
+const LOGIC_TRAINER_LINK = `/builds/logictrainer/index.html`;
+const TIME_OF_HISTORY_LINK = `/builds/timeofhistory/index.html`;
 
 export const GRAMMAR_SLIDES = [
   {
@@ -40,6 +53,16 @@ export const SIMULATOR_SLIDES = [
     descriptionLink: '/builds/attentiontrainer/index.html'
   },
   {
+    id: 'logictrainer',
+    img: bgImageSmallBannerLogicTrainer,
+    imgRecent: bgImageRecentLogictrainer,
+    title: 'Тренажер логики',
+    description:
+      'Ищи логические связи в разных режимах',
+      playLink: LOGIC_TRAINER_LINK,
+    descriptionLink: '/builds/logictrainer/index.html'
+  },
+  {
     id: 'arithmetic',
     img: bgImageMediumArithmetic,
     title: 'Арифметик',
@@ -61,6 +84,16 @@ export const SIMULATOR_SLIDES = [
 
 export const QUIZ_SLIDES = [
   {
+    id: 'battleofminds',
+    img: bgImageSmallBannerBattleofminds,
+    imgRecent: bgImageRecentBattleofminds,
+    title: 'Борьба умов',
+    description:
+      'Вступай в онлайн-викторину и побеждай!',
+    playLink: BATTLE_OF_MINDS_LINK,
+    descriptionLink: '/builds/battleofminds/index.html'
+  },
+  {
     id: 'tanksquiz',
     img: bgImageMediumTanksquiz,
     title: 'TanksQuiz',
@@ -68,6 +101,16 @@ export const QUIZ_SLIDES = [
       'Отвечай на вопросы, собирай снаряды и освободи территорию от врагов!',
     playLink: TANKS_QUIZ_LINK,
     descriptionLink: '/builds/tanksquiz/index.html'
+  },
+  {
+    id: 'timeofhistory',
+    img: bgImageSmallBannerTimeOfHIstory,
+    imgRecent: bgImageRecentTimeofhistory,
+    title: 'Время истории',
+    description:
+      'Шкала времени и исторические события в онлайн-викторине',
+    playLink: TIME_OF_HISTORY_LINK,
+    descriptionLink: '/builds/timeofhistory/index.html'
   }
   // ,
   // {
@@ -88,22 +131,23 @@ export const QUIZ_SLIDES = [
 
 export const RECOMMENDED_GAMES_SLIDES = [
   GRAMMAR_SLIDES[0],
-  GRAMMAR_SLIDES[1],
-  SIMULATOR_SLIDES[1],
+  QUIZ_SLIDES[0],
+  // GRAMMAR_SLIDES[1],
+  SIMULATOR_SLIDES[2],
   SIMULATOR_SLIDES[0],
-  QUIZ_SLIDES[0]
 ];
 
 export const MAIN_CAROUSEL_SLIDES = [
   GRAMMAR_SLIDES[0],
-  SIMULATOR_SLIDES[0],
   QUIZ_SLIDES[0],
+  SIMULATOR_SLIDES[1],
   GRAMMAR_SLIDES[1],
 ];
 
 export interface GameSliderData {
   id: string;
   img: string;
+  imgRecent?: string;
   title?: string;
   description?: string;
   descriptionLink?: string;
@@ -134,8 +178,8 @@ export const LEADERS_CAROUSEL_SLIDES = [
   // GRAMMAR_SLIDES[0],
   // GRAMMAR_SLIDES[1],
   // QUIZ_SLIDES[2],
-  SIMULATOR_SLIDES[1],
-  SIMULATOR_SLIDES[0],
   QUIZ_SLIDES[0],
+  SIMULATOR_SLIDES[0],
   SIMULATOR_SLIDES[2],
+  SIMULATOR_SLIDES[3]
 ];

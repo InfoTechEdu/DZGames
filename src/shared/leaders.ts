@@ -48,21 +48,33 @@ export const LEADERS_GAMES_LIST: GameItem[] = [
     //     title: "Время Истории",
     // },
     {
+        id: "arithmetic",
+        title: "Арифметика",
+    },
+    {
+        id: "battleofminds",
+        title: "Борьба умов",
+    },
+    {
+        id: "timeofhistory",
+        title: "Время истории",
+    },
+    {
         id: "grammarspaceshooter",
         title: "Граматический шутер",
+    },
+    {
+        id: "logictrainer",
+        title: "Тренажер логики",
     },
     {
         id: "attentiontrainer",
         title: "Тренажер внимания",
     },
     {
-        id: "arithmetic",
-        title: "Арифметика",
-    },
-    {
         id: "tanksquiz",
         title: "TanksQuiz",
-    },
+    }
 ];
 
 export const fetchLeadersDataById = async (gameId: string, userId?: string) => {

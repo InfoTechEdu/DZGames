@@ -6,11 +6,14 @@ import GameBanner320 from '../../../assets/gameBanner320.png';
 import RightArrow from '../../../assets/right_arrow.svg';
 import { Button } from '../../../components/Button/Button';
 import { useState } from 'react';
+import ym from 'react-yandex-metrika';
 
 export const Banner = () => {
   const [buttonText, setButtonText] = useState('Нажми меня');
 
   const handleDownload = async () => {
+    ym('reachGoal','yunga-mur-download')
+
     setButtonText('Идет скачивание...');
 
     //#analytics
