@@ -52,6 +52,10 @@ export const LEADERS_GAMES_LIST: GameItem[] = [
         title: "Арифметика",
     },
     {
+        id: "arithmeticchain",
+        title: "Арифметическая цепочка",
+    },
+    {
         id: "battleofminds",
         title: "Борьба умов",
     },

@@ -10,10 +10,17 @@ import bgImageMediumLogictrainer from '../assets/logictrainer_carousel_item.png'
 import bgImageSmallBannerLogicTrainer from '../assets/logictrainer_small_banner.png';
 import bgImageMediumTimeOfHistory from '../assets/timeofhistory_carousel_item.png';
 import bgImageSmallBannerTimeOfHIstory from '../assets/timeofhistory_small_banner.png';
+import bgImageSmallBannerArithmeticChain from '../assets/arithmeticchain_small_banner.png';
+import bgImageSmallBannerArticlesGame from '../assets/articlesgame_small_banner.png';
 
 import bgImageRecentBattleofminds from '../assets/battleofminds_recent_item.png';
 import bgImageRecentLogictrainer from '../assets/logictrainer_recent_item.png';
 import bgImageRecentTimeofhistory from '../assets/timeofhistory_recent_item.png';
+import bgImageRecentArithmeticchain from '../assets/arithmeticchain_recent_item.png';
+import bgImageRecentArticlesgame from '../assets/articlesgame_recent_item.png';
+
+import bgImageSmallBannerForMainCarouselArticlesGame from '../assets/articlesgame_small_banner_for_main_carousel.png';
+import bgImageSmallBannerForMainCarouselArithmeticChain from '../assets/arithmeticchain_small_banner_for_main_carousel.png';
 
 const TANKS_QUIZ_LINK = '/builds/tanksquiz/index.html';
 const ATTENTION_TRAINER_LINK = '/builds/attentiontrainer/index.html';
@@ -22,6 +29,8 @@ const GRAMMAR_SPACE_SHOOTER_LINK = '/builds/grammarspaceshooter/index.html';
 const BATTLE_OF_MINDS_LINK = `/builds/battleofminds/index.html`;
 const LOGIC_TRAINER_LINK = `/builds/logictrainer/index.html`;
 const TIME_OF_HISTORY_LINK = `/builds/timeofhistory/index.html`;
+const ARITHMETIC_CHAIN_LINK = `/builds/arithmeticchain/index.html`;
+const ARTICLES_GAME_LINK = `/builds/articlesgame/index.html`;
 
 export const GRAMMAR_SLIDES = [
   {
@@ -53,6 +62,17 @@ export const SIMULATOR_SLIDES = [
     descriptionLink: '/builds/attentiontrainer/index.html'
   },
   {
+    id: 'articlesgame',
+    img: bgImageSmallBannerArticlesGame,
+    imgRecent: bgImageRecentArticlesgame,
+    imgMainCarousel: bgImageSmallBannerForMainCarouselArticlesGame,
+    title: 'Артикли',
+    description:
+      'Проверь свою english грамматику',
+      playLink: ARTICLES_GAME_LINK,
+    descriptionLink: '/builds/articlesgame/index.html'
+  },
+  {
     id: 'logictrainer',
     img: bgImageSmallBannerLogicTrainer,
     imgRecent: bgImageRecentLogictrainer,
@@ -79,6 +99,17 @@ export const SIMULATOR_SLIDES = [
       'ВетреНый или ВетреННый?',
       playLink: GRAMMAR_SPACE_SHOOTER_LINK,
     descriptionLink: '/builds/grammarspaceshooter/index.html'
+  },
+  {
+    id: 'arithmeticchain',
+    img: bgImageSmallBannerArithmeticChain,
+    imgRecent: bgImageRecentArithmeticchain,
+    imgMainCarousel: bgImageSmallBannerForMainCarouselArithmeticChain,
+    title: 'Арифметическая цепочка',
+    description:
+      'Считай и запоминай',
+      playLink: ARITHMETIC_CHAIN_LINK,
+    descriptionLink: '/builds/arithmeticchain/index.html'
   }
 ];
 
@@ -141,6 +172,7 @@ export const MAIN_CAROUSEL_SLIDES = [
   GRAMMAR_SLIDES[0],
   QUIZ_SLIDES[0],
   SIMULATOR_SLIDES[1],
+  SIMULATOR_SLIDES[2],
   GRAMMAR_SLIDES[1],
 ];
 
@@ -148,6 +180,7 @@ export interface GameSliderData {
   id: string;
   img: string;
   imgRecent?: string;
+  imgMainCarousel?: string;
   title?: string;
   description?: string;
   descriptionLink?: string;

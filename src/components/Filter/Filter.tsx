@@ -7,8 +7,8 @@ import { ReactComponent as Quiz } from '../../assets/filters/quiz.svg';
 
 const inactiveStyle = {
   background: 'none',
-  backgroundColor: '#EFEFEF',
-  color: '#BBBBBB',
+  backgroundColor: '#FFF3E8',
+  color: '#FFA000',
 };
 
 const buttons = [
@@ -90,10 +90,10 @@ const IconWrapper = styled.div<{ isActive: boolean; index: number }>`
       }
 
       if (index === 0) {
-        return `stroke: #BBBBBB`;
+        return `stroke: #FFA000`;
       }
 
-      return `fill: #BBBBBB`;
+      return `fill: #FFA000`;
     }}
   }
 `;

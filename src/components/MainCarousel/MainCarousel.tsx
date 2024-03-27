@@ -39,6 +39,7 @@ export const MainCarousel = ({ onItemClick, data }: IProps) => {
     <CustomSlider {...SLIDER_SETTINGS} swipe>
       {data.map((item, i) => {
         const linkToGame = item.description ? item.descriptionLink : item.playLink
+        const bannerImgSrc = item.imgMainCarousel ?? item.img;
 
         if (onItemClick) {
           return (
@@ -50,7 +51,7 @@ export const MainCarousel = ({ onItemClick, data }: IProps) => {
               }}
               key={i}
             >
-              <Img src={item.img} />
+              <Img src={bannerImgSrc} />
             </SliderDivItem>
           );
         }
@@ -62,7 +63,7 @@ export const MainCarousel = ({ onItemClick, data }: IProps) => {
             onClick={(e) => !linkToGame && e.preventDefault()}
             key={i}
           >
-            <Img src={item.img} />
+            <Img src={bannerImgSrc} />
           </SliderLinkItem>
         );
       })}
