@@ -1,0 +1,46 @@
+.statistics_wrapper {
+	width: 100%;
+	max-width: 1224px;
+	display: flex;
+	flex-direction: column;
+	margin-top: 40px;
+}
+
+@media screen and (max-width: 768px) {
+	.statistics_wrapper {
+		margin-top: 60px;
+	}
+}
+
+.statistics_title {
+	display: flex;
+	align-items: center;
+}
+
+.statistics_title h2 {
+	font-size: 40px;
+	color: #000000;
+	font-weight: 700;
+}
+
+.statistics_title span {
+	font-size: 16px;
+	color: rgba(0, 0, 0, 0.4);
+	margin-left: 25px;
+	font-weight: 500;
+}
+
+@media screen and (max-width: 360px) {
+	.statistics_title {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.statistics_title h2 {
+		font-size: 32px;
+	}
+	.statistics_title span {
+		margin-left: 0;
+		margin-top: 12px;
+		font-size: 14px;
+	}
+}

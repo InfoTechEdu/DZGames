@@ -1,0 +1,285 @@
+.achievement_image_main {
+	background: none !important;
+}
+
+.achievement_main {
+	background-color: #f7f7f8;
+	border-radius: 20px;
+	position: relative;
+}
+
+.main_achievements {
+	margin-left: 48px;
+}
+
+.button_all_achievement {
+	color: #fff;
+	border-radius: 20px;
+	background: linear-gradient(
+		90deg,
+		rgba(255, 197, 102, 1) 0%,
+		rgba(255, 116, 1, 1) 100%
+	);
+	margin-left: 48px;
+	margin-top: 30px;
+}
+
+.image_main {
+	width: 162px;
+}
+
+.button_all_achievement {
+	padding: 20px 38px;
+}
+
+.image_background {
+	position: absolute;
+	top: -40px;
+	left: -230px;
+}
+
+.all_achievement {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	gap: 25px 10px;
+	grid-template-areas:
+		'. . . . . .'
+		'. . . . . .'
+		'. . . . . .';
+}
+
+.modal_all_achievements {
+	margin-top: 300px;
+	margin-bottom: 100px;
+	padding: 48px 38px;
+}
+
+.background_image {
+	background-color: rgba(68, 68, 68, 0.66);
+	border-radius: 20px;
+}
+
+.modal {
+	overflow-y: scroll;
+}
+
+.title_modal_all_achievements {
+	display: flex;
+	align-items: center;
+	margin-bottom: 40px;
+}
+
+.title_modal_all_achievements h3 {
+	font-size: 40px;
+	color: #000000;
+	font-weight: 700;
+	margin-right: 25px;
+}
+
+.title_modal_all_achievements span {
+	font-size: 16px;
+	color: rgba(0, 0, 0, 0.4);
+	font-weight: 500;
+}
+
+.close_modal_achievement {
+	position: absolute;
+	width: 34px;
+	height: 34px;
+	top: 20px;
+	right: 20px;
+	color: rgba(0, 0, 0, 0.4);
+	border: none;
+}
+
+.zamok_modal_achievement {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.info_bottom {
+	background: linear-gradient(
+		90deg,
+		rgba(255, 197, 102, 1) 0%,
+		rgba(255, 116, 1, 1) 100%
+	);
+	border-radius: 20px;
+	color: #fff;
+	width: 129px;
+	height: 42px;
+	align-items: center;
+	justify-content: center;
+}
+
+.info_bottom span {
+	margin-left: 5px;
+	font-size: 12px;
+}
+
+.info_bottom svg {
+	width: 12px;
+	height: 12px;
+}
+
+.close_buttom_modal_detail {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+.detail_modal_image img {
+	width: 108px !important;
+	position: absolute;
+	top: 48px;
+	right: 38px;
+}
+
+.detail_modal_image p {
+	color: rgba(0, 0, 0, 0.4);
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.detail_title_modal {
+	font-size: 36px;
+	margin-top: 19px;
+	margin-bottom: 42px;
+}
+
+.description_modal_p {
+	font-size: 18px;
+	color: #000000 !important;
+	font-weight: 500;
+	margin-bottom: 20px;
+}
+
+.detail_modal {
+	max-width: 756px;
+	min-width: 700px;
+}
+
+@media screen and (max-width: 768px) {
+	.modal_all_achievements {
+		margin-top: 800px;
+		margin-bottom: 300px;
+		padding: 48px 38px;
+	}
+	.all_achievement {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+		grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+		gap: 23px 10px;
+		grid-template-areas:
+			'. . . .'
+			'. . . .'
+			'. . . .'
+			'. . . .'
+			'. . . .';
+	}
+}
+
+@media screen and (max-width: 360px) {
+	.image_main {
+		max-width: 117.96px;
+	}
+	.main_achievements_title {
+		font-size: 12.49px;
+	}
+	.main_achievements {
+		margin-left: 17.73px;
+		gap: 9.75px !important;
+		margin-top: 14.53px !important;
+	}
+	.main_item_achievement {
+		max-width: 117.96px;
+	}
+	.modal_all_achievements {
+		margin-top: 1100px;
+	}
+	.all_achievement {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+		gap: 14px 10px;
+		grid-template-areas:
+			'. . .'
+			'. . .'
+			'. . .'
+			'. . .'
+			'. . .'
+			'. . .'
+			'. . .';
+	}
+	.image_all_modal_achievement {
+		width: 98.15px !important;
+	}
+	.item_all_modal_achievement {
+		width: 98.15px !important;
+	}
+	.modal_all_achievements {
+		padding: 36px 10px !important;
+	}
+	.title_modal_all_achievements {
+		flex-direction: column;
+	}
+	.title_modal_all_achievements h3 {
+		margin-right: 0px;
+		font-size: 22px;
+		margin-bottom: 20px;
+	}
+	.title_modal_all_achievements span {
+		font-size: 14px;
+	}
+	.title_all_achievements_modal {
+		font-size: 10.39px !important;
+	}
+	.zamok_modal_achievement {
+		width: 26.43px;
+		height: 26.43px;
+	}
+	.info_bottom {
+		border-radius: 11.55px;
+		color: #fff;
+		width: 74.28px;
+		height: 24.25px;
+		align-items: center;
+		justify-content: center;
+		border-radius: 11.55px;
+	}
+	.info_bottom span {
+		font-size: 6.93px;
+		margin-left: 2.89px;
+	}
+	.info_bottom svg {
+		width: 6.93px;
+		height: 6.93px;
+	}
+	.detail_modal {
+		max-width: 325px;
+		min-width: 250px;
+	}
+	.detail_modal_image p {
+		font-size: 12.28px;
+	}
+	.detail_modal_image img {
+		width: 82.91px !important;
+		position: absolute;
+		top: 48px;
+		right: 18px;
+	}
+	.detail_title_modal {
+		font-size: 26px;
+		margin-top: 14.87px;
+		margin-bottom: 31.88px;
+	}
+	.description_modal_p {
+		font-size: 13.82px;
+		margin-bottom: 15.26px;
+	}
+	.modal_detail_description {
+		font-size: 12.28px;
+	}
+}

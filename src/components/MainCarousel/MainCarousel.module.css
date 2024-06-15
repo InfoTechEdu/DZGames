@@ -1,0 +1,36 @@
+.gameraiting {
+	border: 1px solid #ffcfa3;
+	border-radius: 10px;
+	background-color: #fff;
+	width: fit-content;
+	display: flex;
+	justify-content: center;
+	position: absolute;
+	left: 10px;
+	bottom: 10px;
+}
+
+.itemgames {
+	position: relative;
+}
+
+.gameraiting span {
+	color: #ff7d01;
+	font-size: 18px;
+	font-weight: 500;
+	display: flex;
+	align-items: center;
+	margin-left: 14px;
+	margin-right: 5px;
+}
+
+.gameraiting svg {
+	margin: 9px 10px 9px 0;
+	text-align: center;
+}
+
+@media screen and (max-width: 760px) {
+	.gameraiting {
+		display: none;
+	}
+}

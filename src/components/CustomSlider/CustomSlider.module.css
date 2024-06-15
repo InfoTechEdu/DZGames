@@ -1,0 +1,29 @@
+.arrowright path,
+.arrowleft path {
+	transition: all 0.3ms ease;
+}
+
+.arrowleft circle,
+.arrowright circle {
+	transition: all 0.3s ease;
+}
+
+.arrowleft:hover circle,
+.arrowright:hover circle {
+	fill: #ffa000;
+	transition: all 0.3s ease;
+}
+
+.arrowleft:hover path,
+.arrowright:hover path {
+	fill: #fff;
+	transition: all 0.3ms ease;
+}
+
+@media screen and (max-width: 360px) {
+	.arrowleft,
+	.arrowright {
+		width: 34px;
+		height: 34px;
+	}
+}

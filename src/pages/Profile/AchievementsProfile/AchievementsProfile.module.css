@@ -1,0 +1,18 @@
+.achievements_wrapper {
+	width: 100%;
+	max-width: 1224px;
+	display: flex;
+	flex-direction: column;
+	margin-top: 15px;
+}
+.achievements_title {
+	display: flex;
+	align-items: center;
+	margin-bottom: 36px;
+}
+
+.achievements_title h2 {
+	font-size: 40px;
+	color: #000000;
+	font-weight: 700;
+}

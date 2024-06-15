@@ -1,300 +1,331 @@
-import styled from "styled-components";
-import { MainTitle } from "../../components/MainTitle/MainTitle";
-import { MainCarousel } from "../../components/MainCarousel/MainCarousel";
+import styled from 'styled-components'
+import { MainCarousel } from '../../components/MainCarousel/MainCarousel'
+import { MainTitle } from '../../components/MainTitle/MainTitle'
 
-import { useCallback, useState } from "react";
-import { SubTitle } from "../../components/SubTitle/SubTitle";
-import { Button } from "../../components/Button/Button";
-import { Overlay } from "../../components/Overlay/Overlay";
-import { CurlyArrow } from "../../components/CurlyArrow/CurlyArrow";
+import { useCallback, useState } from 'react'
+import { ReactComponent as ImagePreloader } from '../../assets/imageloader.svg'
+import { Button } from '../../components/Button/Button'
+import { CurlyArrow } from '../../components/CurlyArrow/CurlyArrow'
+import { Overlay } from '../../components/Overlay/Overlay'
+import { SubDescription } from '../../components/SubDescription/SubDescription'
+import { SubTitle } from '../../components/SubTitle/SubTitle'
+import styles from './Leaders.module.css'
 
-import { ConfirmationModal } from "../../components/ConfirmationModal/ConfirmationModal";
+import { ConfirmationModal } from '../../components/ConfirmationModal/ConfirmationModal'
+import { LeadersTable } from '../../components/LeadersTable/LeadersTable'
 import {
-  // DEFAULT_USER_ID,
-  GameItem,
-  LeadersItem,
-  LeadersPopupItem,
-  fetchLeadersDataById,
-  hideUserInLeadersTable,
-} from "../../shared/leaders";
-import { LeadersTable } from "../../components/LeadersTable/LeadersTable";
+	// DEFAULT_USER_ID,
+	GameItem,
+	LeadersItem,
+	LeadersPopupItem,
+	fetchLeadersDataById,
+	hideUserInLeadersTable,
+} from '../../shared/leaders'
 
-import A from "../../assets/A.svg";
-import { LeadersTablePopup } from "../../components/LeadersTable/LeadersTablePopup";
-import { DropDown } from "../../components/DropDown/DropDown";
-import { LEADERS_CAROUSEL_SLIDES } from "../../shared/slider";
-import { CurrentUserTable } from "../../components/LeadersTable/CurrentUserTable";
-import { FinalModal } from "../../components/FinalModal/FinalModal";
-import { getItemFromCookies, setItemToCookies } from "../../shared/cookies";
+import A from '../../assets/A.svg'
+import { DropDown } from '../../components/DropDown/DropDown'
+import { FinalModal } from '../../components/FinalModal/FinalModal'
+import { CurrentUserTable } from '../../components/LeadersTable/CurrentUserTable'
+import { LeadersTablePopup } from '../../components/LeadersTable/LeadersTablePopup'
+import { getItemFromCookies } from '../../shared/cookies'
+import { LEADERS_CAROUSEL_SLIDES } from '../../shared/slider'
 
 // const userId = getItemFromCookies('userId');// ?? DEFAULT_USER_ID;
 // const userId = "7c35493ffd7316a4322fe6061a01cc4c8ebbb8b0"; //for tests
-const userId = getItemFromCookies('userId') ?? undefined;
+const userId = getItemFromCookies('userId') ?? undefined
 
 const TABLE_BACKGROUND_IMG = new URL(
-  "../../assets/table-bg.png",
-  import.meta.url
-).href;
+	'../../assets/table-bg.png',
+	import.meta.url
+).href
 
 export const Leaders = () => {
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [selectedGame, setSelectedGame] = useState<GameItem | null>(null);
-  const [selectedGameId, setSelectedGameId] = useState("");
+	const [showDropdown, setShowDropdown] = useState(false)
+	const [selectedGame, setSelectedGame] = useState<GameItem | null>(null)
+	const [selectedGameId, setSelectedGameId] = useState('')
 
-  const [leadersList, setLeadersList] = useState<LeadersItem[] | null>(null);
-  const [currentUserLeadersData, setCurrentUserLeadersData] =
-    useState<LeadersItem | null>(null);
+	const [leadersList, setLeadersList] = useState<LeadersItem[] | null>(null)
+	const [currentUserLeadersData, setCurrentUserLeadersData] =
+		useState<LeadersItem | null>(null)
 
-  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
-  const [showFinalModal, setShowFinalModal] = useState(false);
+	const [showConfirmationModal, setShowConfirmationModal] = useState(false)
+	const [showFinalModal, setShowFinalModal] = useState(false)
 
-  const [showPopup, setShowPopup] = useState(false);
-  const [selectedLeadersItem, setSelectedLeadersItem] =
-    useState<LeadersPopupItem | null>(null);
+	const [showPopup, setShowPopup] = useState(false)
+	const [selectedLeadersItem, setSelectedLeadersItem] =
+		useState<LeadersPopupItem | null>(null)
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [isHidingLoading, setIsHidingLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(false)
+	const [isHidingLoading, setIsHidingLoading] = useState(false)
 
-  const toggleDropDown = () => {
-    setShowDropdown((s) => !s);
-  };
+	const toggleDropDown = () => {
+		setShowDropdown(s => !s)
+	}
 
-  const getLeadersData = useCallback(async (gameId: string) => {
-    setIsLoading(true);
+	const getLeadersData = useCallback(async (gameId: string) => {
+		setIsLoading(true)
 
-    const data = await fetchLeadersDataById(gameId, userId);
-    console.log("[debug] Leaderboard data was get: " + JSON.stringify(data));
-  
-    if (!data.users) {
-      setLeadersList(null);
-      setIsLoading(false);
+		const data = await fetchLeadersDataById(gameId, userId)
+		console.log('[debug] Leaderboard data was get: ' + JSON.stringify(data))
 
-      return;
-    }
+		if (!data.users) {
+			setLeadersList(null)
+			setIsLoading(false)
 
-    const mappedLeadersDataToIds = Object.entries(data.users).map(
-      ([id, item]) => {
-        return {
-          id,
-          ...(item as any),
-        };
-      }
-    );
+			return
+		}
 
-    setLeadersList(
-      mappedLeadersDataToIds.sort((a, b) => {
-        // const pointsA = a.progressData.totalPoints || 0;
-        // const pointsB = b.progressData.totalPoints || 0;
-        const positionA = (a.position === null || a.position === "null") ? Number.MAX_SAFE_INTEGER : a.position;
-        const positionB = (b.position === null || b.position === "null") ? Number.MAX_SAFE_INTEGER : b.position;
+		const mappedLeadersDataToIds = Object.entries(data.users).map(
+			([id, item]) => {
+				return {
+					id,
+					...(item as any),
+				}
+			}
+		)
 
-        return positionA - positionB;
-      })
-    );
+		setLeadersList(
+			mappedLeadersDataToIds.sort((a, b) => {
+				// const pointsA = a.progressData.totalPoints || 0;
+				// const pointsB = b.progressData.totalPoints || 0;
+				const positionA =
+					a.position === null || a.position === 'null'
+						? Number.MAX_SAFE_INTEGER
+						: a.position
+				const positionB =
+					b.position === null || b.position === 'null'
+						? Number.MAX_SAFE_INTEGER
+						: b.position
 
-    setCurrentUserLeadersData(data.requestedUserData);
-    setIsLoading(false);
-  }, []);
+				return positionA - positionB
+			})
+		)
 
-  const handleGameSelect = (game: GameItem) => {
-    if (game.id === selectedGame?.id) return;
+		setCurrentUserLeadersData(data.requestedUserData)
+		setIsLoading(false)
+	}, [])
 
-    setSelectedGame(game);
-    setShowDropdown(false);
+	const handleGameSelect = (game: GameItem) => {
+		if (game.id === selectedGame?.id) return
 
-    getLeadersData(game.id);
-  };
+		setSelectedGame(game)
+		setShowDropdown(false)
 
-  const onConfirmationModalShow = () => {
-    setShowConfirmationModal(true);
-  };
+		getLeadersData(game.id)
+	}
 
-  const onConfirmationModalClose = () => {
-    setShowConfirmationModal(false);
-  };
+	const onConfirmationModalShow = () => {
+		setShowConfirmationModal(true)
+	}
 
-  const onFinalModalClose = () => {
-    setShowFinalModal(false);
-  };
+	const onConfirmationModalClose = () => {
+		setShowConfirmationModal(false)
+	}
 
-  const onFinalModalShow = () => {
-    setShowFinalModal(true);
-  };
+	const onFinalModalClose = () => {
+		setShowFinalModal(false)
+	}
 
-  const onConfirmUserHiding = useCallback(async () => {
-    if (!userId) return;
+	const onFinalModalShow = () => {
+		setShowFinalModal(true)
+	}
 
-    setIsHidingLoading(true);
+	const onConfirmUserHiding = useCallback(async () => {
+		if (!userId) return
 
-    const res = await hideUserInLeadersTable(userId);
-    if (res?.ok) {
-      // setItemToCookies('userId', userId)
-      setLeadersList((l) => {
-        if (!l) return null;
+		setIsHidingLoading(true)
 
-        return l.map((leader) => {
-          if (leader.id === userId) {
-            return {
-              ...leader,
-              displayInLeaderboards: false,
-            };
-          }
+		const res = await hideUserInLeadersTable(userId)
+		if (res?.ok) {
+			// setItemToCookies('userId', userId)
+			setLeadersList(l => {
+				if (!l) return null
 
-          return leader;
-        });
-      });
-    }
+				return l.map(leader => {
+					if (leader.id === userId) {
+						return {
+							...leader,
+							displayInLeaderboards: false,
+						}
+					}
 
-    setIsHidingLoading(false);
-    onConfirmationModalClose();
-    onFinalModalShow();
-  }, []);
+					return leader
+				})
+			})
+		}
 
-  const handleShowPopup = (leadersItem: LeadersPopupItem) => {
-    setShowPopup(true);
-    setSelectedLeadersItem(leadersItem);
-  };
+		setIsHidingLoading(false)
+		onConfirmationModalClose()
+		onFinalModalShow()
+	}, [])
 
-  const handleHidePopup = () => {
-    setShowPopup(false);
-  };
+	const handleShowPopup = (leadersItem: LeadersPopupItem) => {
+		setShowPopup(true)
+		setSelectedLeadersItem(leadersItem)
+	}
 
-  const onHide = () => {
-    if (showDropdown) {
-      setShowDropdown(false);
-    }
+	const handleHidePopup = () => {
+		setShowPopup(false)
+	}
 
-    if (showPopup) {
-      handleHidePopup();
-    }
-  };
+	const onHide = () => {
+		if (showDropdown) {
+			setShowDropdown(false)
+		}
 
-  const onCarouselItemClick = (id: string) => {
-    if (selectedGameId === id) return;
+		if (showPopup) {
+			handleHidePopup()
+		}
+	}
 
-    setSelectedGameId(id);
-    getLeadersData(id);
-  };
+	const onCarouselItemClick = (id: string) => {
+		if (selectedGameId === id) return
 
-  return (
-    <Wrapper>
-      <LeadersHeader style={{ position: "relative" }}>
-        <MainTitle text="Выбери игру" />
-        <CurlyArrow style={{ top: 92, left: -175 }} />
-      </LeadersHeader>
+		setSelectedGameId(id)
+		getLeadersData(id)
+	}
 
-      <DropDown
-        showDropdown={showDropdown}
-        selectedGame={selectedGame}
-        toggleDropDown={toggleDropDown}
-        handleGameSelect={handleGameSelect}
-      />
+	return (
+		<Wrapper>
+			<LeadersHeader style={{ position: 'relative' }}>
+				<MainTitle text='Выбери игру' />
+				<CurlyArrow style={{ top: 92, left: -175 }} />
+			</LeadersHeader>
 
-      <MainCarousel
-        onItemClick={onCarouselItemClick}
-        data={LEADERS_CAROUSEL_SLIDES}
-      />
+			<DropDown
+				showDropdown={showDropdown}
+				selectedGame={selectedGame}
+				toggleDropDown={toggleDropDown}
+				handleGameSelect={handleGameSelect}
+			/>
 
-      {isLoading ? (
-        <SubTitle text="Идет загрузка данных..." />
-      ) : leadersList ? (
-        <>
-          <SubTitle withMarginTop={false} text="Таблица лидеров" />
-          <TableWrapper imageSrc={TABLE_BACKGROUND_IMG}>
-            <ImgA className="asideButton" src={A} />
-            <LeadersTable
-              handleShowPopup={handleShowPopup}
-              leadersList={leadersList}
-            />
+			<MainCarousel
+				onItemClick={onCarouselItemClick}
+				data={LEADERS_CAROUSEL_SLIDES}
+			/>
 
-            {currentUserLeadersData && (
-              <CurrentUserTable
-                handleShowPopup={handleShowPopup}
-                currentUserLeadersData={currentUserLeadersData}
-              />
-            )}
+			{isLoading ? (
+				// <SubTitle text='Идет загрузка данных...' />
+				<div>
+					<SubTitle withMarginTop={false} text='Таблица лидеров' />
+					<PreloaderLeaders>
+						<ImagePreloader className={styles.imagepreloader} />
+						<SubDescription
+							withMarginTop={true}
+							text='Идет загрузка данных...'
+						/>
+					</PreloaderLeaders>
+				</div>
+			) : leadersList ? (
+				<>
+					<SubTitle withMarginTop={false} text='Таблица лидеров' />
+					<TableWrapper imageSrc={TABLE_BACKGROUND_IMG}>
+						<ImgA className='asideButton' src={A} />
+						<LeadersTable
+							handleShowPopup={handleShowPopup}
+							leadersList={leadersList}
+						/>
 
-            {showPopup && selectedLeadersItem && (
-              <LeadersTablePopup
-                handleHidePopup={handleHidePopup}
-                selectedLeadersItem={selectedLeadersItem}
-              />
-            )}
-          </TableWrapper>
+						{currentUserLeadersData && (
+							<CurrentUserTable
+								handleShowPopup={handleShowPopup}
+								currentUserLeadersData={currentUserLeadersData}
+							/>
+						)}
 
-          {currentUserLeadersData && (
-            <Button
-              style={{ margin: "0 auto" }}
-              width="332px"
-              onClick={onConfirmationModalShow}
-            >
-              Скрыть мои данные в таблице
-            </Button>
-          )}
-        </>
-      ) : (
-        <SubTitle text="Нет данных" />
-      )}
+						{showPopup && selectedLeadersItem && (
+							<LeadersTablePopup
+								handleHidePopup={handleHidePopup}
+								selectedLeadersItem={selectedLeadersItem}
+							/>
+						)}
+					</TableWrapper>
 
-      {(showDropdown || showPopup) && (
-        <Overlay withBackground={false} onClick={onHide} />
-      )}
+					{currentUserLeadersData && (
+						<Button
+							style={{ margin: '0 auto' }}
+							width='332px'
+							onClick={onConfirmationModalShow}
+						>
+							Скрыть мои данные в таблице
+						</Button>
+					)}
+				</>
+			) : (
+				// <SubTitle text="Нет данных" />
+				<div>
+					<SubTitle withMarginTop={false} text='Таблица лидеров' />
+					<SubDescription
+						withMarginTop={true}
+						text='Пожалуйста, выберите игру для просмотра списка лидеров'
+					/>
+				</div>
+			)}
 
-      {showConfirmationModal && (
-        <ConfirmationModal
-          isLoading={isHidingLoading}
-          onCancel={onConfirmationModalClose}
-          onConfirm={onConfirmUserHiding}
-          title="Действительно хотите скрыть данные?"
-        />
-      )}
+			{(showDropdown || showPopup) && (
+				<Overlay withBackground={false} onClick={onHide} />
+			)}
 
-      {showFinalModal && (
-        <FinalModal
-          title="Tеперь ваше имя скрыто в таблице лидеров"
-          onClose={onFinalModalClose}
-        />
-      )}
-    </Wrapper>
-  );
-};
+			{showConfirmationModal && (
+				<ConfirmationModal
+					isLoading={isHidingLoading}
+					onCancel={onConfirmationModalClose}
+					onConfirm={onConfirmUserHiding}
+					title='Действительно хотите скрыть данные?'
+				/>
+			)}
+
+			{showFinalModal && (
+				<FinalModal
+					title='Tеперь ваше имя скрыто в таблице лидеров'
+					onClose={onFinalModalClose}
+				/>
+			)}
+		</Wrapper>
+	)
+}
 
 const TableWrapper = styled.div<{ imageSrc: string }>`
-  width: 100%;
-  background: ${({ imageSrc }) => `url(${imageSrc})`};
-  background-color: #f7f7f8;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  border-radius: 20px;
+	width: 100%;
+	background: ${({ imageSrc }) => `url(${imageSrc})`};
+	background-color: #f7f7f8;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	border-radius: 20px;
 
-  padding: 30px 42px;
+	padding: 30px 42px;
 
-  position: relative;
-`;
+	position: relative;
+`
 
 const Wrapper = styled.div({
-  display: "flex",
-  flexDirection: "column",
-  margin: "0 auto",
-  width: "100%",
-  maxWidth: "1224px",
-  paddingTop: "80px",
-  gap: "24px",
-});
+	display: 'flex',
+	flexDirection: 'column',
+	margin: '0 auto',
+	width: '100%',
+	maxWidth: '1224px',
+	paddingTop: '80px',
+	gap: '24px',
+})
 
 const LeadersHeader = styled.div`
-  position: relative;
-`;
+	position: relative;
+`
 
 const ImgA = styled.img({
-  position: "absolute",
-  right: "-46px",
-  top: "-51px",
-  transform: "rotate(45deg)",
+	position: 'absolute',
+	right: '-46px',
+	top: '-51px',
+	transform: 'rotate(45deg)',
 
-  "@media(max-width: 1340px)": {
-    right: "-10px",
-    top: "-23px",
-  },
-});
+	'@media(max-width: 1340px)': {
+		right: '-10px',
+		top: '-23px',
+	},
+})
+
+const PreloaderLeaders = styled.div({
+	display: 'flex',
+	alignItems: 'center',
+})

@@ -1,0 +1,44 @@
+.title_options {
+	font-size: 16px;
+	font-weight: 500;
+	color: rgba(0, 0, 0, 0.4);
+}
+
+.options {
+	font-size: 36px;
+	font-weight: 700;
+	color: rgba(0, 0, 0, 1);
+	margin-top: 19px;
+}
+
+.button_container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 10px;
+}
+
+@media screen and (max-width: 768px) {
+	.button_container {
+		justify-content: flex-start;
+	}
+}
+
+@media screen and (max-width: 360px) {
+	.button_container {
+		display: flex;
+		flex-wrap: nowrap;
+		overflow-x: scroll;
+	}
+	.button_game {
+		white-space: nowrap;
+	}
+	.title_options {
+		font-size: 11.39px;
+		white-space: nowrap;
+	}
+	.options {
+		font-size: 26px;
+		margin-top: 13.87px;
+	}
+}

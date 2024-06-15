@@ -1,0 +1,21 @@
+.star_raiting {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.span_rating_players {
+	color: #000000;
+	opacity: 40%;
+	margin-left: 18px;
+}
+
+@media screen and (max-width: 360px) {
+	.star_raiting {
+		flex-direction: column;
+	}
+	.span_rating_players {
+		margin-left: 0px;
+		margin-top: 8px;
+	}
+}
